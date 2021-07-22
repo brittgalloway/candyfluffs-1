@@ -5,21 +5,32 @@ import styled from 'styled-components';
 const StyledDiv = styled.div`
   display: flex;
   justify-content:center;
-  width: 80%;
+  width: 100%;
   margin: 0 auto;
   h1{
     color: var(--highlight);
-    size: 1.5rem;
+    font-size: 2rem;
     text-align:center;
     position: relative;
     top: 100px;
+    @media (max-width: 760px) {
+      top: 50px;
+      font-size: 1.5rem
+    }
   }
 
 
   iframe{
     border:none;
     padding-top:0px;
+    width: 800px;
+    height: 1100px;
+    @media (max-width: 760px) {
+      width: 400px;
+      height: 900px;
+    }
   }
+
 `;
 
 export default function Contact() {
@@ -31,8 +42,6 @@ export default function Contact() {
         <h1>I love to hear from people!</h1>
           <iframe
               title="Mailchimp Contact Form"
-              width="800px"
-              height="1100px"
               src="https://us16.list-manage.com/contact-form?u=f0ccd4aae40398b03156934fd&form_id=a52d1c81b8d8ff1a843eaa0798c8941e">
           </iframe>
                 </div>
