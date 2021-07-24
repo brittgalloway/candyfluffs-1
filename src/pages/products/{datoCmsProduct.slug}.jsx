@@ -210,6 +210,7 @@ export default function Product({ data }) {
             data-item-description={data.datoCmsProduct.descriptionNode.childMarkdownRemark.html}
             data-item-image={data.datoCmsProduct.image.url}
             data-item-name={data.datoCmsProduct.title}
+            data-item-weight={data.datoCmsProduct.weight}
             data-item-url={`/products/${data.datoCmsProduct.slug}`}
           >
             ADD TO CART
@@ -227,6 +228,7 @@ export default function Product({ data }) {
                 data-item-description={data.datoCmsProduct.descriptionNode.childMarkdownRemark.html + " " + vari.title}
                 data-item-image={data.datoCmsProduct.image.url}
                 data-item-name={vari.title}
+                data-item-weight={data.datoCmsProduct.weight}
                 data-item-url={`/products/${data.datoCmsProduct.slug}`}
                 key={idx}
               >
@@ -248,6 +250,7 @@ export const query = graphql`
       title
       price
       slug
+      weight
       descriptionNode {
         childMarkdownRemark {
           html
