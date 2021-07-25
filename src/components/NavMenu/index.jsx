@@ -178,7 +178,7 @@ export default function NavMenu() {
             <Link to='/sticker'>Stickers</Link>
           </li>
           <li>
-            <Link to='/2heros'>Necahual</Link>
+            <Link to='/2heroes'>Necahual</Link>
           </li>
           <li>
             <Link to='/events'>Conventions/Expos</Link>
