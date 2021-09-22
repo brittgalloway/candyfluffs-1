@@ -40,7 +40,7 @@ const DropDownList = styled("ul")`
     text-decoration: none; 
   }
 
-  a:hover {
+  a:hover, a:focus {
     color: var(--highlight);
   }
 `;
@@ -69,11 +69,11 @@ export default function DropDown(props) {
 
   return(
     <DropDownContainer>
-      <DropDownHeader onClick={toggling}>
+      <DropDownHeader tabIndex='0' onClick={toggling} onKeyPress={toggling}>
         {selectedOption || "Fandoms ▾ " } 
       </DropDownHeader>
       {isOpen && (
-        <DropDownListContainer aria-label='Fandom Filter'>
+        <DropDownListContainer aria-label='Fandom Filter' >
           <DropDownList aria-expanded={isOpen}>
             {props.fandomList.map((option, idx) => (
               <ListItem onClick={onOptionClicked(option)} key={idx}>

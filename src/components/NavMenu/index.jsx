@@ -27,7 +27,7 @@ const Nav = styled("nav")`
     color: var(--gray);
   }
 
-  a:hover {
+  a:hover, a:focus {
     color: var(--highlight);
     cursor: pointer; 
   }
@@ -67,7 +67,7 @@ const Nav = styled("nav")`
       background-color: white;
       padding: 1px 6px;
     }
-    &:hover {
+    &:hover, :focus {
       transform: scale(1.2);
       color: var(--highlight);
       .snipcart-total-items{

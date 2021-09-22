@@ -35,7 +35,7 @@ input.button:hover {
   cursor: pointer !important;
 }
 
-input.button inputc {
+input.button input#mce-EMAIL {
   color: #000 !important;
   padding-right: 10px !important;
   display: none !important;
@@ -46,7 +46,7 @@ input.button input#mce-EMAIL :focus {
   border: 3px solid #555 !important;
 }
 
-input.button #mce-EMAIL {
+input.button input.email {
   margin: 1rem !important;
   padding: 12px 20px !important;
   height: 50px !important;
@@ -60,7 +60,7 @@ input.button #mce-EMAIL {
 }
 
 @media (max-width: 680px) {
-  input.button #mce-EMAIL {
+  input.button input.email {
     margin: 1rem 0 !important;
   }
 }
@@ -155,7 +155,12 @@ body {
   padding: 0;
 }
 
-
+@media (max-width: 830px) {
+  html,
+  body {
+    overflow-x: hidden;
+  }
+}
 
 html::-webkit-scrollbar {
   width: 10px;
@@ -187,7 +192,6 @@ html::-webkit-scrollbar-thumb {
   -ms-flex-pack: distribute;
       justify-content: space-around;
 }
-
 
 .logo-area {
   text-align: center;
@@ -342,7 +346,7 @@ html::-webkit-scrollbar-thumb {
   background-color: white;
 }
 
-.overlay:hover {
+.overlay:hover, .overlay:focus {
   opacity: 0.85;
 }
 

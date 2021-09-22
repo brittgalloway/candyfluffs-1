@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect} from 'react';
 import { Link } from 'gatsby';
 import { StaticImage } from "gatsby-plugin-image"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -18,6 +18,10 @@ const StyledDiv = styled.header`
       margin-right: 20px;
       font-size: 1.15rem;
       &:hover {color: var(--highlight);}
+      &:focus {
+        transform: scale(1.2);
+        color: var(--highlight);
+    }
     }
   }
   
@@ -46,7 +50,7 @@ const StyledDiv = styled.header`
       background-color: white;
       padding: 1px 6px;
     }
-    &:hover {
+    &:hover, :focus {
       transform: scale(1.2);
       color: var(--highlight);
       .snipcart-total-items{
@@ -68,6 +72,7 @@ export default function Header(props) {
 
   const [cartCount, setCartCount] = useState('');
   const [cartTotal, setCartTotal] = useState('');
+
   
   useEffect(()=> {
     if (window.Snipcart) {
@@ -85,13 +90,16 @@ export default function Header(props) {
           setCartCount(count)
           setCartTotal(cart)
       });
-
+  
       //this allows it to work on refreshing the page
       window.Snipcart.subscribe('cart.ready', (data) => {
           var count = window.Snipcart.api.items.count();
           var cart = window.Snipcart.api.cart.get();
+        
           setCartCount(count)
           setCartTotal(cart)
+
+         
       })
     }
   }, [])

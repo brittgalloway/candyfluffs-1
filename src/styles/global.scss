@@ -250,6 +250,7 @@ html::-webkit-scrollbar-thumb {
   margin: 40px;
   border-radius: 10px;
   overflow: hidden;
+ 
 }
 
 .gatsby-image-wrapper {
@@ -278,9 +279,10 @@ html::-webkit-scrollbar-thumb {
   background-color: white;
 }
 
-.overlay:hover {
+.overlay:hover, .overlay:focus{
   opacity: 0.85;
 }
+
 @media (max-width: 1439px) {
   .product-item {
     width: 300px;

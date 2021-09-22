@@ -28,7 +28,7 @@ const StyledDiv = styled.div`
     color: #5C5C5C;
     font-size: 1.5rem;
     text-decoration: none;
-    &:hover{
+    &:hover, :focus{
       color: var(--highlight)
     }
   }
