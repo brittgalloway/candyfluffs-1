@@ -9,6 +9,7 @@ export default function GridSquare(props) {
   return (
   <div className="product-item">
     <div className="product-square">
+          {/* <div className="soldOut"><p>Out of Stock</p></div> */}
           <Link to={`../../products/${props.slug}`} tabIndex="-1">
           <Img
             objectFit="cover"

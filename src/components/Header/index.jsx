@@ -90,7 +90,8 @@ export default function Header(props) {
           setCartCount(count)
           setCartTotal(cart)
       });
-  
+     
+
       //this allows it to work on refreshing the page
       window.Snipcart.subscribe('cart.ready', (data) => {
           var count = window.Snipcart.api.items.count();

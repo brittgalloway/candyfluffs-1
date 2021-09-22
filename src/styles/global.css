@@ -14,6 +14,7 @@
   --gray: #5c5c5c;
   --form-gray: #c4c4c4;
   --faded-highlight: #ffe2d6;
+  --warn-highlight: #f33e4f;
 }
 
 #mc_embed_signup {
@@ -346,6 +347,22 @@ html::-webkit-scrollbar-thumb {
   background-color: white;
 }
 
+.soldOut p {
+  width: 400px;
+  height: 400px;
+  margin: 0;
+  background-color: rgba(253, 253, 253, 0.75);
+  color: var(--warn-highlight);
+  font-size: 2em;
+  font-weight: bold;
+  padding: 45% 0;
+  text-decoration: none;
+  z-index: 1;
+  position: absolute;
+  text-align: center;
+  cursor: auto;
+}
+
 .overlay:hover, .overlay:focus {
   opacity: 0.85;
 }
@@ -359,6 +376,10 @@ html::-webkit-scrollbar-thumb {
   .product-square {
     height: 300px;
     width: 300px;
+  }
+  .soldOut p {
+    width: 300px;
+    height: 300px;
   }
 }
 
@@ -409,6 +430,11 @@ html::-webkit-scrollbar-thumb {
   .product-square {
     width: 150px;
     height: 150px;
+  }
+  .soldOut p {
+    width: 150px;
+    height: 150px;
+    font-size: 1.5rem;
   }
   .text {
     font-size: 0.75em !important;
