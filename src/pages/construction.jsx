@@ -36,7 +36,7 @@ const StyledDiv = styled.div`
       a{
         padding:1em;
         color: var(--highlight);
-        &:hover{
+        &:hover, :focus{
           color: var(--gray);
         }
       }
@@ -47,7 +47,7 @@ const StyledDiv = styled.div`
       border: 3px solid var(--gray);
       padding: 20px;
       
-      &:hover{
+      &:hover, :focus{
         cursor:pointer;
         border: 3px solid var(--highlight);
         }
@@ -57,7 +57,7 @@ const StyledDiv = styled.div`
         text-decoration:none;
         color: var(--gray);
         text-transform:uppercase;
-        &:hover{
+        &:hover, :focus{
           text-decoration: underline;
           color: var(--highlight);
         }

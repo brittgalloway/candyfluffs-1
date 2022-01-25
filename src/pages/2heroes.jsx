@@ -41,7 +41,7 @@ const StyledDiv = styled.div`
     a {
       text-decoration: none;
       color: var(--grey);
-      &:hover {
+      &:hover, :focus {
         color: var(--highlight);
         text-decoration: underline;
       }

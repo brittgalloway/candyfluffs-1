@@ -5,19 +5,19 @@ import GridSquare from '../components/GridSquare';
 import DropDown from '../components/DropDown';
 import '../styles/global.css'; 
 
+
 export default function Product({ data }) {
 
   let fandomList = []
   data.allDatoCmsProduct.edges.forEach(({node}) => {
     // Below line makes a list in slug form of fandoms
     // if (!fandomList.includes(node.fandoms.replace(/\s/g, '-').toLowerCase())) {
-    //   fandomList.push(node.fandoms.replace(/\s/g, '-').toLowerCase())
-    // }
+      //   fandomList.push(node.fandoms.replace(/\s/g, '-').toLowerCase())
+      // }
     if (!fandomList.includes(node.fandoms)) {
       fandomList.push(node.fandoms);
     }
   })
-
 	return(
     <Layout heading={`${data.allDatoCmsProduct.edges[0].node.productType}s`}>
 

@@ -14,7 +14,7 @@ const StyledDiv = styled.div`
     width: 20px;
     height: 20px;
     background-color: var(--faded-highlight);
-    &:hover{
+    &:hover, :focus{
       background-color: var(--highlight);
     }
   }

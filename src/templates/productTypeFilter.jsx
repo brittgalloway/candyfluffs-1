@@ -10,7 +10,7 @@ export default function productTypeFilter({pageContext}) {
     // return fandom.replace(/\s/g, '-').toLowerCase();
     return fandom;
   })
-  console.log(fandomList);
+
   return (
     <Layout heading = {"Just a girl who likes to draw manga"}>
 

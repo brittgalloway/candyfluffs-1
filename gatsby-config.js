@@ -3,9 +3,6 @@
  *
  * See: https://www.gatsbyjs.com/docs/gatsby-config/
  */
-require('dotenv').config({
-  path: `.env.${process.env.NODE_ENV}`,
-});
 
 module.exports = {
 
@@ -36,6 +33,9 @@ module.exports = {
 				apiKey: process.env.GATSBY_SNIPCART_APIKEY,
         autopop: false
 			}
-		}
+		},
+    {
+      secretKey: process.env.SNIPCART_APIKEY
+    }
   ],
 }
