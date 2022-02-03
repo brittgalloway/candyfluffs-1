@@ -5,7 +5,6 @@ import GridSquare from '../components/GridSquare';
 import DropDown from '../components/DropDown';
 import '../styles/global.css'; 
 
-
 export default function Product({ data }) {
 
   let fandomList = []

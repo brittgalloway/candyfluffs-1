@@ -6,7 +6,7 @@ const DropDownContainer = styled("div")`
   width: 300px;
   margin: 0 auto;
   position: absolute;
-  z-index: 1; 
+  z-index: 2; 
 `;
 
 const DropDownHeader = styled("div")`

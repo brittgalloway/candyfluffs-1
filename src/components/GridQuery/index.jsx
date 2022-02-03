@@ -3,19 +3,6 @@ import { graphql, StaticQuery } from "gatsby";
 import GridSquare from '../GridSquare';
 
 export default function Grid() {
-// const secret = 'MzFmNzVkYTktNWQzYy00MmQzLWE3MDctY2Q2OWIzOTJkMGIzNjM3NDMxNDcyNjQ0Nzc3NDEw';
-
-// const request = await fetch('https://app.snipcart.com/api/products', {
-//     headers: {
-//         'Authorization': `Basic ${btoa(secret)}`,
-//         'Accept': 'application/json'
-//     }
-// })
-// // make new prop in GRidSquare, map?? fore
-
-// const result = await request.json()
-// console.log("products", result);
-
   return(
     <StaticQuery 
       query={graphql`
