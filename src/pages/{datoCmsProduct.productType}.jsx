@@ -32,6 +32,7 @@ export default function Product({ data }) {
       <div className="product-grid">
         {data.allDatoCmsProduct.edges.map(({node}) => (
           <GridSquare 
+            id={node.id} 
             title={node.title} 
             price={node.price}
             image={node.image[0]}
