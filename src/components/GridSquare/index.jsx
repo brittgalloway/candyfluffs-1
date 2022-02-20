@@ -16,7 +16,7 @@ const options = {
 
 axios.request(options).then(function (response) {
   const items = response.data.items
-  console.log("all Items", items);
+  // console.log("all Items", items);
   // creates an array of items 
   // https://www.gatsbyjs.com/docs/how-to/rendering-options/using-server-side-rendering/
   const outOfStock = Object.keys(items).map(key =>{
@@ -28,12 +28,14 @@ axios.request(options).then(function (response) {
       return itemLabel;
     }
   });
+  console.log('out of stock, out of loop', outOfStock);
+
   const notNull = outOfStock.filter(item => Boolean(item));
   console.log('not null', notNull);
   notNull.map(item =>{
       console.log(item);
-      item.classList.remove('hide');
-      item.classList.add('soldOut');
+      // item.classList.remove('hide');
+      // item.classList.add('soldOut');
   })
 }).catch(function (error) {
   console.error(error);
