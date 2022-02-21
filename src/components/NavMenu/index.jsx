@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import hamburgerIcon from './hamburger.svg';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShoppingBag } from '@fortawesome/free-solid-svg-icons';
+import axios from 'axios';
 
 const Nav = styled("nav")`
   border-top:2px solid var(--faded-highlight);
@@ -119,9 +120,39 @@ const NavList = styled("ul")`
   }
 
 `;
-
+export function handleOnClick() {
+  const options = {
+    method: 'GET',
+    url: 'https://app.snipcart.com/api/products',
+    params: {limit: '200'},
+    headers: {
+      Accept: 'application/json',
+      Authorization: `Basic ${process.env.GATSBY_API_AUTH}`,
+      'content-type': 'application/json'
+    }
+  };
+  axios.request(options).then(function (response) {
+    const items = response.data.items
+    // creates an array of items 
+    const outOfStock = Object.keys(items).map(key =>{
+      const stock = items[key].stock
+      if (stock === 0){
+        const itemId = items[key].userDefinedId;
+        const itemLabel = document.getElementById(itemId);
+        return itemLabel;
+      }
+    });
+    const outofStockOnThePage = outOfStock.filter(item => Boolean(item));
+    outofStockOnThePage.map(item =>{
+        item.classList.remove('hide');
+        item.classList.add('soldOut');
+    })
+  }).catch(function (error) {
+    console.error(error);
+  });
+}
 export default function NavMenu() {
-
+  handleOnClick();
   const [isOpen, setIsOpen] = useState(false);
 
   const isMobile = useMediaQuery({query: `(max-width: 830px)`});
@@ -156,28 +187,28 @@ export default function NavMenu() {
       })
     }
   }, [])
-  
+
   return(
     <Nav aria-label='Main'>
       {(isOpen || !isMobile) && (
         <NavList className={isMobile && 'mobile'}>
           <li>
-            <Link to='/book'>Books</Link>
+            <Link onClick={handleOnClick} to='/book'>Books</Link>
           </li>
           <li>
-            <Link to='/print'>Prints</Link>
+            <Link onClick={handleOnClick} to='/print'>Prints</Link>
           </li>
           <li>
-            <Link to='/charm'>Charms</Link>
+            <Link onClick={handleOnClick} to='/charm'>Charms</Link>
           </li>
           <li>
-            <Link to='/button'>Buttons</Link>
+            <Link onClick={handleOnClick} to='/button'>Buttons</Link>
           </li>
           <li>
-            <Link to='/sticker'>Stickers</Link>
+            <Link onClick={handleOnClick} to='/sticker'>Stickers</Link>
           </li>
           <li>
-            <Link to='/2heroes'>Necahual</Link>
+            <Link onClick={handleOnClick} to='/2heroes'>Necahual</Link>
           </li>
           <li>
             <Link to='/events'>Conventions/Expos</Link>
