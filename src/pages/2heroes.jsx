@@ -61,7 +61,7 @@ export default function Necahual({ data }) {
             <StaticImage layout="constrained"  aspectRatio={1} style={{maxWidth:600}} src="../images/necahualImg.jpeg" alt="Necahual"/>
             <div className="links">
               <h3 style={{fontSize:'1.5rem'}}>Read it on <a style={{color: 'var(--highlight)'}} href="https://www.webtoons.com/en/challenge/necahual/list?title_no=216820">WEBTOONS</a>!</h3>
-              <p style={{  color: 'var(--highlight)'}}>Support us on:</p>
+              <p style={{ color: 'var(--highlight)'}}>Support us on:</p>
               <ul>
                 <li><a href="https://www.patreon.com/2heroes">Patreon</a></li>
                 <li><a href="https://www.instagram.com/2.heroes/">Instagram</a></li>
@@ -75,6 +75,7 @@ export default function Necahual({ data }) {
         <div className="product-grid">
           {data.allDatoCmsProduct.edges.map(({node}) => (
             <GridSquare 
+              id={node.id}
               title={node.title} 
               price={node.price}
               image={node.image[0]}

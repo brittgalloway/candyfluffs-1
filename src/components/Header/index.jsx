@@ -4,7 +4,7 @@ import { StaticImage } from "gatsby-plugin-image"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faInstagram, faTwitter, faTumblr } from '@fortawesome/free-brands-svg-icons';
 import { faShoppingBag, faUser } from '@fortawesome/free-solid-svg-icons';
-
+import {handleOnClick} from '../NavMenu'
 import styled from 'styled-components';
 
 const StyledDiv = styled.header`
@@ -112,7 +112,7 @@ export default function Header(props) {
         </div>
         <div className="logo-area">
           <div className="logo">
-            <h1><Link to='/'><StaticImage src='./logo.jpg' alt='Candy Fluffs'style={{maxWidth: 300}}/></Link></h1>
+            <h1><Link to='/' onClick={handleOnClick} ><StaticImage src='./logo.jpg' alt='Candy Fluffs'style={{maxWidth: 300}}/></Link></h1>
           </div>
           <div className="subheading">
             {props.heading} (ㆁᴗㆁ✿)

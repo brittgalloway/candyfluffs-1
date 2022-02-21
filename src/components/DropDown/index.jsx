@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import { Link } from 'gatsby';
+import {handleOnClick} from '../NavMenu'
 import styled from 'styled-components';
 
 const DropDownContainer = styled("div")`
@@ -77,7 +78,7 @@ export default function DropDown(props) {
           <DropDownList aria-expanded={isOpen}>
             {props.fandomList.map((option, idx) => (
               <ListItem onClick={onClick(option)} key={idx}>
-                <Link to={`/${props.productType.toLowerCase()}/${slugify(option)}`}>{option}</Link>
+                <Link onClick={handleOnClick} to={`/${props.productType.toLowerCase()}/${slugify(option)}`}>{option}</Link>
               </ListItem>
             ))}
           </DropDownList>
