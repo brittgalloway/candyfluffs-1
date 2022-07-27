@@ -179,7 +179,7 @@ export default function Product({ data }) {
   }
  const text = () =>{
     console.log('Added!');
-    item.classList.add('soldOut');
+    // item.classList.add('soldOut');
  }
 	return(
     <Layout heading={`${data.datoCmsProduct.title}`}>
