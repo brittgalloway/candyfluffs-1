@@ -169,6 +169,9 @@ export default function NavMenu() {
             <Link to='/print'>Prints</Link>
           </li>
           <li>
+            <Link to='/scroll'>Scrolls</Link>
+          </li>
+          <li>
             <Link to='/charm'>Charms</Link>
           </li>
           <li>
