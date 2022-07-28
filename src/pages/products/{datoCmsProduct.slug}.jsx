@@ -3,7 +3,6 @@ import { graphql } from "gatsby";
 import Layout from "../../components/Layout";
 import styled from 'styled-components';
 import Img from 'gatsby-image';
-import { text } from "@fortawesome/fontawesome-svg-core";
 
 const StyledDiv = styled.section`
 
@@ -177,10 +176,12 @@ export default function Product({ data }) {
     setVariant(e.target.value)
     
   }
- const text = () =>{
-    console.log('Added!');
-    // item.classList.add('soldOut');
- }
+
+  // let addButton = document.getElementsByTagName('button.snipcart-add-item selected').textContent="ADD TO CART";
+  // const text = () =>{
+  //   addButton = document.getElementsByTagName('button.snipcart-add-item selected').textContent="ADDED!";
+  //   console.log(addButton)
+  // }
 	return(
     <Layout heading={`${data.datoCmsProduct.title}`}>
       <StyledDiv>
@@ -217,8 +218,9 @@ export default function Product({ data }) {
             data-item-weight={data.datoCmsProduct.weight}
             data-item-url={`/products/${data.datoCmsProduct.slug}`}
             data-item-categories={`${data.datoCmsProduct.productType } | ${data.datoCmsProduct.fandoms}`}
-            onClick={text}
+            // onClick={text}
           >
+            {/* {addButton} */}
             ADD TO CART
           </button>
           
@@ -237,8 +239,9 @@ export default function Product({ data }) {
                 data-item-weight={data.datoCmsProduct.weight}
                 data-item-url={`/products/${data.datoCmsProduct.slug}`}
                 key={idx}
-                onClick={text}
+                // onClick={text}
               >
+                {/* {addButton} */}
                 ADD TO CART
               </button>
             })
