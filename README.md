@@ -4,7 +4,7 @@ An e-shop built with Gatsby JS for a talented [Illustrator](https://www.instagra
 ## Team
 - [Doug](https://github.com/daleinen7): Lead
 - [Stephanie](https://github.com/mlisdev): Front-end
-- [Brittney](https://sleepygallows.com/): Designer
+- [Brittney](https://sleepygallows.com/): Designer and Maintenance Developer
 
 ## Tech Used
 - Gatsby

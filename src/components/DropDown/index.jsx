@@ -1,12 +1,13 @@
 import React, {useState} from 'react';
 import { Link } from 'gatsby';
+import {handleOnClick} from '../NavMenu'
 import styled from 'styled-components';
 
 const DropDownContainer = styled("div")`
   width: 300px;
   margin: 0 auto;
   position: absolute;
-  z-index: 1; 
+  z-index: 2; 
 `;
 
 const DropDownHeader = styled("div")`
@@ -40,7 +41,7 @@ const DropDownList = styled("ul")`
     text-decoration: none; 
   }
 
-  a:hover {
+  a:hover, a:focus {
     color: var(--highlight);
   }
 `;
@@ -57,7 +58,7 @@ export default function DropDown(props) {
 
   const toggling = () => setIsOpen(!isOpen);
 
-  const onOptionClicked = value => () => {
+  const onClick = value => () => {
     setSelectedOption(value);
     setIsOpen(false);
 
@@ -69,15 +70,15 @@ export default function DropDown(props) {
 
   return(
     <DropDownContainer>
-      <DropDownHeader onClick={toggling}>
+      <DropDownHeader tabIndex='0' onClick={toggling} onKeyPress={toggling}>
         {selectedOption || "Fandoms ▾ " } 
       </DropDownHeader>
       {isOpen && (
-        <DropDownListContainer aria-label='Fandom Filter'>
+        <DropDownListContainer aria-label='Fandom Filter' >
           <DropDownList aria-expanded={isOpen}>
             {props.fandomList.map((option, idx) => (
-              <ListItem onClick={onOptionClicked(option)} key={idx}>
-                <Link to={`/${props.productType.toLowerCase()}/${slugify(option)}`}>{option}</Link>
+              <ListItem onClick={onClick(option)} key={idx}>
+                <Link onClick={handleOnClick} to={`/${props.productType.toLowerCase()}/${slugify(option)}`}>{option}</Link>
               </ListItem>
             ))}
           </DropDownList>

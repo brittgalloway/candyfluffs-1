@@ -6,6 +6,10 @@ import styled from 'styled-components';
 
 
 const StyledDiv = styled.div`
+  .alice-carousel__wrapper{
+    width: 90%;
+    margin: 0 auto;
+  }
   margin: 0 auto;
   .alice-carousel__dots-item.__active{
   background-color: var(--highlight);
@@ -14,23 +18,30 @@ const StyledDiv = styled.div`
     width: 20px;
     height: 20px;
     background-color: var(--faded-highlight);
-    &:hover{
+    &:hover, :focus{
       background-color: var(--highlight);
     }
   }
   @media (max-width: 830px){
+    .alice-carousel__wrapper{
+      width: 100%;
+      margin: 0;
+    }
     .alice-carousel__dots-item{
       width: 10px;
       height: 10px;
-     
     }
+  }
   @media (max-width: 450px){
+    .alice-carousel__wrapper{
+      width: 100%;
+      margin: 0;
+    }
     .alice-carousel__dots-item{
       width: 0px;
       height: 0px;
-     
     }
-
+  }
 
 `;
 

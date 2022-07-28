@@ -44,7 +44,7 @@ const StyledDiv = styled.section`
       height:110px;
       cursor: pointer;
     
-      &:hover {
+      &:hover, :focus {
         outline: 1px solid var(--highlight);
       }
     }
@@ -100,7 +100,7 @@ const StyledDiv = styled.section`
       a{
         color: var(--highlight);
         text-decoration: none;
-        &:hover{
+             &:hover, :focus{
           text-decoration: underline;
         }
       }
@@ -115,7 +115,7 @@ const StyledDiv = styled.section`
       color: var(--gray);
       font-weight: 700;
       transition: font-weight .2s;
-      &:hover{
+         &:hover, :focus{
         cursor:pointer;
         font-weight: 900;
       }
@@ -140,7 +140,7 @@ const StyledDiv = styled.section`
       margin-top: 2rem;
       color: var(--gray);
       transition: font-weight .2s, border .2s;
-      &:hover {
+        &:hover, :focus {
         cursor: pointer;
         border: 3px solid var(--highlight);
         color: var(--highlight);
@@ -214,13 +214,14 @@ export default function Product({ data }) {
             data-item-description={data.datoCmsProduct.descriptionNode.childMarkdownRemark.html}
             data-item-image={data.datoCmsProduct.image.url}
             data-item-name={data.datoCmsProduct.title}
+            data-item-weight={data.datoCmsProduct.weight}
             data-item-url={`/products/${data.datoCmsProduct.slug}`}
             data-item-categories={`${data.datoCmsProduct.productType } | ${data.datoCmsProduct.fandoms}`}
             onClick={text}
           >
             ADD TO CART
           </button>
-
+          
           {/* if there is a variant, map and add a button to page for each */}
           {data.datoCmsProduct.variation.length > 0 &&
             data.datoCmsProduct.variation.map((vari, idx)=>{
@@ -233,6 +234,7 @@ export default function Product({ data }) {
                 data-item-description={data.datoCmsProduct.descriptionNode.childMarkdownRemark.html + " " + vari.title}
                 data-item-image={data.datoCmsProduct.image.url}
                 data-item-name={vari.title}
+                data-item-weight={data.datoCmsProduct.weight}
                 data-item-url={`/products/${data.datoCmsProduct.slug}`}
                 key={idx}
                 onClick={text}
@@ -257,6 +259,7 @@ export const query = graphql`
       slug
       productType
       fandoms
+      weight
       descriptionNode {
         childMarkdownRemark {
           html

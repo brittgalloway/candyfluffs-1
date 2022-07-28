@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect} from 'react';
 import { Link } from 'gatsby';
 import { StaticImage } from "gatsby-plugin-image"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faInstagram, faTwitter, faTumblr } from '@fortawesome/free-brands-svg-icons';
 import { faShoppingBag, faUser } from '@fortawesome/free-solid-svg-icons';
-
+import {handleOnClick} from '../NavMenu'
 import styled from 'styled-components';
 
 const StyledDiv = styled.header`
@@ -18,6 +18,10 @@ const StyledDiv = styled.header`
       margin-right: 20px;
       font-size: 1.15rem;
       &:hover {color: var(--highlight);}
+      &:focus {
+        transform: scale(1.2);
+        color: var(--highlight);
+    }
     }
   }
   
@@ -46,7 +50,7 @@ const StyledDiv = styled.header`
       background-color: white;
       padding: 1px 6px;
     }
-    &:hover {
+    &:hover, :focus {
       transform: scale(1.2);
       color: var(--highlight);
       .snipcart-total-items{
@@ -68,16 +72,16 @@ export default function Header(props) {
 
   const [cartCount, setCartCount] = useState('');
   const [cartTotal, setCartTotal] = useState('');
+
   
   useEffect(()=> {
     if (window.Snipcart) {
       //this allows it to work when switching pages
       var count = window.Snipcart.api.items.count();
       var cart = window.Snipcart.api.cart.get();
-
       setCartCount(count)
       setCartTotal(cart);
-
+      
       //this allows it to work when you add or change items
       window.Snipcart.subscribe('cart.closed', () => {
           var count = window.Snipcart.api.items.count();
@@ -85,13 +89,17 @@ export default function Header(props) {
           setCartCount(count)
           setCartTotal(cart)
       });
+     
 
       //this allows it to work on refreshing the page
       window.Snipcart.subscribe('cart.ready', (data) => {
           var count = window.Snipcart.api.items.count();
           var cart = window.Snipcart.api.cart.get();
+        
           setCartCount(count)
           setCartTotal(cart)
+
+         
       })
     }
   }, [])
@@ -104,7 +112,7 @@ export default function Header(props) {
         </div>
         <div className="logo-area">
           <div className="logo">
-            <h1><Link to='/'><StaticImage src='./logo.jpg' alt='Candy Fluffs'style={{maxWidth: 300}}/></Link></h1>
+            <h1><Link to='/' onClick={handleOnClick} ><StaticImage src='./logo.jpg' alt='Candy Fluffs'style={{maxWidth: 300}}/></Link></h1>
           </div>
           <div className="subheading">
             {props.heading} (ㆁᴗㆁ✿)

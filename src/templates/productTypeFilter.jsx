@@ -25,6 +25,7 @@ export default function productTypeFilter({pageContext}) {
       {pageContext.pageContext.map(product => {
         return (
           <GridSquare 
+            id={product.id}
             title={product.title} 
             price={product.price}
             image={product.image[0]}

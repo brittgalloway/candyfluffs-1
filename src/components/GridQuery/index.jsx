@@ -27,7 +27,9 @@ export default function Grid() {
       `}
       render={data => (
         data.allDatoCmsProduct.edges.map(({node}) => (
+          //some how pass prop
           <GridSquare 
+            id={node.id} 
             title={node.title} 
             price={node.price}
             image={node.image[0]}

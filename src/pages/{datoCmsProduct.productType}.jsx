@@ -11,13 +11,12 @@ export default function Product({ data }) {
   data.allDatoCmsProduct.edges.forEach(({node}) => {
     // Below line makes a list in slug form of fandoms
     // if (!fandomList.includes(node.fandoms.replace(/\s/g, '-').toLowerCase())) {
-    //   fandomList.push(node.fandoms.replace(/\s/g, '-').toLowerCase())
-    // }
+      //   fandomList.push(node.fandoms.replace(/\s/g, '-').toLowerCase())
+      // }
     if (!fandomList.includes(node.fandoms)) {
       fandomList.push(node.fandoms);
     }
   })
-
 	return(
     <Layout heading={`${data.allDatoCmsProduct.edges[0].node.productType}s`}>
 
@@ -32,6 +31,7 @@ export default function Product({ data }) {
       <div className="product-grid">
         {data.allDatoCmsProduct.edges.map(({node}) => (
           <GridSquare 
+            id={node.id} 
             title={node.title} 
             price={node.price}
             image={node.image[0]}

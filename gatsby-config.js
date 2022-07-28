@@ -3,10 +3,9 @@
  *
  * See: https://www.gatsbyjs.com/docs/gatsby-config/
  */
-require('dotenv').config({
+ require('dotenv').config({
   path: `.env.${process.env.NODE_ENV}`,
 });
-
 module.exports = {
 
   /* Your site config here */
@@ -33,9 +32,9 @@ module.exports = {
     {
 			resolve: 'gatsby-plugin-snipcart',
 			options: {
-				apiKey: 'MzFmNzVkYTktNWQzYy00MmQzLWE3MDctY2Q2OWIzOTJkMGIzNjM3NDMxNDcyNjQ0Nzc3NDEw',
+				apiKey: process.env.GATSBY_SNIPCART_APIKEY,
         autopop: false
 			}
-		}
+		},
   ],
 }
