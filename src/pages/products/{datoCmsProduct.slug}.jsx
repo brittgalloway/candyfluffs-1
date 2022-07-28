@@ -177,6 +177,11 @@ export default function Product({ data }) {
     
   }
 
+  // let addButton = document.getElementsByTagName('button.snipcart-add-item selected').textContent="ADD TO CART";
+  // const text = () =>{
+  //   addButton = document.getElementsByTagName('button.snipcart-add-item selected').textContent="ADDED!";
+  //   console.log(addButton)
+  // }
 	return(
     <Layout heading={`${data.datoCmsProduct.title}`}>
       <StyledDiv>
@@ -212,7 +217,10 @@ export default function Product({ data }) {
             data-item-name={data.datoCmsProduct.title}
             data-item-weight={data.datoCmsProduct.weight}
             data-item-url={`/products/${data.datoCmsProduct.slug}`}
+            data-item-categories={`${data.datoCmsProduct.productType } | ${data.datoCmsProduct.fandoms}`}
+            // onClick={text}
           >
+            {/* {addButton} */}
             ADD TO CART
           </button>
           
@@ -231,7 +239,9 @@ export default function Product({ data }) {
                 data-item-weight={data.datoCmsProduct.weight}
                 data-item-url={`/products/${data.datoCmsProduct.slug}`}
                 key={idx}
+                // onClick={text}
               >
+                {/* {addButton} */}
                 ADD TO CART
               </button>
             })
@@ -250,6 +260,8 @@ export const query = graphql`
       title
       price
       slug
+      productType
+      fandoms
       weight
       descriptionNode {
         childMarkdownRemark {

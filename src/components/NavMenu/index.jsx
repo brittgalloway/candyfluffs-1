@@ -199,6 +199,9 @@ export default function NavMenu() {
             <Link onClick={handleOnClick} to='/print'>Prints</Link>
           </li>
           <li>
+            <Link onClick={handleOnClick} to='/scroll'>Scrolls</Link>
+          </li>
+          <li>
             <Link onClick={handleOnClick} to='/charm'>Charms</Link>
           </li>
           <li>
