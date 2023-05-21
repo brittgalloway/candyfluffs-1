@@ -55,6 +55,7 @@ export default function Slider(props) {
             nodes {
               banner {
                 title
+                notes
                 fluid {
                   src
                 }
@@ -65,16 +66,18 @@ export default function Slider(props) {
       `}
       render={data => (
         <StyledDiv className="slider">
-          <AliceCarousel
-            autoPlay autoPlayInterval="3000"
-            disableButtonsControls
-            infinite
-            items={data.allDatoCmsBanner.nodes.map((node, idx) => {
-              return (
-                <img src={node.banner[0].fluid.src} alt={node.banner[0].title} className="sliderimg" key={idx}/>
-              )
-            })}
-          />
+            <AliceCarousel
+              autoPlay autoPlayInterval="3000"
+              disableButtonsControls
+              infinite
+              items={data.allDatoCmsBanner.nodes.map((node, idx) => {
+                return (
+                  <a href={node.banner[0].notes}>
+                    <img src={node.banner[0].fluid.src} alt={node.banner[0].title} className="sliderimg" key={idx}/>
+                  </a>
+                )
+              })}
+            />
         </StyledDiv>
       )}
     />

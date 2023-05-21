@@ -1,7 +1,7 @@
 {
-  "name": "gatsby-starter-hello-world",
+  "name": "candy-fluffs",
   "private": true,
-  "description": "A simplified bare-bones starter for Gatsby",
+  "description": "An e-store for anime and manga merchandise",
   "version": "0.1.0",
   "license": "0BSD",
   "scripts": {
