@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faInstagram, faTwitter, faTumblr } from '@fortawesome/free-brands-svg-icons';
 import styled from 'styled-components';
 
-const StyledDiv = styled.div`
+const StyledDiv = styled('div')`
   margin-top: 10rem; 
   display: flex; 
   flex-direction: column;

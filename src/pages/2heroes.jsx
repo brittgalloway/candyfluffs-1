@@ -1,10 +1,11 @@
-import React from 'react'
-import Layout from '../components/Layout'
+import React from 'react';
+import { graphql } from 'gatsby';
+import Layout from '../components/Layout';
 import GridSquare from '../components/GridSquare';
-import {StaticImage} from 'gatsby-plugin-image'
+import { StaticImage } from 'gatsby-plugin-image';
 import styled from 'styled-components';
 
-const StyledDiv = styled.div`
+const StyledDiv = styled('div')`
   #title{
     font-size: 3rem;
     color: var(--highlight);
@@ -58,7 +59,7 @@ export default function Necahual({ data }) {
        
           <h2 id="title">NECAHUAL</h2>
           <div className='info'style={{justifyContent:'center',lineHeight:'3rem'}}>
-            <StaticImage layout="constrained"  aspectRatio={1} style={{maxWidth:600}} src="../images/necahualImg.jpeg" alt="Necahual"/>
+            <StaticImage layout='constrained'  aspectRatio={1} style={{maxWidth:600}} src='../images/necahualImg.jpeg' alt='Necahual'/>
             <div className="links">
               <h3 style={{fontSize:'1.5rem'}}>Read it on <a style={{color: 'var(--highlight)'}} href="https://www.webtoons.com/en/challenge/necahual/list?title_no=216820">WEBTOONS</a>!</h3>
               <p style={{ color: 'var(--highlight)'}}>Support us on:</p>
@@ -101,7 +102,6 @@ export const query = graphql`
           image {
             fluid(maxWidth: 200) {
               src
-              ...GatsbyDatoCmsFluid
             }
           }
         }

@@ -1,13 +1,14 @@
 import React, { useState, useEffect} from 'react';
 import { Link } from 'gatsby';
-import { StaticImage } from "gatsby-plugin-image"
+import { StaticImage } from 'gatsby-plugin-image'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faInstagram, faTwitter, faTumblr } from '@fortawesome/free-brands-svg-icons';
 import { faShoppingBag, faUser } from '@fortawesome/free-solid-svg-icons';
-import {handleOnClick} from '../NavMenu'
+import Searchbar from '../Searchbar';
+import { handleOnClick } from '../NavMenu'
 import styled from 'styled-components';
 
-const StyledDiv = styled.header`
+const StyledHeader = styled('header')`
   .subheading {
     color: var(--highlight);
     word-break: keep-all;
@@ -17,11 +18,13 @@ const StyledDiv = styled.header`
       color: var(--form-gray);
       margin-right: 20px;
       font-size: 1.15rem;
-      &:hover {color: var(--highlight);}
+      &:hover {
+        color: var(--highlight);
+      }
       &:focus {
         transform: scale(1.2);
         color: var(--highlight);
-    }
+      }
     }
   }
   
@@ -58,9 +61,6 @@ const StyledDiv = styled.header`
       }
     }
   }
-
-
-
   .snipcart-summary {
     color: var(--gray);
   }
@@ -68,7 +68,7 @@ const StyledDiv = styled.header`
   margin-bottom: 1rem;
 `;
 
-export default function Header(props) {
+export default function Header({heading}) {
 
   const [cartCount, setCartCount] = useState('');
   const [cartTotal, setCartTotal] = useState('');
@@ -98,13 +98,12 @@ export default function Header(props) {
         
           setCartCount(count)
           setCartTotal(cart)
-
          
       })
     }
   }, [])
   return (
-    <StyledDiv className="header">
+    <StyledHeader className="header">
         <div className="social-links hidden">
           <a href="https://candy-fluffs.tumblr.com/" aria-label="Candy Fluffs Tumblr"><FontAwesomeIcon icon={faTumblr} size="lg"/></a>
           <a href="http://instagram.com/candy_fluffs" aria-label="Candy Fluffs Instagram"><FontAwesomeIcon icon={faInstagram} size="lg"/></a>
@@ -115,7 +114,7 @@ export default function Header(props) {
             <h1><Link to='/' onClick={handleOnClick} ><StaticImage src='./logo.jpg' alt='Candy Fluffs'style={{maxWidth: 300}}/></Link></h1>
           </div>
           <div className="subheading">
-            {props.heading} (ㆁᴗㆁ✿)
+            {heading} (ㆁᴗㆁ✿)
           </div>
         </div>
         <div className="contact-links hidden">
@@ -130,7 +129,8 @@ export default function Header(props) {
             </div>
             <FontAwesomeIcon icon={faShoppingBag} size="lg"/>
           </button>
+          <Searchbar/>
         </div>
-    </StyledDiv>
+    </StyledHeader>
   )
 }

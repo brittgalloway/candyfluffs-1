@@ -1,10 +1,10 @@
-import React, { useState } from "react";
-import { graphql } from "gatsby";
-import Layout from "../../components/Layout";
+import React, { useState } from 'react';
+import { graphql } from 'gatsby';
+import Layout from '../../components/Layout';
 import styled from 'styled-components';
 import Img from 'gatsby-image';
 
-const StyledDiv = styled.section`
+const StyledSection = styled('section')`
 
   display:flex;
   flex-wrap: nowrap;
@@ -127,28 +127,28 @@ const StyledDiv = styled.section`
     li{
       padding: 1rem 0
     }
-    button {
-      /* visibility: collapse; */
-      display: none;
-      border: 3px solid var(--gray);
-      width: fit-content;
-      background: var(--background);
-      padding: 20px 30px;
-      font-weight: 700;
-      margin-top: 2rem;
-      color: var(--gray);
-      transition: font-weight .2s, border .2s;
-        &:hover, :focus {
-        cursor: pointer;
-        border: 3px solid var(--highlight);
-        color: var(--highlight);
-        font-weight: 900;
-        padding: px 30px;
-      }
-    }
   }
 `;
+const StyledButton = styled('button')`
+  display: none;
+  border: 3px solid var(--gray);
+  width: fit-content;
+  background: var(--background);
+  padding: 20px 30px;
+  font-weight: 700;
+  margin-top: 2rem;
+  color: var(--gray);
+  text-transform: uppercase;
+  transition: font-weight .2s, border .2s;
+    &:hover, :focus {
+    cursor: pointer;
+    border: 3px solid var(--highlight);
+    color: var(--highlight);
+    font-weight: 900;
+    padding: px 30px;
+  }
 
+`
 export default function Product({ data }) {
   const [displayImg, setDisplayImage] = useState(0);
   const [variant, setVariant] = useState("OG")
@@ -173,15 +173,21 @@ export default function Product({ data }) {
 
   const selectVariant = (e) => {
     setVariant(e.target.value)
-    
+  }
+
+  function handleClick(e) {
+    e.target.textContent='Added to Cart!';
+    setTimeout(()=>{
+      e.target.textContent='Add to Cart';
+    }, 5000);
   }
 
 	return(
     <Layout heading={`${data.datoCmsProduct.title}`}>
-      <StyledDiv>
+      <StyledSection>
         <div className="images-section">
           <Img 
-            style={{maxWidth:600, height: "auto"}}
+            style={{maxWidth:600, height: 'auto'}}
             fluid={{...data.datoCmsProduct.image[displayImg].fluid, aspectRatio: 1}} />
           {previewImgs}
         </div>
@@ -200,7 +206,7 @@ export default function Product({ data }) {
             </select>
           }
           
-          <button 
+          <StyledButton 
             className={variant==="OG" ? "snipcart-add-item selected":"snipcart-add-item"}
             aria-hidden={variant=="OG" ? "false":"true"}
             aria-label="Add to Cart"
@@ -213,16 +219,17 @@ export default function Product({ data }) {
             data-item-url={`/products/${data.datoCmsProduct.slug}`}
             data-item-categories={`${data.datoCmsProduct.productType } | ${data.datoCmsProduct.fandoms}`}
           >
-            ADD TO CART
-          </button>
+            Add to Cart
+          </StyledButton>
           
           {/* if there is a variant, map and add a button to page for each */}
           {data.datoCmsProduct.variation.length > 0 &&
             data.datoCmsProduct.variation.map((vari, idx)=>{
-              return <button 
+              return <StyledButton 
                 className={variant==idx ? "snipcart-add-item selected":"snipcart-add-item"}
                 aria-hidden={variant==idx ? "false":"true"}
                 aria-label="Add to Cart"
+                onClick={handleClick}
                 data-item-id={vari.id}
                 data-item-price={vari.price}
                 data-item-description={data.datoCmsProduct.descriptionNode.childMarkdownRemark.html + " " + vari.title}
@@ -232,13 +239,13 @@ export default function Product({ data }) {
                 data-item-url={`/products/${data.datoCmsProduct.slug}`}
                 key={idx}
               >
-                ADD TO CART
-              </button>
+                Add to Cart
+              </StyledButton>
             })
           }
           
         </div>
-      </StyledDiv>
+      </StyledSection>
     </Layout>
   )
 };
@@ -261,7 +268,6 @@ export const query = graphql`
       image {
         fluid(maxWidth: 600) {
           src
-          ...GatsbyDatoCmsFluid
         }
       }
       variation {

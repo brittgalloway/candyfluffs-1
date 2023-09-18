@@ -2,12 +2,13 @@ import React from 'react';
 import Layout from '../components/Layout';
 import GridSquare from '../components/GridSquare';
 
-export default function productTypeFilter({pageContext}) {
+export default function productFandomFilter({pageContext}) {
+  console.log("page", pageContext);
 
   return (
     <Layout heading = {'Just a girl who likes to draw manga'}>
       <div className='product-grid'>
-      {pageContext.pageContext.map(product => {
+      {pageContext.map(product => {
         return (
           <GridSquare 
             id={product.id}

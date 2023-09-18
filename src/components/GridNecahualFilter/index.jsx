@@ -1,5 +1,5 @@
 import React from 'react';
-import { graphql, StaticQuery } from "gatsby";
+import { graphql, StaticQuery } from 'gatsby';
 import GridSquare from '../GridSquare';
 
 export default function GridNecahualQuery() {
@@ -17,7 +17,6 @@ export default function GridNecahualQuery() {
                 image {
                   fluid(maxWidth: 200) {
                     src
-                    ...GatsbyDatoCmsFluid
                   }
                 }
               }

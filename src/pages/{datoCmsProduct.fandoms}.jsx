@@ -7,7 +7,7 @@ import '../styles/global.css';
 export default function Product({ data }) {
 
 	return(
-    <Layout heading={`${data.allDatoCmsProduct.edges[0].node.productType}s`}>
+    <Layout heading={`${data.allDatoCmsProduct.edges[0].node.fandoms}`}>
       <div className="product-grid">
         {data.allDatoCmsProduct.edges.map(({node}) => (
           <GridSquare 
@@ -25,8 +25,8 @@ export default function Product({ data }) {
 };
 
 export const query = graphql`
-  query AllProductTypes($productType:String!) {
-  allDatoCmsProduct(filter: {productType: {eq: $productType}}) {
+  query AllProductTypes($fandoms:String!) {
+  allDatoCmsProduct(filter: {fandoms: {eq: $fandoms}}) {
     edges {
       node {
         id

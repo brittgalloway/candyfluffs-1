@@ -7,7 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShoppingBag } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
 
-const Nav = styled("nav")`
+const Nav = styled('nav')`
   border-top:2px solid var(--faded-highlight);
   border-bottom:1px solid var(--faded-highlight);
 
@@ -82,7 +82,7 @@ const Nav = styled("nav")`
   }
 `;
 
-const Hamburger = styled("button")`
+const Hamburger = styled('button')`
   display: none;
   cursor: pointer;
   @media(max-width: 830px) {
@@ -94,7 +94,7 @@ const Hamburger = styled("button")`
   }
 `;
 
-const NavList = styled("ul")`
+const NavList = styled('ul')`
   display: flex;
   width: 80%;
   margin: 0 auto;
@@ -224,8 +224,8 @@ export default function NavMenu() {
               <li>
                 <Link to='/contact'>Contact</Link>
               </li>
-              <li className="snipcart-summary">
-                <a href="#" className="snipcart-user-email snipcart-user-profile">
+              <li className='snipcart-summary'>
+                <a href='#' className='snipcart-user-email snipcart-user-profile'>
                     Account
                 </a>
               </li>
@@ -233,14 +233,14 @@ export default function NavMenu() {
           }
         </NavList>
       )}
-      <div className="mobile-menu">
+      <div className='mobile-menu'>
         <Hamburger onClick={toggling}><img src={hamburgerIcon} alt="hamburger menu"/></Hamburger>
         {isMobile &&
            <button aria-label="Go to cart" className="snipcart-checkout">
            <div className="snipcart-summary">  
              <span className="snipcart-total-items">{cartCount}</span>
            </div>
-           <FontAwesomeIcon icon={faShoppingBag} size="lg"/>
+           <FontAwesomeIcon icon={faShoppingBag} size='lg'/>
          </button>
         }
       </div>

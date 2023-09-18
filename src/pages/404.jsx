@@ -1,8 +1,8 @@
-import React from "react"
-import Layout from "../components/Layout"
+import React from 'react';
+import Layout from '../components/Layout';
 import styled from 'styled-components';
 
-const StyledDiv = styled.div`
+const StyledDiv = styled('div')`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -42,7 +42,7 @@ const StyledDiv = styled.div`
 
 export default function About() {
 	return (
-		<Layout heading = {"NOT FOUND?!?"} >
+		<Layout heading = {'NOT FOUND?!?'} >
       <StyledDiv>
         <h1>404</h1>
 
