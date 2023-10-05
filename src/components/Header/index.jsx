@@ -1,4 +1,5 @@
-import React, { useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
+import { useMediaQuery } from 'react-responsive';
 import { Link } from 'gatsby';
 import { StaticImage } from 'gatsby-plugin-image'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -34,41 +35,42 @@ const StyledHeader = styled('header')`
     }
   }
 
-  button.snipcart-checkout, button.snipcart-user-email {
-    font-size: 1.15rem;
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    color: var(--form-gray);
-    transition: transform .2s;
-    .snipcart-total-items{
-      color: var(--form-gray);
-      font-weight: bold;
-      position: relative;
-      top: 10px;
-      left: 15px;
-      z-index: 1;   
-      border: 1px solid var(--faded-highlight);
-      border-radius: 50%; 
-      background-color: white;
-      padding: 1px 6px;
-    }
-    &:hover, :focus {
-      transform: scale(1.2);
-      color: var(--highlight);
-      .snipcart-total-items{
-        color: var(--highlight);
-      }
-    }
-  }
   .snipcart-summary {
     color: var(--gray);
   }
 
   margin-bottom: 1rem;
 `;
+const StyledButton = styled('button')`
+  font-size: 1.15rem;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--form-gray);
+  transition: transform .2s;
+  .snipcart-total-items{
+    color: var(--form-gray);
+    font-weight: bold;
+    position: relative;
+    top: 10px;
+    left: 15px;
+    z-index: 1;   
+    border: 1px solid var(--faded-highlight);
+    border-radius: 50%; 
+    background-color: white;
+    padding: 1px 6px;
+  }
+  &:hover, :focus {
+    transform: scale(1.2);
+    color: var(--highlight);
+    .snipcart-total-items{
+      color: var(--highlight);
+    }
+  }
+`;
 
 export default function Header({heading}) {
+  const isMobile = useMediaQuery({query: `(max-width: 830px)`});
 
   const [cartCount, setCartCount] = useState('');
   const [cartTotal, setCartTotal] = useState('');
@@ -119,17 +121,17 @@ export default function Header({heading}) {
         </div>
         <div className="contact-links hidden">
           <div className="snipcart-summary">
-              <button aria-label="User Profile" className="snipcart-user-email snipcart-user-profile">
-              <FontAwesomeIcon icon={faUser} size="lg"/>
-              </button >
+              <StyledButton type="button" title="User Profile" aria-label="User Profile" className="snipcart-user-email snipcart-user-profile">
+                <FontAwesomeIcon icon={faUser} size="lg"/>
+              </StyledButton >
           </div>
-          <button aria-label="Go to cart" className="snipcart-checkout">
+          <StyledButton type="button" title="See your cart" aria-label="Go to cart" className="snipcart-checkout">
             <div className="snipcart-summary">  
               <span className="snipcart-total-items">{cartCount}</span>
             </div>
             <FontAwesomeIcon icon={faShoppingBag} size="lg"/>
-          </button>
-          <Searchbar/>
+          </StyledButton>
+          {(!isMobile) ? <Searchbar/> : null}
         </div>
     </StyledHeader>
   )

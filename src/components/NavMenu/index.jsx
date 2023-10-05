@@ -1,11 +1,12 @@
-import React, {useState, useEffect} from 'react';
-import {useMediaQuery} from 'react-responsive';
+import React, { useState, useEffect } from 'react';
+import { useMediaQuery } from 'react-responsive';
 import { Link } from 'gatsby';
 import styled from 'styled-components';
 import hamburgerIcon from './hamburger.svg';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShoppingBag } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
+import Searchbar from '../Searchbar';
 
 const Nav = styled('nav')`
   border-top:2px solid var(--faded-highlight);
@@ -234,14 +235,17 @@ export default function NavMenu() {
         </NavList>
       )}
       <div className='mobile-menu'>
-        <Hamburger onClick={toggling}><img src={hamburgerIcon} alt="hamburger menu"/></Hamburger>
+        <Hamburger type="button" title="" onClick={toggling}><img src={hamburgerIcon} alt="hamburger menu"/></Hamburger>
         {isMobile &&
-           <button aria-label="Go to cart" className="snipcart-checkout">
-           <div className="snipcart-summary">  
-             <span className="snipcart-total-items">{cartCount}</span>
-           </div>
-           <FontAwesomeIcon icon={faShoppingBag} size='lg'/>
-         </button>
+          <>
+          <Searchbar/>
+           <button title="See your cart" type="button" aria-label="Go to cart" className="snipcart-checkout">
+            <div className="snipcart-summary">  
+              <span className="snipcart-total-items">{cartCount}</span>
+            </div>
+            <FontAwesomeIcon icon={faShoppingBag} size='lg'/>
+          </button>
+         </>
         }
       </div>
     </Nav>

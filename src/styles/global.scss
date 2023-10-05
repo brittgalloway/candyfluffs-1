@@ -281,7 +281,7 @@ html::-webkit-scrollbar-thumb {
   background-color: white;
 }
 .hide{
-  display: none;
+  display: none !important;
 }
  .soldOut p{
   width: 400px;

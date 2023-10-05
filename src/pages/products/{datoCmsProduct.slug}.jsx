@@ -183,7 +183,7 @@ export default function Product({ data }) {
   }
 
 	return(
-    <Layout heading={`${data.datoCmsProduct.title}`}>
+    <Layout title={`${data.datoCmsProduct.title}`} heading={`${data.datoCmsProduct.title}`}>
       <StyledSection>
         <div className="images-section">
           <Img 
@@ -208,8 +208,9 @@ export default function Product({ data }) {
           
           <StyledButton 
             className={variant==="OG" ? "snipcart-add-item selected":"snipcart-add-item"}
-            aria-hidden={variant=="OG" ? "false":"true"}
+            aria-hidden={variant==="OG" ? "false":"true"}
             aria-label="Add to Cart"
+            onClick={handleClick}
             data-item-id={data.datoCmsProduct.id}
             data-item-price={data.datoCmsProduct.price}
             data-item-description={data.datoCmsProduct.descriptionNode.childMarkdownRemark.html}
@@ -226,8 +227,8 @@ export default function Product({ data }) {
           {data.datoCmsProduct.variation.length > 0 &&
             data.datoCmsProduct.variation.map((vari, idx)=>{
               return <StyledButton 
-                className={variant==idx ? "snipcart-add-item selected":"snipcart-add-item"}
-                aria-hidden={variant==idx ? "false":"true"}
+                className={variant===idx ? "snipcart-add-item selected":"snipcart-add-item"}
+                aria-hidden={variant===idx ? "false":"true"}
                 aria-label="Add to Cart"
                 onClick={handleClick}
                 data-item-id={vari.id}

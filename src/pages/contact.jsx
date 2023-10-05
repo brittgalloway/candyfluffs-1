@@ -35,7 +35,7 @@ const StyledDiv = styled('div')`
 
 export default function Contact() {
 	return (
-		<Layout heading = {'Feel free to contact me!'}>
+		<Layout title = {'Contact Me'} heading = {'Feel free to contact me!'}>
       <StyledDiv>
         <div>
 

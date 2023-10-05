@@ -42,7 +42,7 @@ const StyledDiv = styled('div')`
 
 export default function About() {
 	return (
-		<Layout heading = {'NOT FOUND?!?'} >
+		<Layout title = {'404 NOT FOUND'} heading = {'NOT FOUND?!?'} >
       <StyledDiv>
         <h1>404</h1>
 

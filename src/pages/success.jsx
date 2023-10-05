@@ -55,7 +55,7 @@ const StyledDiv = styled('div')`
 
 export default function About() {
 	return (
-		<Layout heading = {'Success!'} >
+		<Layout title = {'Subscribed!'} heading = {'Success!'} >
       <StyledDiv>
         <div>
           <h2>You Have</h2>

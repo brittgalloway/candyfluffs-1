@@ -7,7 +7,7 @@ import '../styles/global.css';
 export default function Product({ data }) {
 
 	return(
-    <Layout heading={`${data.allDatoCmsProduct.edges[0].node.fandoms}`}>
+    <Layout title={`${data.allDatoCmsProduct.edges[0].node.fandoms}`} heading={`${data.allDatoCmsProduct.edges[0].node.fandoms}`}>
       <div className="product-grid">
         {data.allDatoCmsProduct.edges.map(({node}) => (
           <GridSquare 

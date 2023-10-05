@@ -6,19 +6,6 @@ import { StaticImage } from 'gatsby-plugin-image';
 import styled from 'styled-components';
 
 const StyledDiv = styled('div')`
-  #title{
-    font-size: 3rem;
-    color: var(--highlight);
-    text-align: center;
-    padding: 2rem;
-    @media(max-width: 830px) {
-      position: absolute !important;
-      height: 1px; width: 1px; 
-      overflow: hidden;
-      clip: rect(1px 1px 1px 1px);
-      clip: rect(1px, 1px, 1px, 1px);
-    }
-  }
   .info {
     display: flex;
     @media(max-width: 830px) {
@@ -52,12 +39,26 @@ const StyledDiv = styled('div')`
 
 `
 
+const StyledH2 = styled('h2')`
+  font-size: 3rem;
+  color: var(--highlight);
+  text-align: center;
+  padding: 2rem;
+  @media(max-width: 830px) {
+    position: absolute !important;
+    height: 1px; width: 1px; 
+    overflow: hidden;
+    clip: rect(1px 1px 1px 1px);
+    clip: rect(1px, 1px, 1px, 1px);
+
+}`
+
 export default function Necahual({ data }) {
   return (
-    <Layout heading = {'Necahual'}>
+    <Layout title = {'Necahual'} heading = {'Necahual'}>
       <StyledDiv>
        
-          <h2 id="title">NECAHUAL</h2>
+          <StyledH2 id="title">NECAHUAL</StyledH2>
           <div className='info'style={{justifyContent:'center',lineHeight:'3rem'}}>
             <StaticImage layout='constrained'  aspectRatio={1} style={{maxWidth:600}} src='../images/necahualImg.jpeg' alt='Necahual'/>
             <div className="links">

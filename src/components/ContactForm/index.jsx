@@ -11,7 +11,6 @@ const StyledDiv = styled('div')`
   
   @media(max-width: 1100px) {
     width: 90%;
-  
   }
 
   @media(max-width: 830px) {
@@ -21,22 +20,21 @@ const StyledDiv = styled('div')`
     }
   }
 
-  #contactH2 {
-    color: #000000;
-    font-size: 2rem;
-    margin-bottom: 10px; 
-  }
-
   small {
     text-align: center; 
   }
+`;
+const StyledH2 = styled('h2')`
+    color: #000000;
+    font-size: 2.25rem;
+    margin-bottom: 10px; 
 `;
 
 export default function ContactForm() {
 
   return(
     <StyledDiv>
-      <h2 id="contactH2">Candy Fluffs Updates!</h2>
+      <StyledH2>Candy Fluffs Updates!</StyledH2>
       <p>Sign up to get updates about new products and when I’ll be at anime conventions!</p>
       <div id="mc_embed_signup">
       <form action="https://candyfluffs.us16.list-manage.com/subscribe/post?u=f0ccd4aae40398b03156934fd&amp;id=1e5c516db8" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" className="validate" target="_blank" noValidate>

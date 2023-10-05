@@ -125,7 +125,7 @@ export default function About() {
             <a href="http://instagram.com/candy_fluffs" aria-label="Candy Fluffs Instagram"><FontAwesomeIcon icon={faInstagram} size="lg"/></a>
             <a href="http://twitter.com/candy_fluffs" aria-label="Candy Fluffs Twitter"><FontAwesomeIcon icon={faTwitter} size="lg"/></a> 
           </div>
-          <button><a href="http://eepurl.com/duTC3L">be the first to know when we’re live</a></button>
+          <button type="button"><a href="http://eepurl.com/duTC3L">be the first to know when we’re live</a></button>
         </span>
         </div>
       </StyledDiv>

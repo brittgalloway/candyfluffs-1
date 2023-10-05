@@ -18,7 +18,7 @@ const StyledDiv = styled('div')`
 `
 export default function Events({data}) {
   return (
-    <Layout heading = {'Catch me outside! '}>
+    <Layout title = {'Conventions'} heading = {'Catch me outside! '}>
       <StyledDiv>
         {data.allDatoCmsLiveEvent.nodes.map(liveEvent => {
          const startDate=moment(liveEvent.startDate).format( 'dddd, MMMM Do YYYY, h:mm a');

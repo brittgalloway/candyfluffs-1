@@ -4,10 +4,10 @@ import Header from '../Header';
 import NavMenu from '../NavMenu';
 import Footer from '../Footer';
 
-export default function Layout({heading, children}) {
+export default function Layout({title, heading, children}) {
   return(
     <div className="container">
-      <Head />
+      <Head title={title}/>
       <Header heading={heading} />
       <NavMenu/>
       <main>

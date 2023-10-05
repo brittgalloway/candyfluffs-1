@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import OptionsQuery from './searchQuery';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -33,10 +33,21 @@ const StyledButton = styled('button')`
 const StyledInput = styled('input')`
   display: inline-block;
   height: 30px;
+  width: 100%;
   border: none;
+  border-radius: 4px;
   background: var(--form-gray);
 `
+const StyledDiv = styled('div')`
+  width: 100%;
+  display: flex;
+  @media(max-width: 830px) {
+    align-items: center;
+  }
+`
+
 export default function Searchbar() {
+  
   function handleSearch(event) {
     event.target.setAttribute('value', event.target.value);
   };
@@ -55,29 +66,36 @@ export default function Searchbar() {
     isOpen === true ? setIsOpen(false) : setIsOpen(true);
     if (isOpen === true) {
       document.querySelector('#searchBar').classList.remove('hide');
+      document.querySelector('.snipcart-summary').classList.add('hide');
+      document.querySelector('.snipcart-checkout').classList.add('hide');
+      submit();
     } else {
       document.querySelector('#searchBar').classList.add('hide');
+      document.querySelector('.snipcart-summary').classList.remove('hide');
+      document.querySelector('.snipcart-checkout').classList.remove('hide');
+      submit();
     }
-    submit();
   };
-  function handlKeyPress(event) {
+  function handleKeyPress(event) {
     if (event.key === "Enter") {
       submit();
     }
   };
+  function handleSelect(event) {
+      submit();
+  };
 
   return(
-    <div className='searchBar'>
+    <StyledDiv className='searchBar'>
       <StyledLabel htmlFor='searchBar'>Search show and manga titles</StyledLabel>
-      <StyledInput className='hide' name='searchBar' id='searchBar' onChange={handleSearch} onKeyUp={handlKeyPress} type='search' list='product-options' placeholder='Search titles...'/>
-
-      <StyledButton type="submit" onClick={handleClick}>
+      <StyledInput  name='searchBar' className='hide' id='searchBar' onChange={handleSearch} onKeyUp={handleKeyPress} type='search' list='product-options' placeholder='Search titles...'/>
+      <StyledButton title="Search Products" type="button" onClick={handleClick}>
         <FontAwesomeIcon icon={faSearch} size="lg"/>
         <span>Search</span>
       </StyledButton>
-      <datalist id='product-options'>
+      <datalist id='product-options' onKeyUp={handleKeyPress} onClick={handleSelect}>
           <OptionsQuery/> 
       </datalist>
-    </div>
+    </StyledDiv>
   )
 }

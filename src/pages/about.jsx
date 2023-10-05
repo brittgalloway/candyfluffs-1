@@ -20,7 +20,7 @@ const StyledDiv = styled('div')`
 
 export default function About() {
 	return (
-		<Layout heading = {'Just a girl who likes to draw manga'} >
+		<Layout title = {'About'} heading = {'Just a girl who likes to draw manga'} >
       <StyledDiv>
 
               <StaticImage layout='fullWidth'  aspectRatio={1} style={{maxWidth:425, margin: '4rem 0', padding:'1rem'}} src='../images/cjoy.png' alt='C Joy'/>
