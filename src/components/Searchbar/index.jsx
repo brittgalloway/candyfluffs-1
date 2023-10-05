@@ -64,7 +64,7 @@ export default function Searchbar() {
 
   function handleClick() {
     isOpen === true ? setIsOpen(false) : setIsOpen(true);
-    if (isOpen === true) {
+    if (isOpen === false) {
       document.querySelector('#searchBar').classList.remove('hide');
       document.querySelector('.snipcart-summary').classList.add('hide');
       document.querySelector('.snipcart-checkout').classList.add('hide');

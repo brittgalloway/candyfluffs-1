@@ -41,7 +41,7 @@ export default function ContactForm() {
           <div id="mc_embed_signup_scroll">
           <input style={{  marginRight: "1rem", padding: "12px 20px", height: "50px", width: "300x", backgroundColor: "#c4c4c4", color: "#000", border: "0px", verticalAlign:" center"}} type="email" name="EMAIL" className="email" id="mce-EMAIL" placeholder="EMAIL" required/>
         
-          <div style={{position: "absolute", left: "-5000px"}} aria-hidden="true"><input type="text" name="b_f0ccd4aae40398b03156934fd_1e5c516db8" tabIndex="-1" value=""/></div>
+          <div style={{position: "absolute", left: "-5000px"}} aria-hidden="true"><input type="text" name="b_f0ccd4aae40398b03156934fd_1e5c516db8" tabIndex="-1" /></div>
           <div className="clear"><input type="submit" value="SUBSCRIBE" name="subscribe" id="mc-embedded-subscribe" className="button"/></div>
           </div>
       </form>
