@@ -56,7 +56,9 @@ export default function Searchbar() {
     let searchValue = document.querySelector('#searchBar').getAttribute('value');
     const searchResult = searchValue === null ? '' : searchValue.replace(/\s/g, '-').toLowerCase();
     if (searchValue !== null && searchValue !== '') {
-      document.location=`/${searchResult}/`;
+      // quick fix for "jojo" fandom
+      const newSlug = searchResult == 'jojo' ? 'jo-jo' : searchResult;
+      document.location=`/${newSlug}/`;
     } else {
       searchValue = document.querySelector('#searchBar').setAttribute('value', '');
     }

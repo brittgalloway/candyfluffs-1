@@ -3,7 +3,6 @@ import Layout from '../components/Layout';
 import GridSquare from '../components/GridSquare';
 
 export default function productFandomFilter({pageContext}) {
-  console.log("page", pageContext);
 
   return (
     <Layout heading = {'Just a girl who likes to draw manga'}>
