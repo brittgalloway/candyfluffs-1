@@ -51,7 +51,7 @@ exports.createPages = async function({actions, graphql}) {
   
   const fandomList = data.allDatoCmsProduct.distinct;
  fandomList.map((fandom) =>{
-   const lowerFandom = fandom.replace(/\s/g, '-').toLowerCase();
+   const lowerFandom = fandom === 'JoJo' ? 'jo-jo' : fandom.replace(/\s/g, '-').toLowerCase();
    actions.createPage({
      path: `/${lowerFandom}`,
      component: require.resolve(`./src/templates/productFandomFilter.jsx`),
