@@ -1,16 +1,17 @@
 import React from 'react';
-import { StaticQuery, graphql } from "gatsby"
+import { StaticQuery, graphql } from 'gatsby';
 import AliceCarousel from 'react-alice-carousel';
-import "react-alice-carousel/lib/alice-carousel.css";
+import 'react-alice-carousel/lib/alice-carousel.css';
 import styled from 'styled-components';
 
 
-const StyledDiv = styled.div`
+const StyledDiv = styled('div')`
   .alice-carousel__wrapper{
     width: 90%;
     margin: 0 auto;
   }
   margin: 0 auto;
+  overflow-x: hidden;
   .alice-carousel__dots-item.__active{
   background-color: var(--highlight);
   }
@@ -45,7 +46,7 @@ const StyledDiv = styled.div`
 
 `;
 
-export default function Slider(props) {
+export default function Slider() {
   
   return(
     <StaticQuery
@@ -55,6 +56,7 @@ export default function Slider(props) {
             nodes {
               banner {
                 title
+                notes
                 fluid {
                   src
                 }
@@ -64,17 +66,19 @@ export default function Slider(props) {
         }
       `}
       render={data => (
-        <StyledDiv className="slider">
-          <AliceCarousel
-            autoPlay autoPlayInterval="3000"
-            disableButtonsControls
-            infinite
-            items={data.allDatoCmsBanner.nodes.map((node, idx) => {
-              return (
-                <img src={node.banner[0].fluid.src} alt={node.banner[0].title} className="sliderimg" key={idx}/>
-              )
-            })}
-          />
+        <StyledDiv className='slider'>
+            <AliceCarousel
+              autoPlay autoPlayInterval='3000'
+              disableButtonsControls
+              infinite
+              items={data.allDatoCmsBanner.nodes.map((node, idx) => {
+                return (
+                  <a href={node.banner[0].notes}>
+                    <img src={node.banner[0].fluid.src} alt={node.banner[0].title} className='sliderimg' key={idx}/>
+                  </a>
+                )
+              })}
+            />
         </StyledDiv>
       )}
     />

@@ -1,9 +1,10 @@
-import React from "react"
-import Layout from "../components/Layout"
+import React from 'react';
+import { graphql } from 'gatsby';
+import Layout from '../components/Layout';
 import styled from 'styled-components';
-import moment from "moment";
+import moment from 'moment';
 
-const StyledDiv = styled.div`
+const StyledDiv = styled('div')`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -17,11 +18,11 @@ const StyledDiv = styled.div`
 `
 export default function Events({data}) {
   return (
-    <Layout heading = {"Catch me outside! "}>
+    <Layout title = {'Conventions'} heading = {'Catch me outside! '}>
       <StyledDiv>
         {data.allDatoCmsLiveEvent.nodes.map(liveEvent => {
-         const startDate=moment(liveEvent.startDate).format( "dddd, MMMM Do YYYY, h:mm a");
-         const endDate=moment(liveEvent.endDate).format( "dddd, MMMM Do YYYY, h:mm a");
+         const startDate=moment(liveEvent.startDate).format( 'dddd, MMMM Do YYYY, h:mm a');
+         const endDate=moment(liveEvent.endDate).format( 'dddd, MMMM Do YYYY, h:mm a');
      
           return (
             <article  className="event">
@@ -29,7 +30,7 @@ export default function Events({data}) {
               <time style={{fontWeight:'bold'}}>{startDate} - {endDate} </time>
               <address style={{fontStyle:'normal'}}>{liveEvent.address}</address>
               <p>
-              Get tickets here: <a style={{color:'var(--highlight)', textDecoration: 'none', fontWeight:'bold'}}href={liveEvent.website}>{liveEvent.website}</a>
+                Get tickets here: <a style={{color:'var(--highlight)', textDecoration: 'none', fontWeight:'bold'}}href={liveEvent.website}>{liveEvent.website}</a>
               </p>
             </article>
           )

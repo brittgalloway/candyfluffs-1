@@ -1,9 +1,9 @@
-import React from "react"
-import Layout from "../components/Layout"
-import { StaticImage } from "gatsby-plugin-image"
+import React from 'react';
+import Layout from '../components/Layout';
+import { StaticImage } from 'gatsby-plugin-image';
 import styled from 'styled-components';
 
-const StyledDiv = styled.div`
+const StyledDiv = styled('div')`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -20,10 +20,10 @@ const StyledDiv = styled.div`
 
 export default function About() {
 	return (
-		<Layout heading = {"Just a girl who likes to draw manga"} >
+		<Layout title = {'About'} heading = {'Just a girl who likes to draw manga'} >
       <StyledDiv>
 
-              <StaticImage layout="fullWidth"  aspectRatio={1} style={{maxWidth:425, margin: "4rem 0", padding:"1rem"}} src="../images/cjoy.png" alt="C Joy"/>
+              <StaticImage layout='fullWidth'  aspectRatio={1} style={{maxWidth:425, margin: '4rem 0', padding:'1rem'}} src='../images/cjoy.png' alt='C Joy'/>
 
 
         <p>Hello my lovelies~ </p>

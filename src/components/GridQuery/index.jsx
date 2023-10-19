@@ -1,5 +1,5 @@
 import React from 'react';
-import { graphql, StaticQuery } from "gatsby";
+import { graphql, StaticQuery } from 'gatsby';
 import GridSquare from '../GridSquare';
 
 export default function Grid() {
@@ -17,7 +17,6 @@ export default function Grid() {
                 image {
                   fluid(maxWidth: 400) {
                     src
-                    ...GatsbyDatoCmsFluid
                   }
                 }
               }
@@ -27,7 +26,6 @@ export default function Grid() {
       `}
       render={data => (
         data.allDatoCmsProduct.edges.map(({node}) => (
-          //some how pass prop
           <GridSquare 
             id={node.id} 
             title={node.title} 

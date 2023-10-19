@@ -1,11 +1,10 @@
-import React from "react"
-
-import { StaticImage } from "gatsby-plugin-image"
+import React from 'react';
+import { StaticImage } from 'gatsby-plugin-image';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faInstagram, faTwitter, faTumblr } from '@fortawesome/free-brands-svg-icons';
 
-const StyledDiv = styled.div`
+const StyledDiv = styled('div')`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -106,19 +105,19 @@ const StyledDiv = styled.div`
 export default function About() {
 	return (
       <StyledDiv>
-        <div className="header">
-        <div className="logo-area">
+        <div className='header'>
+        <div className='logo-area'>
           <div className="logo">
             <h1><StaticImage src='../components/Header/logo.jpg' alt='Candy Fluffs'style={{maxWidth: 300}}/></h1>
           </div>
           <div className="subheading">
-          Under Construction! (ㆁᴗㆁ✿)
+            Under Construction! (ㆁᴗㆁ✿)
           </div>
         </div>
 
         </div>
         <div className="container">
-              <StaticImage layout="fullWidth"  style={{maxWidth:752, margin: "4rem 0"}} src="../images/underConstruction.svg" alt="C Joy"/>
+              <StaticImage layout='fullWidth'  style={{maxWidth:752, margin: '4rem 0'}} src='../images/underConstruction.svg' alt='C Joy'/>
 
         <span>
           <div className="social-links">
@@ -126,7 +125,7 @@ export default function About() {
             <a href="http://instagram.com/candy_fluffs" aria-label="Candy Fluffs Instagram"><FontAwesomeIcon icon={faInstagram} size="lg"/></a>
             <a href="http://twitter.com/candy_fluffs" aria-label="Candy Fluffs Twitter"><FontAwesomeIcon icon={faTwitter} size="lg"/></a> 
           </div>
-          <button><a href="http://eepurl.com/duTC3L">be the first to know when we’re live</a></button>
+          <button type="button"><a href="http://eepurl.com/duTC3L">be the first to know when we’re live</a></button>
         </span>
         </div>
       </StyledDiv>

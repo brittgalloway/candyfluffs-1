@@ -1,8 +1,8 @@
-import React from "react"
-import Layout from "../components/Layout"
+import React from 'react';
+import Layout from '../components/Layout';
 import styled from 'styled-components';
 
-const StyledDiv = styled.div`
+const StyledDiv = styled('div')`
   display: flex;
   justify-content:center;
   width: 100%;
@@ -35,7 +35,7 @@ const StyledDiv = styled.div`
 
 export default function Contact() {
 	return (
-		<Layout heading = {"Feel free to contact me!"}>
+		<Layout title = {'Contact Me'} heading = {'Feel free to contact me!'}>
       <StyledDiv>
         <div>
 

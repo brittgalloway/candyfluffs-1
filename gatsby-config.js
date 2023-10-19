@@ -10,8 +10,8 @@ module.exports = {
 
   /* Your site config here */
   siteMetadata: {
-    title: "Candy Fluffs",
-    description: "Just a girl who likes to draw manga",
+    title: 'Candy Fluffs',
+    description: 'Just a girl who likes to draw manga',
   },
   plugins: [
     `gatsby-plugin-styled-components`,
@@ -20,7 +20,6 @@ module.exports = {
     `gatsby-transformer-sharp`, 
     `gatsby-transformer-remark`,
     `gatsby-plugin-netlify`,
-    `gatsby-plugin-react-helmet`,
     {
       resolve: `gatsby-source-datocms`,
       options: {

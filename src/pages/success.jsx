@@ -1,8 +1,8 @@
-import React from "react"
-import Layout from "../components/Layout"
+import React from 'react';
+import Layout from '../components/Layout';
 import styled from 'styled-components';
 
-const StyledDiv = styled.div`
+const StyledDiv = styled('div')`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -55,17 +55,17 @@ const StyledDiv = styled.div`
 
 export default function About() {
 	return (
-		<Layout heading = {"Success!"} >
+		<Layout title = {'Subscribed!'} heading = {'Success!'} >
       <StyledDiv>
         <div>
           <h2>You Have</h2>
           <h1>Subscribed!</h1>
         </div>
         <p>
-        <span>(((o(</span> *<span>ﾟ▽ﾟ</span>*<span>)o)))</span>♡
+          <span>(((o(</span> *<span>ﾟ▽ﾟ</span>*<span>)o)))</span>♡
         </p>
         <p>
-        Stay tuned for more news!
+          Stay tuned for more news!
         </p>
         <small>
           Continue <a href="/">Shopping</a>
