@@ -1,6 +1,7 @@
 # Candy Fluffs
 
 Candy Fluffs is an eCommerce website for a talented [illustrator, Candy Joy](https://www.instagram.com/candy_fluffs/), built with GatsbyJS, powered by GraphQL, and designed with love using Figma. It leverages various technologies and services, including DatoCMS, Snipcart, and Stripe, to provide a seamless shopping experience.
+![CandyFluffs Home page](https://github.com/brittgalloway/candyfluffs-1/assets/50898741/c286b558-8255-4735-9d3b-b57cb75ccc48)
 
 ## Team
 
@@ -98,6 +99,11 @@ As a user, on the home page all of the products are availilable, navigation to t
   - Here you can signup for the Candy Fluffs newsletter.
   - Go to the about page and learn about Candy Joy.
   - Go to the contact page and message the Candy Joy.
+
+---
+## Preview
+![Product type gallery](https://github.com/brittgalloway/candyfluffs-1/assets/50898741/49f41c25-1474-4538-a3fe-6fd69e4bdef7)
+![Product page](https://github.com/brittgalloway/candyfluffs-1/assets/50898741/17472f43-f4c0-45e2-950e-59d6d9150b2d)
 
 ---
 
