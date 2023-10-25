@@ -19,7 +19,6 @@ module.exports = {
     `gatsby-plugin-sharp`, 
     `gatsby-transformer-sharp`, 
     `gatsby-transformer-remark`,
-    `gatsby-plugin-netlify`,
     {
       resolve: `gatsby-source-datocms`,
       options: {
