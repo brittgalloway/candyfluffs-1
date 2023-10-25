@@ -6,7 +6,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faInstagram, faTwitter, faTumblr } from '@fortawesome/free-brands-svg-icons';
 import { faShoppingBag, faUser } from '@fortawesome/free-solid-svg-icons';
 import Searchbar from '../Searchbar';
-import { handleOnClick } from '../NavMenu'
 import styled from 'styled-components';
 
 const StyledHeader = styled('header')`
@@ -113,7 +112,7 @@ export default function Header({heading}) {
         </div>
         <div className="logo-area">
           <div className="logo">
-            <h1><Link to='/' onClick={handleOnClick} ><StaticImage src='./logo.jpg' alt='Candy Fluffs'style={{maxWidth: 300}}/></Link></h1>
+            <h1><Link to='/' ><StaticImage src='./logo.jpg' alt='Candy Fluffs'style={{maxWidth: 300}}/></Link></h1>
           </div>
           <div className="subheading">
             {heading} (ㆁᴗㆁ✿)
