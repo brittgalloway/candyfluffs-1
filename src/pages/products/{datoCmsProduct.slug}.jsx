@@ -227,7 +227,6 @@ export default function Product({ data }) {
           {/* if there is a variant, map and add a button to page for each */}
           {data.datoCmsProduct.variation.length > 0 &&
             data.datoCmsProduct.variation.map((vari, idx)=>{
-              console.log("vari", vari)
               return (<StyledButton 
                 className={variant==idx ? "snipcart-add-item selected":"snipcart-add-item"}
                 aria-hidden={variant==idx ? "false":"true"}
