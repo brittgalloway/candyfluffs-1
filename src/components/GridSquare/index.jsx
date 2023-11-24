@@ -11,7 +11,6 @@ export default function GridSquare({id, slug, image, title, price}) {
   const options = {
     method: 'GET',
     url: `https://app.snipcart.com/api/products/${id}-en`,
-    params: {limit: '1'},
     headers: {
       Accept: 'application/json',
       Authorization: `Basic ${process.env.GATSBY_API_AUTH}`,

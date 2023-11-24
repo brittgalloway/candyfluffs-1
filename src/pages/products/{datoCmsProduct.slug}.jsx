@@ -195,7 +195,7 @@ export default function Product({ data }) {
         <div className="details">
           <h2>{data.datoCmsProduct.title}</h2>
           <h3>{variant === "OG" ? "" : data.datoCmsProduct.variation[variant].title}</h3>
-          <p>${variant === "OG" ? data.datoCmsProduct.price : data.datoCmsProduct.variation[variant].price}</p>
+          <p>${variant == "OG" ? data.datoCmsProduct.price : data.datoCmsProduct.variation[variant].price}</p>
           <div dangerouslySetInnerHTML={{__html: data.datoCmsProduct.descriptionNode.childMarkdownRemark.html}} />
 
           {data.datoCmsProduct.variation.length > 0 &&
@@ -209,7 +209,7 @@ export default function Product({ data }) {
           
           <StyledButton 
             className={variant==="OG" ? "snipcart-add-item selected":"snipcart-add-item"}
-            aria-hidden={variant==="OG" ? "false":"true"}
+            aria-hidden={variant=="OG" ? "false":"true"}
             aria-label="Add to Cart"
             onClick={handleClick}
             data-item-id={data.datoCmsProduct.id}
@@ -227,9 +227,10 @@ export default function Product({ data }) {
           {/* if there is a variant, map and add a button to page for each */}
           {data.datoCmsProduct.variation.length > 0 &&
             data.datoCmsProduct.variation.map((vari, idx)=>{
-              return <StyledButton 
-                className={variant===idx ? "snipcart-add-item selected":"snipcart-add-item"}
-                aria-hidden={variant===idx ? "false":"true"}
+              console.log("vari", vari)
+              return (<StyledButton 
+                className={variant==idx ? "snipcart-add-item selected":"snipcart-add-item"}
+                aria-hidden={variant==idx ? "false":"true"}
                 aria-label="Add to Cart"
                 onClick={handleClick}
                 data-item-id={vari.id}
@@ -242,7 +243,7 @@ export default function Product({ data }) {
                 key={idx}
               >
                 Add to Cart
-              </StyledButton>
+              </StyledButton>)
             })
           }
           

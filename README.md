@@ -101,7 +101,9 @@ As a user, on the home page all of the products are availilable, navigation to t
   - Go to the contact page and message the Candy Joy.
 
 ---
+
 ## Preview
+
 ![Product type gallery](https://github.com/brittgalloway/candyfluffs-1/assets/50898741/49f41c25-1474-4538-a3fe-6fd69e4bdef7)
 ![Product page](https://github.com/brittgalloway/candyfluffs-1/assets/50898741/17472f43-f4c0-45e2-950e-59d6d9150b2d)
 
@@ -140,11 +142,13 @@ As a user, on the home page all of the products are availilable, navigation to t
 Candy Fluffs welcomes contributions from the open-source community. If you have suggestions, bug reports, or feature requests, please submit an issue.
 
 ---
+
 ## Future Features
 
-Next steps for this store is to upgrade to [Snipcartv3](https://docs.snipcart.com/v3/migration-guide). 
+Next steps for this store is to upgrade to [Snipcartv3](https://docs.snipcart.com/v3/migration-guide).
 
 ---
+
 ## License
 
 This project is licensed under the [The BSD Zero Clause License](./LICENSE).
