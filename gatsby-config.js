@@ -27,12 +27,6 @@ module.exports = {
         disableLiveReload: false,
       },
     },
-    {
-			resolve: 'gatsby-plugin-snipcart',
-			options: {
-				apiKey: process.env.GATSBY_SNIPCART_APIKEY,
-        autopop: false
-			}
-		},
+
   ],
 }

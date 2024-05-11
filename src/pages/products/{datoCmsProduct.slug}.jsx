@@ -208,7 +208,7 @@ export default function Product({ data }) {
           }
           
           <StyledButton 
-            className={variant==="OG" ? "snipcart-add-item selected":"snipcart-add-item"}
+            className={variant==="OG"}
             aria-hidden={variant=="OG" ? "false":"true"}
             aria-label="Add to Cart"
             onClick={handleClick}

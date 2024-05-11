@@ -131,31 +131,7 @@ export default function NavMenu() {
   const [cartCount, setCartCount] = useState('');
   const [cartTotal, setCartTotal] = useState('');
   
-  useEffect(()=> {
-    if (window.Snipcart) {
-      //this allows it to work when switching pages
-      var count = window.Snipcart.api.items.count();
-      var cart = window.Snipcart.api.cart.get();
-      setCartCount(count)
-      setCartTotal(cart);
-
-      //this allows it to work when you add or change items
-      window.Snipcart.subscribe('cart.closed', () => {
-          var count = window.Snipcart.api.items.count();
-          var cart = window.Snipcart.api.cart.get();
-          setCartCount(count)
-          setCartTotal(cart)
-      });
-
-      //this allows it to work on refreshing the page
-      window.Snipcart.subscribe('cart.ready', (data) => {
-          var count = window.Snipcart.api.items.count();
-          var cart = window.Snipcart.api.cart.get();
-          setCartCount(count)
-          setCartTotal(cart)
-      })
-    }
-  }, [])
+  useEffect(()=> {}, [])
 
   return(
     <Nav aria-label='Main'>

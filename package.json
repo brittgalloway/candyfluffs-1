@@ -14,17 +14,18 @@
     "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1"
   },
   "dependencies": {
-    "@fortawesome/fontawesome-svg-core": "^1.2.35",
-    "@fortawesome/free-brands-svg-icons": "^5.15.3",
-    "@fortawesome/free-solid-svg-icons": "^5.15.4",
-    "@fortawesome/react-fontawesome": "^0.1.14",
+    "@fortawesome/fontawesome-svg-core": "^6.5.2",
+    "@fortawesome/free-brands-svg-icons": "^6.5.2",
+    "@fortawesome/free-solid-svg-icons": "^6.5.2",
+    "@fortawesome/react-fontawesome": "^0.2.0",
+    "@stripe/react-stripe-js": "^2.7.0",
+    "@stripe/stripe-js": "^3.3.0",
     "babel-plugin-styled-components": "^2.1.4",
-    "fontsource-lato": "^3.0.9",
-    "gatsby": "^5.11.0",
-    "gatsby-image": "^2.5.0",
+    "fontsource-lato": "^4.0.0",
+    "gatsby": "^5.13.4",
+    "gatsby-image": "^3.11.0",
     "gatsby-plugin-image": "^3.11.0",
     "gatsby-plugin-sharp": "^5.11.0",
-    "gatsby-plugin-snipcart": "^1.1.2",
     "gatsby-plugin-styled-components": "^6.11.0",
     "gatsby-source-datocms": "^5.1.2",
     "gatsby-source-filesystem": "^5.11.0",
@@ -35,12 +36,13 @@
     "react": "^18.2.0",
     "react-alice-carousel": "^2.4.0",
     "react-dom": "^18.2.0",
-    "react-responsive": "^8.2.0",
-    "styled-components": "^6.0.5"
+    "react-responsive": "^10.0.0",
+    "styled-components": "^6.0.5",
+    "use-shopping-cart": "^3.2.0"
   },
   "devDependencies": {
     "eslint-plugin-react-hooks": "^4.6.0",
-    "prettier": "2.1.2"
+    "prettier": "^3.2.5"
   },
   "repository": {
     "type": "git",

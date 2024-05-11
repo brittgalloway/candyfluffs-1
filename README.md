@@ -21,8 +21,6 @@ Candy Fluffs is an eCommerce website for a talented [illustrator, Candy Joy](htt
 - [Getting Started](#getting-started)
 - [Configuration](#configuration)
 - [Usage](#usage)
-- [Development](#development)
-- [Contributing](#contributing)
 - [License](#license)
 
 ---
@@ -37,8 +35,12 @@ Candy Fluffs is powered by the following technologies and services:
 - npm
 - GraphQL
 - DatoCMS
-- Snipcart
 - Stripe
+https://docs.stripe.com/docs/checkout/embedded/quickstart
+https://docs.stripe.com/payments/accept-a-payment?platform=web&ui=embedded-form
+https://www.npmjs.com/package/gatsby-source-stripe
+https://www.gatsbyjs.com/tutorial/ecommerce-tutorial/#example-2-import-skus-via-source-plugin
+https://useshoppingcart.com/docs/welcome/getting-started-client-mode
 - Mailchimp
 - [Figma](https://www.figma.com/file/IndaqA3RP8qZew4yHcXYQI/candyFluffs?node-id=26%3A9)
 
