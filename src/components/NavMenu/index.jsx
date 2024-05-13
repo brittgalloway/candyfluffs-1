@@ -182,17 +182,17 @@ export default function NavMenu() {
           <li>
             <Link to='/2heroes'>Necahual</Link>
           </li>
-          <li>
-            <Link to='/events'>Conventions/Expos</Link>
-          </li> 
           {isMobile && 
             <>
               <li>
-                <Link to='/about'>About</Link>
+                <Link to='/about'>About Me</Link>
               </li>
               <li>
-                <Link to='/contact'>Contact</Link>
+                <Link to='/contact'>Contact Me</Link>
               </li>
+              <li>
+                <Link to='/events'>Conventions/Expos</Link>
+              </li> 
               <li className='snipcart-summary'>
                 <a href='#' className='snipcart-user-email snipcart-user-profile'>
                     Account
