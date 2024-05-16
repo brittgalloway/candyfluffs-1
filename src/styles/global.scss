@@ -175,22 +175,16 @@ html::-webkit-scrollbar-thumb {
   .logo-area {
     width: 100%;
   }
-}
-
-.social-links {
-  display: flex;
-  justify-content: center;
-  align-items: flex-end;
-  width: 25%;
-}
-
-.social-links a {
-  transition: transform 0.2s;
+  .social-links {
+    width: 100%;
+  }
 }
 
 .social-links a:hover {
   transform: scale(1.2);
+  color: var(--highlight);
 }
+
 
 .contact-links {
   display: flex;
