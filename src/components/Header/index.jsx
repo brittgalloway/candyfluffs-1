@@ -14,6 +14,10 @@ const StyledHeader = styled('header')`
     word-break: keep-all;
   }
   .social-links {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    width: 25%;
     a {
       color: var(--form-gray);
       margin-right: 20px;

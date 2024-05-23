@@ -188,20 +188,13 @@ html::-webkit-scrollbar-thumb {
   .logo-area {
     width: 100%;
   }
+  .social-links {
+    width: 100%;
+  }
 }
-.social-links {
-  display: flex;
-  justify-content: center;
-  align-items: flex-end;
-  width: 25%;
-}
-
-.social-links a {
-  transition: transform 0.2s;
-}
-
 .social-links a:hover {
   transform: scale(1.2);
+  color: var(--highlight);
 }
 
 .contact-links {
@@ -239,14 +232,6 @@ html::-webkit-scrollbar-thumb {
      object-fit: cover;
   width: 100%;
   height: 100%;
-}
-
-.fandom-dropdown {
-  position: relative;
-  display: flex;
-  margin-top: 30px;
-  justify-content: center;
-  min-height: 100px;
 }
 
 .product-grid {
@@ -331,6 +316,12 @@ html::-webkit-scrollbar-thumb {
     height: 300px;
   }
 }
+.fandom-dropdown {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
 @media (max-width: 960px) {
   /* 960px is the cut off before the layout gets weird*/
   .product-grid {

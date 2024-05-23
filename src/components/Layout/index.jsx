@@ -7,7 +7,7 @@ import Footer from '../Footer';
 export default function Layout({title, heading, children}) {
   return(
     <div className="container">
-      <Head title={title}/>
+      <Head title={title || "Candy Fluffs"}/>
       <Header heading={heading} />
       <NavMenu/>
       <main>
