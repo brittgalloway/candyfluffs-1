@@ -91,7 +91,7 @@ export default function Footer() {
               <StyledSocial>
                 <StyledA href="https://candy-fluffs.tumblr.com/" aria-label="Candy Fluffs Tumblr"><FontAwesomeIcon icon={faTumblr} size="lg"/></StyledA>
                 <StyledA href="http://instagram.com/candy_fluffs" aria-label="Candy Fluffs Instagram"><FontAwesomeIcon icon={faInstagram} size="lg"/></StyledA>
-                <StyledA href="http://twitter.com/candy_fluffs" aria-label="Candy Fluffs Twitter"><FontAwesomeIcon icon={faTwitter} size="lg"/></StyledA> 
+                <StyledA href="https://x.com/candy_fluffs" aria-label="Candy Fluffs Twitter"><FontAwesomeIcon icon={faTwitter} size="lg"/></StyledA> 
               </StyledSocial>
             </div>
             {isMobile ? null :

@@ -7,6 +7,9 @@ const DropDownContainer = styled("div")`
   margin: 0 auto;
   position: absolute;
   z-index: 1; 
+  @media(max-width: 830px) {
+    position: static;
+  }
 `;
 
 const DropDownHeader = styled("div")`
@@ -33,15 +36,12 @@ const DropDownList = styled("ul")`
   font-weight: 500;
   border: 2px solid var(--highlight);
   border-radius: 10px;
-
-
   a {
     color: #000;
     text-decoration: none; 
-  }
-
-  a:hover {
-    color: var(--highlight);
+    &:hover {
+      color: var(--highlight);
+    }
   }
 `;
 
