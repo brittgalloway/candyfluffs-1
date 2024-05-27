@@ -316,6 +316,12 @@ html::-webkit-scrollbar-thumb {
     height: 300px;
   }
 }
+.fandom-dropdown {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
 @media (max-width: 960px) {
   /* 960px is the cut off before the layout gets weird*/
   .product-grid {
