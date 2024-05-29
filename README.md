@@ -19,10 +19,7 @@ Candy Fluffs is an eCommerce website for a talented [illustrator, Candy Joy](htt
 - [Setup](#setup)
 - [Technologies Used](#technologies-used)
 - [Getting Started](#getting-started)
-- [Configuration](#configuration)
 - [Usage](#usage)
-- [Development](#development)
-- [Contributing](#contributing)
 - [License](#license)
 
 ---
@@ -73,9 +70,6 @@ To run Candy Fluffs locally or deploy it, follow these steps:
 
    Your Candy Fluffs site should now be running locally at [http://localhost:8000](http://localhost:8000).
 
-### Configuration
-
-For detailed configuration instructions and additional information, refer to the [Configuration](./docs/configuration.md) documentation.
 
 ---
 
@@ -109,43 +103,12 @@ As a user, on the home page all of the products are availilable, navigation to t
 
 ---
 
-## Development
-
-1. **Fork this repository.**
-2. **Create a new branch:**
-
-   ```bash
-   git checkout -b feature/my-feature
-   ```
-
-3. **Make your changes and commit:**
-
-   ```bash
-   git commit -m "Add new feature"
-   ```
-
-4. **Push to your fork:**
-
-   ```bash
-   git push origin feature/my-feature
-   ```
-
-5. **Open a pull request:**
-
-   Contribute to the project by opening a pull request.
-   We are not currently looking for contributions, please reachout to Brittney Galloway at crlnfllr(at)gmail.com before adding features.
-
----
-
-## Contributing
-
-Candy Fluffs welcomes contributions from the open-source community. If you have suggestions, bug reports, or feature requests, please submit an issue.
-
----
 
 ## Future Features
 
-Next steps for this store is to upgrade to [Snipcartv3](https://docs.snipcart.com/v3/migration-guide).
+- Migrate to Nextjs
+- Use Stripe Checkout
+- Add better search and indexing
 
 ---
 
