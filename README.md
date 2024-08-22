@@ -3,12 +3,14 @@
 Candy Fluffs is an eCommerce website for a talented [illustrator, Candy Joy](https://www.instagram.com/candy_fluffs/), built with GatsbyJS, powered by GraphQL, and designed with love using Figma. It leverages various technologies and services, including DatoCMS, Snipcart, and Stripe, to provide a seamless shopping experience.
 ![CandyFluffs Home page](https://github.com/brittgalloway/candyfluffs-1/assets/50898741/c286b558-8255-4735-9d3b-b57cb75ccc48)
 
-## Team
+## Original Team
 
+The original project was created with Gatsby by a team of 3 in 2021.
 - **[Doug](https://github.com/daleinen7)**: Lead Developer
 - **[Stephanie](https://github.com/mlisdev)**: Front-end Developer
 - **[Brittney](https://www.linkedin.com/in/brittneygalloway/)**: Designer and Maintenance Developer
 
+Since then, Brittney was be the sole maintainer and decided to switch to Nextjs and Typescript.
 ---
 
 ## Table of Contents
@@ -19,7 +21,6 @@ Candy Fluffs is an eCommerce website for a talented [illustrator, Candy Joy](htt
 - [Setup](#setup)
 - [Technologies Used](#technologies-used)
 - [Getting Started](#getting-started)
-- [Configuration](#configuration)
 - [Usage](#usage)
 - [License](#license)
 
@@ -31,7 +32,7 @@ Candy Fluffs is an eCommerce website for a talented [illustrator, Candy Joy](htt
 
 Candy Fluffs is powered by the following technologies and services:
 
-- GatsbyJS
+- NextJs
 - npm
 - GraphQL
 - DatoCMS
@@ -43,6 +44,7 @@ https://www.gatsbyjs.com/tutorial/ecommerce-tutorial/#example-2-import-skus-via-
 https://useshoppingcart.com/docs/welcome/getting-started-client-mode
 - Mailchimp
 - [Figma](https://www.figma.com/file/IndaqA3RP8qZew4yHcXYQI/candyFluffs?node-id=26%3A9)
+- Netlify
 
 ### Getting Started
 
@@ -68,7 +70,7 @@ To run Candy Fluffs locally or deploy it, follow these steps:
 4. **Start the development server:**
 
    ```bash
-   npm run develop
+   npm run dev
    ```
 
 5. **Open your browser:**
@@ -137,20 +139,51 @@ As a user, on the home page all of the products are availilable, navigation to t
    Contribute to the project by opening a pull request.
    We are not currently looking for contributions, please reachout to Brittney Galloway at crlnfllr(at)gmail.com before adding features.
 
----
 
-## Contributing
-
-Candy Fluffs welcomes contributions from the open-source community. If you have suggestions, bug reports, or feature requests, please submit an issue.
-
----
 
 ## Future Features
 
-Next steps for this store is to upgrade to [Snipcartv3](https://docs.snipcart.com/v3/migration-guide).
-
+Next steps for this store is to add Jest or Cypress to adding testing to the app.
 ---
 
 ## License
 
 This project is licensed under the [The BSD Zero Clause License](./LICENSE).
+
+=========
+
+This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+
+## Getting Started
+
+First, run the development server:
+
+```bash
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
+```
+
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+
+This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+
+## Learn More
+
+To learn more about Next.js, take a look at the following resources:
+
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+
+## Deploy 
+
+
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
