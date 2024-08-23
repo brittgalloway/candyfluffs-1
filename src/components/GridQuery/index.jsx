@@ -12,6 +12,7 @@ export default function Grid() {
               node {
                 id
                 title
+                productType
                 price
                 slug
                 image {
@@ -32,6 +33,7 @@ export default function Grid() {
             price={node.price}
             image={node.image[0]}
             slug={node.slug}
+            productType={node.productType}
             key={node.id} 
           />
         ))

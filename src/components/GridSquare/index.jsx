@@ -3,14 +3,28 @@ import axios from 'axios';
 import { Link } from 'gatsby';
 import Img from 'gatsby-image';
 
-export default function GridSquare({id, slug, image, title, price}) {
+export default function GridSquare({id, slug, image, title, price, productType}) {
   const [isOutOfStock, setIsOutOfStock] = useState(false);
-  const reDirect = () =>{
-      window.location.href =`../../products/${slug}`; 
-  }
+  
+  let url = ''; 
+  if (id.match(/^DatoCmsProduct-\d+$/)) {
+    url = `https://app.snipcart.com/api/products/${id}-en`;
+  } else  
+  if ( id.match(/^DatoCmsName-[A-Za-z0-9]+$/)) {
+    const idk = id.replace("DatoCmsProduct", "DatoCmsName")
+    url = `https://app.snipcart.com/api/products/${idk}`;
+  } else
+  if ( productType.match(/print/)) {
+    return null;
+  } 
+
+  const reDirect = () => {
+    window.location.href = `../../products/${slug}`;
+  };
+
   const options = {
     method: 'GET',
-    url: `https://app.snipcart.com/api/products/${id}-en`,
+    url: url,
     headers: {
       Accept: 'application/json',
       Authorization: `Basic ${process.env.GATSBY_API_AUTH}`,

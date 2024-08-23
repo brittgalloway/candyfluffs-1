@@ -14,6 +14,7 @@ export default function GridNecahualQuery() {
                 title
                 price
                 slug
+                productType
                 image {
                   fluid(maxWidth: 200) {
                     src
@@ -25,6 +26,7 @@ export default function GridNecahualQuery() {
         }
 
       `}
+
       render={data => (
         data.allDatoCmsProduct.edges.map(({node}) => (
           <GridSquare 
