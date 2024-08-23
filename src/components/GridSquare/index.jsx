@@ -14,11 +14,8 @@ export default function GridSquare({id, slug, image, title, price, productType})
     url = `https://app.snipcart.com/api/products/${id}-en`;
   } else  
   if ( id.match(/^DatoCmsName-[A-Za-z0-9]+$/)) {
-    const idk = id.replace("DatoCmsProduct", "DatoCmsName")
-    url = `https://app.snipcart.com/api/products/${idk}`;
-  } else
-  if ( productType.match(/print/)) {
-    return null;
+    const swap = id.replace("DatoCmsProduct", "DatoCmsName")
+    url = `https://app.snipcart.com/api/products/${swap}`;
   } else {
     return null;
   }
@@ -26,7 +23,7 @@ export default function GridSquare({id, slug, image, title, price, productType})
   const reDirect = () => {
     window.location.href = `../../products/${slug}`;
   };
-  if (url !== null) {
+  if (!productType?.match(/Print/) && url !== null) {
     const options = {
       method: 'GET',
       url: url,
