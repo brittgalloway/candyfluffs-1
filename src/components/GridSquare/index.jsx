@@ -6,7 +6,10 @@ import Img from 'gatsby-image';
 export default function GridSquare({id, slug, image, title, price, productType}) {
   const [isOutOfStock, setIsOutOfStock] = useState(false);
   
-  let url = ''; 
+  let url = null; 
+  if (id.match(/DatoCmsProduct-188559869/)) {
+    url = `https://app.snipcart.com/api/products/${id}`;
+  } else  
   if (id.match(/^DatoCmsProduct-\d+$/)) {
     url = `https://app.snipcart.com/api/products/${id}-en`;
   } else  
@@ -16,34 +19,37 @@ export default function GridSquare({id, slug, image, title, price, productType})
   } else
   if ( productType.match(/print/)) {
     return null;
-  } 
+  } else {
+    return null;
+  }
 
   const reDirect = () => {
     window.location.href = `../../products/${slug}`;
   };
-
-  const options = {
-    method: 'GET',
-    url: url,
-    headers: {
-      Accept: 'application/json',
-      Authorization: `Basic ${process.env.GATSBY_API_AUTH}`,
-      'content-type': 'application/json'
-    }
-  };
-  axios.request(options).then(function (response) {
-    const items = response.data;
-    const stock = items.stock;
-    
-    if (stock === 0){
-      setIsOutOfStock(true);
-    } else {
-      setIsOutOfStock(false);
-    }
-
-  }).catch(function (error) {
-    console.error(error);
-  });
+  if (url !== null) {
+    const options = {
+      method: 'GET',
+      url: url,
+      headers: {
+        Accept: 'application/json',
+        Authorization: `Basic ${process.env.GATSBY_API_AUTH}`,
+        'content-type': 'application/json'
+      }
+    };
+    axios.request(options).then(function (response) {
+      const items = response.data;
+      const stock = items.stock;
+      
+      if (stock === 0){
+        setIsOutOfStock(true);
+      } else {
+        setIsOutOfStock(false);
+      }
+  
+    }).catch(function (error) {
+      console.error(error);
+    });
+  }
   return (
   <div className='product-item'>
     <div className='product-square'>
