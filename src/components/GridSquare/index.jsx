@@ -3,33 +3,50 @@ import axios from 'axios';
 import { Link } from 'gatsby';
 import Img from 'gatsby-image';
 
-export default function GridSquare({id, slug, image, title, price}) {
+export default function GridSquare({id, slug, image, title, price, productType}) {
   const [isOutOfStock, setIsOutOfStock] = useState(false);
-  const reDirect = () =>{
-      window.location.href =`../../products/${slug}`; 
+  
+  let url = null; 
+  if (id.match(/DatoCmsProduct-188559869/)) {
+    url = `https://app.snipcart.com/api/products/${id}`;
+  } else  
+  if (id.match(/^DatoCmsProduct-\d+$/)) {
+    url = `https://app.snipcart.com/api/products/${id}-en`;
+  } else  
+  if ( id.match(/^DatoCmsName-[A-Za-z0-9]+$/)) {
+    const swap = id.replace("DatoCmsProduct", "DatoCmsName")
+    url = `https://app.snipcart.com/api/products/${swap}`;
+  } else {
+    return null;
   }
-  const options = {
-    method: 'GET',
-    url: `https://app.snipcart.com/api/products/${id}-en`,
-    headers: {
-      Accept: 'application/json',
-      Authorization: `Basic ${process.env.GATSBY_API_AUTH}`,
-      'content-type': 'application/json'
-    }
-  };
-  axios.request(options).then(function (response) {
-    const items = response.data;
-    const stock = items.stock;
-    
-    if (stock === 0){
-      setIsOutOfStock(true);
-    } else {
-      setIsOutOfStock(false);
-    }
 
-  }).catch(function (error) {
-    console.error(error);
-  });
+  const reDirect = () => {
+    window.location.href = `../../products/${slug}`;
+  };
+  if (!productType?.match(/Print/) && url !== null) {
+    const options = {
+      method: 'GET',
+      url: url,
+      headers: {
+        Accept: 'application/json',
+        Authorization: `Basic ${process.env.GATSBY_API_AUTH}`,
+        'content-type': 'application/json'
+      }
+    };
+    axios.request(options).then(function (response) {
+      const items = response.data;
+      const stock = items.stock;
+      
+      if (stock === 0){
+        setIsOutOfStock(true);
+      } else {
+        setIsOutOfStock(false);
+      }
+  
+    }).catch(function (error) {
+      console.error(error);
+    });
+  }
   return (
   <div className='product-item'>
     <div className='product-square'>
