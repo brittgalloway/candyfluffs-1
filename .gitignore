@@ -40,6 +40,8 @@ next-env.d.ts
 .env.production
 .cache/
 node_modules
-public
+public/page-data
+public/static
+public/~partytown
 
-.vscode
+/.vscode/

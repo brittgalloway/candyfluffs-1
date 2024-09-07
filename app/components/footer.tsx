@@ -1,8 +1,14 @@
 import React from 'react';
 import Link from 'next/link';
 
+const socialMedia = [
+  {href: 'https://candy-fluffs.tumblr.com/', label: 'Link to Candy Fluffs\' Tumblr', text : 'tumblr'},
+  {href: 'http://instagram.com/candy_fluffs', label: 'Link to Candy Fluffs\' Instagram', text: 'insta'},
+  {href: 'https://x.com/candy_fluffs', label: 'Link to Candy Fluffs\' X', text: 'X'},
+];
+
 export function Footer() {
-  const isMobile = false;
+  const isMobile = true;
   return(
     <footer>
           <div className="social-links">
@@ -10,9 +16,9 @@ export function Footer() {
               isMobile ? null : <p>Connect With Me</p>
             }
             <div>
-              <a href="https://candy-fluffs.tumblr.com/" aria-label="Candy Fluffs Tumblr">tumblr</a>
-              <a href="http://instagram.com/candy_fluffs" aria-label="Candy Fluffs Instagram">insta</a>
-              <a href="https://x.com/candy_fluffs" aria-label="Candy Fluffs Twitter">twitter</a> 
+              {socialMedia.map((link) => (
+                <a key={link.text} href={link.href} aria-label={link.label}>{link.text}</a>
+              ))}
             </div>
           </div>
           {isMobile ? null :

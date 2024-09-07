@@ -1,0 +1,23 @@
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  justify-items: center;
+}
+.main {
+  grid-template-rows: repeat(7, auto);
+  gap: 1rem;
+  width: 100%;
+  img {
+    width: 300px;
+    height: auto;
+  }
+}
+
+.products {
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  justify-items: center;
+  h1 {
+    grid-column: 1/3;
+  }
+}

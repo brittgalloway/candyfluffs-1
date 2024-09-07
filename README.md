@@ -36,6 +36,7 @@ Candy Fluffs is powered by the following technologies and services:
 - npm
 - GraphQL
 - DatoCMS
+- Snipcart
 - Stripe
 https://docs.stripe.com/docs/checkout/embedded/quickstart
 https://docs.stripe.com/payments/accept-a-payment?platform=web&ui=embedded-form

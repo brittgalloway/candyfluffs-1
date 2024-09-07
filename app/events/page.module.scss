@@ -1,0 +1,22 @@
+.main {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  width: 100%;
+  justify-items: center;
+  h1 {
+    color: var(--highlight);
+    font-size: 2rem;
+  }
+}
+
+.events {
+  display: inherit;
+  grid-template-columns: 1fr;
+  gap: 0.5rem;
+  width: 100%;
+  justify-items: start;
+  h2 {
+    color: var(--highlight);    
+  }
+}
