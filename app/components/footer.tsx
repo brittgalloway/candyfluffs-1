@@ -1,10 +1,12 @@
 import React from 'react';
 import Link from 'next/link';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faInstagram, faXTwitter, faTumblr } from '@fortawesome/free-brands-svg-icons';
 
 const socialMedia = [
-  {href: 'https://candy-fluffs.tumblr.com/', label: 'Link to Candy Fluffs\' Tumblr', text : 'tumblr'},
-  {href: 'http://instagram.com/candy_fluffs', label: 'Link to Candy Fluffs\' Instagram', text: 'insta'},
-  {href: 'https://x.com/candy_fluffs', label: 'Link to Candy Fluffs\' X', text: 'X'},
+  {href: 'https://candy-fluffs.tumblr.com/', label: 'Link to Candy Fluffs\' Tumblr', icon: faTumblr},
+  {href: 'http://instagram.com/candy_fluffs', label: 'Link to Candy Fluffs\' Instagram', icon: faInstagram},
+  {href: 'https://x.com/candy_fluffs', label: 'Link to Candy Fluffs\' X', icon: faXTwitter},
 ];
 
 export function Footer() {
@@ -15,11 +17,9 @@ export function Footer() {
             {
               isMobile ? null : <p>Connect With Me</p>
             }
-            <div>
               {socialMedia.map((link) => (
-                <a key={link.text} href={link.href} aria-label={link.label}>{link.text}</a>
+                <a key={link.href} href={link.href} aria-label={link.label}><FontAwesomeIcon icon={link.icon} size="lg"/></a>
               ))}
-            </div>
           </div>
           {isMobile ? null :
             (

@@ -1,4 +1,6 @@
 import { performRequest } from '@/app/lib/datocms';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faInstagram, faXTwitter, faPatreon } from '@fortawesome/free-brands-svg-icons';
 import Image from 'next/image';
 import { ProductItem } from '../components/productItem';
 import styles from './page.module.scss'
@@ -40,26 +42,35 @@ const PAGE_CONTENT_QUERY = `
   }
 `;
 
+export const tagline = "Necahual";
+
 export default async function TwoHeroes() {
   const { data: { necahual, allProducts} } = await performRequest({ query: PAGE_CONTENT_QUERY });
-
+  const socialMedia = [
+    {href: 'https://www.patreon.com/2heroes', label: 'Link to 2Heroes\' Patreon', icon: faPatreon},
+    {href: 'https://www.instagram.com/2.heroes/', label: 'Link to 2Heroes\' Instagram', icon: faInstagram},
+    {href: 'https://twitter.com/2Heroes1/', label: 'Link to 2Heroes\' X', icon: faXTwitter},
+  ]
   return (
     <>
-      <section className={`${styles.grid} ${styles.main}`}>
-        <h1>{necahual?.pageTitle}</h1>
+      <section className={`${styles.grid}`}>
+        <h1 className={`${styles.span3}`}>{necahual?.pageTitle}</h1>
         <Image 
+          className={`${styles.span3}`}
           alt={necahual?.necahualImage?.alt}
           src={necahual?.necahualImage?.url}
           width={500}
           height={500}
         />
-        <p>{necahual?.summary?.value?.document?.children[0]?.children[0]?.value}</p>
-        <h2>Read it on <a href="#">Webtoons</a>!</h2>
-        <h2>Support us on:</h2>
-        [socialMedia]
-        <p><small>{necahual?.patreonDisclaimer}</small></p>
+        <p className={`${styles.span3}`}>{necahual?.summary?.value?.document?.children[0]?.children[0]?.value}</p>
+        <h2 className={`${styles.span3}`}>Read it on <a className={`${styles.webtoons}`} href="#">Webtoons</a>!</h2>
+        <h2 className={`${styles.span3}`}>Support us on:</h2>
+        {socialMedia.map((link) => (
+          <a key={link.href} href={link.href} aria-label={link.label}><FontAwesomeIcon icon={link.icon} size="lg"/></a>
+        ))}
+        <p className={`${styles.span3}`}><small>{necahual?.patreonDisclaimer}</small></p>
       </section>
-      <section className={`${styles.grid} ${styles.products}`}>
+      <section className={`products`}>
         <h1>Merch</h1>
         {allProducts.map((product : 
         {id:string, title:string, price:number, slug:string, 

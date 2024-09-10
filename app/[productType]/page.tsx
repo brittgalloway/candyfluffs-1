@@ -1,19 +1,16 @@
 import { performRequest } from '@/app/lib/datocms';
-import Image from 'next/image';
+import { ProductItem } from '@/app/components/productItem';
 
-export const metadata = {
-  title: 'Candy Fluffs ',
-}
 
-export default async function ProductsByType( {params} : any ) {
+export default async function ProductsByType({ params }: any) {
   const PAGE_CONTENT_QUERY = `
     query ProductsQuery {
       allProducts(filter: {productType: {eq: "${params.productType}"}}) {
         id
         title
         fandoms
-        productType
         price
+        slug
         image {
           alt
           url
@@ -24,19 +21,19 @@ export default async function ProductsByType( {params} : any ) {
   const { data: { allProducts } } = await performRequest({ query: PAGE_CONTENT_QUERY });
 
   return (
-    <section >
-      <h1>{params.productType}</h1>
-      {allProducts.map((product: any) => (
-        <div key={product?.id}>
-          {product?.title}
-          {product?.fandoms}
-          {product?.productType}
-          {product?.price}
-        </div>
-      )
-      )}
+    <section className="products">
+      {allProducts.map((product: { id: string, title: string, price: number, slug: string, 
+        image: [{ url: string, alt: string }] }) => (
+        <ProductItem
+          key={product?.id}
+          id={product?.id}
+          title={product?.title}
+          slug={product?.slug}
+          url={product?.image[0]?.url}
+          alt={product?.image[0]?.alt}
+          price={product?.price}
+        />
+      ))}
     </section>
-  )
+  );
 }
-
-

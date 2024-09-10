@@ -1,6 +1,5 @@
 import { performRequest } from '@/app/lib/datocms';
 import { ProductItem } from './components/productItem';
-import styles from "./page.module.scss";
 
 export default async function Home() {
   const PAGE_CONTENT_QUERY = `
@@ -20,7 +19,7 @@ export default async function Home() {
   const { data: { allProducts } } = await performRequest({ query: PAGE_CONTENT_QUERY });
 
   return (
-    <section className={`${styles.main}`}>
+    <section className={`products`}>
       {allProducts.map((product : 
         {id:string, title:string, price:number, slug:string, 
           image: [{url:string, alt:string}]}

@@ -1,12 +1,14 @@
 import Link from "next/link";
 import { Nav } from "./nav";
+import Image from "next/image";
+import Logo from "../../public/logo.jpg";
 
 const socialMedia = [
   {href: 'https://candy-fluffs.tumblr.com/', label: 'Link to Candy Fluffs\' Tumblr', text : 'tumblr'},
   {href: 'http://instagram.com/candy_fluffs', label: 'Link to Candy Fluffs\' Instagram', text: 'insta'},
   {href: 'https://x.com/candy_fluffs', label: 'Link to Candy Fluffs\' X', text: 'X'},
 ];
-export function Header({tagline} : {tagline: string}) {
+export function Header() {
   const isMobile = true;
   return(
     <header>
@@ -18,7 +20,14 @@ export function Header({tagline} : {tagline: string}) {
         </div>
       )}
       <div>
-       <Link href='/'>Candy fluffs logo</Link>
+       <Link href='/'>
+        <Image
+          src={Logo}
+          alt="Candy Fluffs logo with cotton candy next to the text."
+          width={300}
+          height={177}
+        />
+       </Link>
       </div>
       {isMobile ? null : (
         <div>
@@ -26,7 +35,7 @@ export function Header({tagline} : {tagline: string}) {
         </div>
       )}
       <p>
-        {tagline}
+        Just a girl who likes to draw manga (ㆁᴗㆁ✿)
       </p>
       <Nav/>
     </header>
