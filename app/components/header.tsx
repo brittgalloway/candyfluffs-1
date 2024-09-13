@@ -31,7 +31,9 @@ export function Header() {
       </div>
       {isMobile ? null : (
         <div>
-          account, checkout, search
+          <button className="snipcart-customer-signin">My account</button>
+
+           checkout, search
         </div>
       )}
       <p>

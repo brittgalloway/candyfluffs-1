@@ -63,7 +63,7 @@ export default async function TwoHeroes() {
           height={500}
         />
         <p className={`${styles.span3}`}>{necahual?.summary?.value?.document?.children[0]?.children[0]?.value}</p>
-        <h2 className={`${styles.span3}`}>Read it on <a className={`${styles.webtoons}`} href="#">Webtoons</a>!</h2>
+        <h2 className={`${styles.span3}`}>Read it on <a className={`${styles.webtoons}`} href="https://www.webtoons.com/en/canvas/necahual/list?title_no=216820">Webtoons</a>!</h2>
         <h2 className={`${styles.span3}`}>Support us on:</h2>
         {socialMedia.map((link) => (
           <a key={link.href} href={link.href} aria-label={link.label}><FontAwesomeIcon icon={link.icon} size="lg"/></a>

@@ -3,6 +3,8 @@ import React, { useEffect, useState } from 'react';
 import { useMediaQuery } from 'react-responsive';
 import Link from 'next/link';
 import Image from 'next/image';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBagShopping } from '@fortawesome/free-solid-svg-icons';
 import Burger from '@/public/hamburger.svg';
 
 const nav = [
@@ -15,7 +17,6 @@ const nav = [
   {href: '/2heroes', label: 'Nechual'},
 ];
 const navMobile = [
-  {href: '#', label: 'Account'},
   {href: '/about', label: 'About Me'},
   {href: '/events', label: 'Conventions/Expos'},
 ];
@@ -38,7 +39,7 @@ export function Nav() {
   };
 
   if (!isMounted) {
-    return null; // Prevent server-side rendering issues by rendering null initially
+    return null; 
   } 
   return(
     <nav>
@@ -49,6 +50,7 @@ export function Nav() {
           ))}
           {isMobile ? 
             (<>
+              <li onClick={handleMenuToggle} onKeyDown={handleMenuToggle} className="snipcart-customer-signin">Account</li>
               {navMobile.map((link) => (
                 <li onClick={handleMenuToggle} onKeyDown={handleMenuToggle} key={link.label}><Link href={link.href}>{link.label}</Link></li>
               ))}
@@ -69,7 +71,10 @@ export function Nav() {
             tabIndex={1}
             />
           <span>Search</span>
-          <span>ChkOut</span>
+          <span className="snipcart-checkout">
+            <FontAwesomeIcon icon={faBagShopping}/>
+            <span className="snipcart-items-count"></span>
+          </span>
         </div>
         ) : null}
     </nav>
