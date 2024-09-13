@@ -9,6 +9,72 @@
   --faded-highlight: #ffe2d6;
   --warn-highlight: #f33e4f;
   --radius: 4px;
+
+  // SNIPCART
+  /* Default */
+--bgColor-buttonPrimary: var(--highlight);
+
+// /* Hover */
+--color-buttonPrimary-hover: var(--highlight);
+--borderColor-buttonPrimary-hover: var(--highlight);
+--bgColor-buttonPrimary-hover: #fff;
+
+// /* Active */
+--color-buttonPrimary-active: var(--highlight);
+--borderColor-buttonPrimary-active: var(--highlight);
+--bgColor-buttonPrimary-active: #fff;
+
+// /* Focus */
+--color-buttonPrimary-focus: var(--highlight);
+--borderColor-buttonPrimary-focus: var(--highlight);
+--bgColor-buttonPrimary-focus: #fff;
+--shadow-buttonPrimary-focus:: var(--highlight);
+
+/* ----------------------- 
+    PART: Input
+----------------------- */
+
+// /* Hover */
+--borderColor-input-hover: var(--highlight);
+
+// /* Focus */
+--borderColor-input-focus: var(--highlight);
+--shadow-input-focus: var(--faded-highlight);
+
+// /* Checked */
+--borderColor-input-checked: var(--highlight);
+--bgColor-input-checked: var(--highlight);
+
+// /* Error */
+--borderColor-input-error: var(--dark-highlight);
+
+
+//BADGES
+/* Default (completed) */
+--color-badge: var(--highlight);
+--borderColor-badge: var(--highlight);
+
+// /* Active */
+--color-badge-active: var(--highlight);
+--borderColor-badge-active: var(--highlight);
+--bgColor-badge-active: #fff;
+
+
+--bgColor-modal: #fff;
+--bgColor-info: var(--faded-highlight);
+--borderColor-default: var(--highlight);
+/* ----------------------- 
+    PART: Icon
+----------------------- */
+
+--color-inputIcon: var(--highlight);
+
+/* Hover */
+--color-inputIcon-hover: var(--dark-highlight);
+
+/* Focus */
+--color-inputIcon-focus: var(--dark-highlight);
+
 }
 
 * {
@@ -170,4 +236,15 @@ a {
 }
 .react-photo-album--track {
   width: 100px !important;
+}
+
+.snipcart-modal__close-icon, 
+.snipcart-cart-header__icon,
+.snipcart-modal__close-icon {
+  color: var(--highlight) !important;
+}
+.snipcart-button-icon.is-secondary {
+  color: var(--highlight);
+  background-color: #fff;
+  border: 1px solid var(--highlight);
 }
