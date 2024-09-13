@@ -30,7 +30,7 @@ export function ProductImages({photos}: any ) {
         />
       <ColumnsPhotoAlbum 
         photos={slides}
-        columns={12}
+        columns={photos.length}
         spacing={10}
         onClick={handleClick}
       />
