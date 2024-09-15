@@ -1,6 +1,6 @@
 import { performRequest } from '@/app/lib/datocms';
 import { ProductItem } from './components/productItem';
-// import { Carousel } from './components/slider';
+import { Gallery } from './components/slider';
 
 export default async function Home() {
   const PAGE_CONTENT_QUERY = `
@@ -35,13 +35,13 @@ export default async function Home() {
   const { data: { allProducts, allBanners } } = await performRequest({ query: PAGE_CONTENT_QUERY });
 
   return (
-    <section>
-      {/* <header>
-        <Carousel/>
-      {allBanners.map((banner: {id: string, alt:string, responsiveImage: {src:string, width:number,height:number}}) => {
-       <div></div>
-      })}
-      </header> */}
+    <section>      
+      {/* {allBanners.map((banner: any) => (
+        <Gallery
+          key={banner.banner[0].id}
+          banners={banner.banner[0]}
+          />
+      ))} */}
       <div className={`products`}>
         {allProducts.map((product : 
           {id:string, title:string, price:number, slug:string, 

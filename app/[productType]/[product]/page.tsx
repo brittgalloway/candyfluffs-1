@@ -32,7 +32,9 @@ export default async function Product({ params }: any) {
     }
   `;
   const { data: { product } } = await performRequest({ query: PAGE_CONTENT_QUERY });
+
   const formatedPrice = product?.price.toLocaleString("en-US", { style: "currency", currency: "USD" });
+
   function handleVariantion() {
     const options = product.variation.map((variant: {title: string, price:number}) => {
       if (variant.price != product.price) {
@@ -47,8 +49,9 @@ export default async function Product({ params }: any) {
         return variant.title;
       }
     }).join("|");
-    return options;
+    return `${options}|${product.title}`;
   }
+
   return (
     <section className={``}>
       <h1>{product?.title}</h1>
@@ -57,17 +60,20 @@ export default async function Product({ params }: any) {
       />
       <p>{formatedPrice}</p>
       <p>{product?.description}</p>
-      {product?.variation.length ? 
-        <button className={`snipcart-add-item`}
-          data-item-id={product?.id}
-          data-item-price={product?.price}
-          data-item-description={product?.description}
-          data-item-name={product?.title}
-          data-item-custom1-name="Select one"
-          data-item-custom1-options={handleVariantion()}
-        >
-          Add to cart
-        </button>
+      {product?.variation.length ?
+        <>
+          <button className={`snipcart-add-item`}
+            data-item-id={product?.id}
+            data-item-price={product?.price}
+            data-item-description={product?.description}
+            data-item-name={product?.title}
+            data-item-custom1-name="Select one"
+            data-item-custom1-options={handleVariantion()}
+          >
+            Add to cart
+          </button>
+          <p>You can select which one you want in the cart.</p>
+        </>
       : 
       <button className={`snipcart-add-item`}
         data-item-id={product?.id}

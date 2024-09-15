@@ -76,7 +76,12 @@ export function Nav() {
             <span className="snipcart-items-count"></span>
           </span>
         </div>
-        ) : null}
+        ) : 
+        <ul>
+          {nav.map((link) => (
+            <li key={link.label}><Link href={link.href}>{link.label}</Link></li>
+          ))}
+        </ul>}
     </nav>
   )
 }

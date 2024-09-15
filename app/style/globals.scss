@@ -1,3 +1,5 @@
+@import "react-alice-carousel/lib/scss/alice-carousel.scss";
+
 :root {
   --highlight: #f58f89;
   --dark-highlight: #983025;
@@ -13,22 +15,31 @@
   // SNIPCART
   /* Default */
 --bgColor-buttonPrimary: var(--highlight);
+--bgColor-buttonSecondary: var(--highlight);
 
 // /* Hover */
 --color-buttonPrimary-hover: var(--highlight);
---borderColor-buttonPrimary-hover: var(--highlight);
+--borderColor-buttonSecondary-hover: var(--highlight);
 --bgColor-buttonPrimary-hover: #fff;
+--bgColor-buttonSecondary-hover: #fff;
 
 // /* Active */
 --color-buttonPrimary-active: var(--highlight);
+--color-buttonSecondary-active: var(--highlight);
 --borderColor-buttonPrimary-active: var(--highlight);
+--borderColor-buttonSecondary-active: var(--highlight);
 --bgColor-buttonPrimary-active: #fff;
+--bgColor-buttonSecondary-active: #fff;
 
 // /* Focus */
 --color-buttonPrimary-focus: var(--highlight);
+--color-buttonSecondary-focus: var(--highlight);
 --borderColor-buttonPrimary-focus: var(--highlight);
+--borderColor-buttonSecondary-focus: var(--highlight);
 --bgColor-buttonPrimary-focus: #fff;
+--bgColor-buttonSecondary-focus: #fff;
 --shadow-buttonPrimary-focus:: var(--highlight);
+--shadow-buttonSecondary-focus:: var(--highlight);
 
 /* ----------------------- 
     PART: Input
@@ -112,6 +123,36 @@ header {
   img {
     mix-blend-mode: multiply;
   }
+  @media ( width >= 550px ) {
+    grid-template-columns: 1fr 2fr 1fr;
+    gap: 1rem;
+    grid-template-areas: "logo logo logo" 
+                          "social tag shop"
+                          "nav nav nav";
+    .logo{
+      grid-area: logo;
+      grid-column: span 3;
+      justify-self: center;
+    }
+    .tagline{
+      grid-area: tag;
+    }
+    .social-links {
+      grid-area: social;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      font-size: 1.25rem;
+    }
+    .shop-icons {
+      grid-area: shop;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      font-size: 1.25rem;
+      justify-items: center;
+    }
+  }
   nav {
     border-top: 1px solid var(--highlight);
     border-bottom: 1px solid var(--highlight);
@@ -142,7 +183,33 @@ header {
         border:none;
         outline: none;
       }
-      
+    }
+    @media ( width >= 550px ) {
+      grid-area: nav;
+      position: static;
+      ul {
+        grid-template-columns: repeat(7, 1fr);
+        grid-template-rows: 1fr;
+        li {
+          &:hover,
+          &:focus,
+          &:focus-visible {
+            background-color: transparent;
+            color: #222;
+            font-weight: 400;
+          }
+        }
+        li > a {
+          &:hover,
+          &:focus,
+          &:focus-visible {
+            background-color: transparent;
+            color: var(--highlight);
+            font-weight: 600;
+            text-decoration: underline;
+          }
+        }
+      }
     }
     .mobile-menu {
       display: grid;
@@ -194,7 +261,7 @@ a {
 
 .product-item {
   display: grid;
-  // border: 1px solid var(--highlight);
+  border: 1px solid var(--highlight);
   border-radius: var(--radius);
   overflow: hidden;
   grid-template-columns: 1fr;
@@ -203,6 +270,14 @@ a {
   img {
     width: 150px;
     height: 150px;
+    @media (width >= 550px) {
+      width: auto;
+      height: auto;    
+      max-width: 300px;
+      max-height: 300px;    
+      min-width: 200px;
+      min-height: 200px;    
+    }
   }
   p {
     max-width: 150px;
@@ -218,6 +293,14 @@ a {
   h1 {
     grid-column: 1/3;
   }
+  @media (width >= 550px) {
+    grid-template-columns: repeat(3, 1fr);
+
+  }
+  // @media (width >= 768px) {
+  //   grid-template-columns: repeat(4, 1fr);
+
+  // }
 }
 .largeDisplay {
   width: 400px;

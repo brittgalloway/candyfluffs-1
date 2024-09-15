@@ -1,25 +1,41 @@
+'use client'
+import React, { useEffect, useState } from 'react';
+import { useMediaQuery } from 'react-responsive';
 import Link from "next/link";
 import { Nav } from "./nav";
 import Image from "next/image";
-import Logo from "../../public/logo.jpg";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBagShopping, faUser } from '@fortawesome/free-solid-svg-icons';
+import { 
+  faInstagram, faXTwitter, faTumblr
+ } from '@fortawesome/free-brands-svg-icons';
+import Logo from '@/public/logo.jpg'
 
 const socialMedia = [
-  {href: 'https://candy-fluffs.tumblr.com/', label: 'Link to Candy Fluffs\' Tumblr', text : 'tumblr'},
-  {href: 'http://instagram.com/candy_fluffs', label: 'Link to Candy Fluffs\' Instagram', text: 'insta'},
-  {href: 'https://x.com/candy_fluffs', label: 'Link to Candy Fluffs\' X', text: 'X'},
+  {href: 'https://candy-fluffs.tumblr.com/', label: 'Link to Candy Fluffs\' Tumblr', icon: faTumblr},
+  {href: 'http://instagram.com/candy_fluffs', label: 'Link to Candy Fluffs\' Instagram', icon: faInstagram},
+  {href: 'https://x.com/candy_fluffs', label: 'Link to Candy Fluffs\' X', icon: faXTwitter},
 ];
 export function Header() {
-  const isMobile = true;
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  const isMobile = useMediaQuery({
+    query: '(max-width: 768px)',
+  });
   return(
     <header>
       {isMobile ? null : (
-        <div className="social-links">
+        <div className={`social-links`}>
           {socialMedia.map((link) => (
-            <a key={link.text} href={link.href} aria-label={link.label}>{link.text}</a>
+            <a key={link.href} href={link.href} aria-label={link.label}><FontAwesomeIcon icon={link?.icon} size="lg"/></a>
           ))}
         </div>
       )}
-      <div>
+      <div className={`logo`}>
        <Link href='/'>
         <Image
           src={Logo}
@@ -30,13 +46,17 @@ export function Header() {
        </Link>
       </div>
       {isMobile ? null : (
-        <div>
-          <button className="snipcart-customer-signin">My account</button>
-
-           checkout, search
+        <div className={`shop-icons`}>
+          <span className="snipcart-customer-signin">
+            <FontAwesomeIcon icon={faUser}/>
+          </span>
+          <span className="snipcart-checkout">
+            <FontAwesomeIcon icon={faBagShopping}/>
+            <span className="snipcart-items-count"></span>
+          </span>search
         </div>
       )}
-      <p>
+      <p className={`tagline`}>
         Just a girl who likes to draw manga (ㆁᴗㆁ✿)
       </p>
       <Nav/>
