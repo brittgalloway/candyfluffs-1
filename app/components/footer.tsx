@@ -1,4 +1,6 @@
-import React from 'react';
+'use client'
+import React, { useEffect, useState } from 'react';
+import { useMediaQuery } from 'react-responsive';
 import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { 
@@ -19,7 +21,16 @@ const paymentMethods = [
 ];
 
 export function Footer() {
-  const isMobile = true;
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  const isMobile = useMediaQuery({
+    query: '(max-width: 768px)',
+  });
+
   return(
     <footer>
       <div className="social-links">
@@ -33,10 +44,10 @@ export function Footer() {
       {isMobile ? null :
         (
           <>
-            <ul>
+            <ul className={`contact`}>
               <li><Link href="/contact">Contact Me</Link></li>
             </ul>
-            <ul>
+            <ul className={`extra-links`}>
               <li><Link href="/about">About Me</Link></li>
               <li><Link href="/events">Conventions/Expos</Link></li>
             </ul>

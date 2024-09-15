@@ -241,6 +241,13 @@ footer {
     a {
       font-size: 1.5rem;
     }
+    @media ( width >= 550px ) {
+      grid-area: connect;
+      grid-template-rows: repeat(2, 1fr);
+      p {
+        grid-column: 1/4;
+      }
+    }
   }
   .payment-methods {
     display: grid;
@@ -248,7 +255,30 @@ footer {
     gap: 1rem;
     font-size: 1.5rem;
     margin-block: 1rem;
-    color: var(--light-gray)
+    color: var(--light-gray);
+    @media ( width >= 550px ) {
+      grid-area: pay;
+      font-size: 2rem;
+    }
+  }
+  @media ( width >= 550px ) {
+    grid-template-areas: "connect contact extra" "connect contact extra" "pay pay pay";
+    grid-template-columns: repeat(3, 1fr);
+    margin-bottom: 0;
+    gap: 1rem;
+    font-size: 1.5rem;
+    .contact {
+      grid-area: contact;
+    }
+    .extra-links {
+      grid-area: extra;
+      display: grid;
+      justify-items: center;
+    }
+    ul {
+      list-style: none;
+    }
+
   }
 }
 h2 {
