@@ -1,5 +1,3 @@
-@import "react-alice-carousel/lib/scss/alice-carousel.scss";
-
 :root {
   --highlight: #f58f89;
   --dark-highlight: #983025;
@@ -87,7 +85,6 @@
 --color-inputIcon-focus: var(--dark-highlight);
 
 }
-
 * {
   padding: 0;
   margin: 0;
@@ -95,13 +92,11 @@
   -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
-
 html,
 body {
   max-width: 100vw;
   overflow-x: hidden;
 }
-
 body {
   background: var(--background);
   display: grid;
@@ -118,8 +113,10 @@ header {
   grid-template-columns: 1fr;
   grid-template-rows: repeat(2, auto);
   justify-items: center;
-  color: var(--highlight);
   margin-top: 2rem;
+  p {
+    color: var(--highlight);
+  }
   img {
     mix-blend-mode: multiply;
   }
@@ -143,6 +140,16 @@ header {
       grid-template-columns: repeat(3, 1fr);
       gap: 1rem;
       font-size: 1.25rem;
+      a {
+        transform: scale(1);
+        &:hover,
+        &:active,
+        &:focus {
+          cursor: pointer;
+          transform: scale(1.2);
+          color: var(--highlight);
+        }
+      }
     }
     .shop-icons {
       grid-area: shop;
@@ -152,10 +159,20 @@ header {
       font-size: 1.25rem;
       justify-items: center;
     }
+    span {
+      transform: scale(1);
+      &:hover,
+      &:active,
+      &:focus {
+        cursor: pointer;
+        transform: scale(1.2);
+        color: var(--highlight);
+      }
+    }
   }
   nav {
-    border-top: 1px solid var(--highlight);
-    border-bottom: 1px solid var(--highlight);
+    border-top: 2px solid var(--faded-highlight);
+    border-bottom: 1px solid var(--faded-highlight);
     width: 100%;
     z-index: 2;
     position: fixed;
@@ -230,7 +247,7 @@ footer {
   grid-template-rows: auto;
   grid-template-columns: 1fr;
   justify-items: center;
-  border-top: 1px solid var(--highlight);
+  border-top: 2px solid var(--faded-highlight);
   padding-block: 1rem;
   margin-bottom: 45px;
   .social-links {
@@ -240,6 +257,13 @@ footer {
     gap: 1rem;
     a {
       font-size: 1.5rem;
+      transform: scale(1);
+      &:hover,
+      &:active,
+      &:focus {
+        transform: scale(1.2);
+        color: var(--highlight);
+      }
     }
     @media ( width >= 550px ) {
       grid-area: connect;
@@ -264,6 +288,7 @@ footer {
   @media ( width >= 550px ) {
     grid-template-areas: "connect contact extra" "connect contact extra" "pay pay pay";
     grid-template-columns: repeat(3, 1fr);
+    margin-top:3rem;
     margin-bottom: 0;
     gap: 1rem;
     font-size: 1.5rem;
@@ -281,12 +306,26 @@ footer {
 
   }
 }
+h1 {
+  font-size: 2rem;
+  color: var(--highlight);
+  text-align: center;
+  margin-top: 1rem;
+  @media (width >= 550px) {
+    font-size: 3rem;
+  }
+}
 h2 {
   font-size: 1.25rem;
 }
 a {
   color: inherit;
   text-decoration: none;
+  &:hover {
+    cursor: pointer;
+    color: var(--highlight);
+    text-decoration: underline;
+  }
 }
 
 .product-item {
@@ -303,8 +342,8 @@ a {
     @media (width >= 550px) {
       width: auto;
       height: auto;    
-      max-width: 300px;
-      max-height: 300px;    
+      max-width: 400px;
+      max-height: 400px;    
       min-width: 200px;
       min-height: 200px;    
     }

@@ -8,10 +8,40 @@
   img {
     width: 300px;
     height: auto;
+    border-radius: var(--radius);
+  }
+  @media (width >= 550px){
+    grid-template-columns: 4fr repeat(3, 1fr);
+    grid-template-rows: repeat(6, auto);
+    width: 80%;
+    margin-inline: auto;
+    font-size: 1.5rem;
+    img {
+      grid-column: 1/2;
+      grid-row: 2/7;
+      width: 450px;
+    }
+    a:first-of-type {
+      grid-column: 2/3;
+    }
+    > a {
+      font-size: 1.5rem;
+    }
   }
 }
-.span3 {
+.span3mobile {
   grid-column: 1/4;
+  @media (width >= 550px){
+    grid-column: none; 
+  }
+}
+.necahual {
+  @media (width >= 550px){
+    grid-column: 2/5;
+  }
+}
+.title {
+  grid-column: 1/5;
 }
 .webtoons {
   color: var(--highlight);
@@ -19,4 +49,7 @@
   &:hover {
     text-decoration: underline;
   }
+}
+.alignCenter {
+  align-self: center;
 }

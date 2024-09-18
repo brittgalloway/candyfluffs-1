@@ -54,24 +54,25 @@ export default async function TwoHeroes() {
   return (
     <>
       <section className={`${styles.grid}`}>
-        <h1 className={`${styles.span3}`}>{necahual?.pageTitle}</h1>
+        <h1 className={`${styles.span3mobile} ${styles.title}`}>{necahual?.pageTitle}</h1>
         <Image 
-          className={`${styles.span3}`}
+          className={`${styles.span3mobile}`}
           alt={necahual?.necahualImage?.alt}
           src={necahual?.necahualImage?.url}
           width={500}
           height={500}
         />
-        <p className={`${styles.span3}`}>{necahual?.summary?.value?.document?.children[0]?.children[0]?.value}</p>
-        <h2 className={`${styles.span3}`}>Read it on <a className={`${styles.webtoons}`} href="https://www.webtoons.com/en/canvas/necahual/list?title_no=216820">Webtoons</a>!</h2>
-        <h2 className={`${styles.span3}`}>Support us on:</h2>
+        <h2 className={`${styles.span3mobile} ${styles.necahual} ${styles.alignCenter}`}>Read it on <a className={`${styles.webtoons}`} href="https://www.webtoons.com/en/canvas/necahual/list?title_no=216820">Webtoons</a>!</h2>
+        <p className={`${styles.span3mobile} ${styles.necahual}`}>{necahual?.summary?.value?.document?.children[0]?.children[0]?.value}</p>
+        <h2 className={`${styles.span3mobile} ${styles.necahual} ${styles.alignCenter}`}>Support us on:</h2>
         {socialMedia.map((link) => (
           <a key={link.href} href={link.href} aria-label={link.label}><FontAwesomeIcon icon={link.icon} size="lg"/></a>
         ))}
-        <p className={`${styles.span3}`}><small>{necahual?.patreonDisclaimer}</small></p>
+        <p className={`${styles.span3mobile} ${styles.necahual}`}><small>{necahual?.patreonDisclaimer}</small></p>
       </section>
-      <section className={`products`}>
-        <h1>Merch</h1>
+      <section className={``}>
+        <h1 className={`${styles.title}`} >Merch</h1>
+        <div className={`products`}>
         {allProducts.map((product : 
         {id:string, title:string, price:number, slug:string, 
           image: [{url:string, alt:string}]}
@@ -86,6 +87,7 @@ export default async function TwoHeroes() {
             price={product?.price}
           />
         ))}
+        </div>
       </section>
     </>
   )

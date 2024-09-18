@@ -4,12 +4,17 @@
   gap: 1rem;
   width: 100%;
   justify-items: center;
-  h1 {
-    color: var(--highlight);
-    font-size: 2rem;
+  a {
+    font-weight: 700;
+    cursor: pointer;
+  }
+  @media (width >= 550px) {
+    gap: 2rem;
   }
 }
-
+.h1 {
+  margin-block: 1rem;
+}
 .events {
   display: inherit;
   grid-template-columns: 1fr;
