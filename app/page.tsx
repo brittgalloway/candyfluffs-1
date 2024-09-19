@@ -1,47 +1,49 @@
 import { performRequest } from '@/app/lib/datocms';
+import { EmblaOptionsType } from 'embla-carousel'
 import { ProductItem } from './components/productItem';
-import { Gallery } from './components/slider';
+import Slider from './components/slider';
+
+
 
 export default async function Home() {
   const PAGE_CONTENT_QUERY = `
     query ProductsQuery {
-  allBanners {
-    banner {
-      id
-      alt
-      responsiveImage {
-        src
-        width
-        height
+      allBanners {
+        banner {
+          id
+          alt
+          responsiveImage {
+            src
+            width
+            height
+          }
+        }
+        link {
+          value
+        }
+      }
+      allProducts {
+        id
+        title
+        price
+        slug
+        image {
+          alt
+          url
+        }
       }
     }
-    link {
-      value
-    }
-  }
-  allProducts {
-    id
-    title
-    price
-    slug
-    image {
-      alt
-      url
-    }
-  }
-}
   `;
 
   const { data: { allProducts, allBanners } } = await performRequest({ query: PAGE_CONTENT_QUERY });
-
+  const OPTIONS: EmblaOptionsType = { direction: 'rtl', loop: true }
+  const SLIDES = allBanners;
   return (
     <section>      
-      {/* {allBanners.map((banner: any) => (
-        <Gallery
-          key={banner.banner[0].id}
-          banners={banner.banner[0]}
-          />
-      ))} */}
+      <Slider 
+        slides={SLIDES} 
+        options={OPTIONS} 
+      />
       <div className={`products`}>
         {allProducts.map((product : 
           {id:string, title:string, price:number, slug:string, 

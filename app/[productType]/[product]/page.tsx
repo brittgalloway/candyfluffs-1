@@ -1,6 +1,6 @@
 import { performRequest } from '@/app/lib/datocms';
-import styles from './page.module.scss'
 import { ProductImages } from '@/app/components/productImageDisplay';
+import styles from '../../style/product-page.module.scss'
 
 export default async function Product({ params }: any) {
   const PAGE_CONTENT_QUERY = `
@@ -8,7 +8,7 @@ export default async function Product({ params }: any) {
       product(filter: {slug: {eq: "${params.product}"}}) {
         id
         fandoms
-        description
+        description(markdown: true)
         price
         size
         slug
@@ -53,16 +53,16 @@ export default async function Product({ params }: any) {
   }
 
   return (
-    <section className={``}>
+    <section className={`${styles.main}`}>
       <h1>{product?.title}</h1>
       <ProductImages
         photos={product?.image}
       />
-      <p>{formatedPrice}</p>
-      <p>{product?.description}</p>
+      <p className={`${styles.price}`}>{formatedPrice}</p>
+      <div className={`${styles.description}`} dangerouslySetInnerHTML={{__html:product?.description}}/>
       {product?.variation.length ?
         <>
-          <button className={`snipcart-add-item`}
+          <button className={`snipcart-add-item ${styles.add}`}
             data-item-id={product?.id}
             data-item-price={product?.price}
             data-item-description={product?.description}
@@ -75,7 +75,7 @@ export default async function Product({ params }: any) {
           <p>You can select which one you want in the cart.</p>
         </>
       : 
-      <button className={`snipcart-add-item`}
+      <button className={`snipcart-add-item ${styles.add}`}
         data-item-id={product?.id}
         data-item-price={product?.price}
         data-item-description={product?.description}

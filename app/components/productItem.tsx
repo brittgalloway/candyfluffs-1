@@ -13,8 +13,8 @@ export function ProductItem({id, title, slug, url, alt, price}:
         width={250}
         height={250}
       />
-      <p>{title}</p>
-      <p>{formatedPrice}</p>
+      <p className="product-title">{title}</p>
+      <p className="product-price">{formatedPrice}</p>
       <div className="soldOut">
         <p>Sold Out</p>
       </div>

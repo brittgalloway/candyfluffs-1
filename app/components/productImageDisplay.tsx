@@ -1,9 +1,9 @@
 'use client'
 import React, { useState } from 'react';
 import Image from 'next/image';
-import PhotoAlbum from 'react-photo-album';
 import { ColumnsPhotoAlbum } from "react-photo-album";
 import "react-photo-album/columns.css";
+import styles from '@/app/style/product-page.module.scss'
 
 export function ProductImages({photos}: any ) {
 
@@ -19,21 +19,21 @@ export function ProductImages({photos}: any ) {
         alt: photo?.alt
     }))
   return (
-    <>
+    <div>
       <Image 
-        className={`largeDisplay`}
+        className={`${styles.largeDisplay}`}
         key= {photos[index]}
         src= {photos[index]?.url}
         width={500}
         height={500}
         alt= {photos[index]?.alt}
         />
-      <ColumnsPhotoAlbum 
+      <ColumnsPhotoAlbum  
         photos={slides}
-        columns={photos.length}
+        columns={photos?.length || 2}
         spacing={10}
         onClick={handleClick}
       />
-    </>
+    </div>
   )
 }
