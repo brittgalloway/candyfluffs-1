@@ -1,5 +1,4 @@
 'use client'
-import React, { useEffect, useState } from 'react';
 import { useMediaQuery } from 'react-responsive';
 import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -21,11 +20,6 @@ const paymentMethods = [
 ];
 
 export function Footer() {
-  const [isMounted, setIsMounted] = useState(false);
-
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
 
   const isMobile = useMediaQuery({
     query: '(max-width: 768px)',

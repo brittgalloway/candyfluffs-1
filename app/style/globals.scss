@@ -8,7 +8,7 @@
   --form-gray: #c4c4c4;
   --faded-highlight: #ffe2d6;
   --warn-highlight: #f33e4f;
-  --radius: 4px;
+  --radius: 8px;
 
   // SNIPCART
   /* Default */
@@ -123,9 +123,10 @@ header {
   @media ( width >= 550px ) {
     grid-template-columns: 1fr 2fr 1fr;
     gap: 1rem;
-    grid-template-areas: "logo logo logo" 
-                          "social tag shop"
-                          "nav nav nav";
+    grid-template-areas: 
+    "logo logo logo" 
+    "social tag shop"
+    "nav nav nav";
     .logo{
       grid-area: logo;
       grid-column: span 3;
@@ -286,7 +287,10 @@ footer {
     }
   }
   @media ( width >= 550px ) {
-    grid-template-areas: "connect contact extra" "connect contact extra" "pay pay pay";
+    grid-template-areas: 
+    "connect contact extra" 
+    "connect contact extra" 
+    "pay pay pay";
     grid-template-columns: repeat(3, 1fr);
     margin-top:3rem;
     margin-bottom: 0;
@@ -330,42 +334,84 @@ a {
 
 .product-item {
   display: grid;
-  border: 1px solid var(--highlight);
   border-radius: var(--radius);
   overflow: hidden;
   grid-template-columns: 1fr;
   grid-template-rows: 6fr auto 1fr;
   width: 100%;
+  align-items: start;
+  .overlay {
+    display: none;
+  }
+  .soldOut {
+    display: none;
+  }
   img {
-    width: 150px;
-    height: 150px;
+    grid-column: 1/2;
+    grid-row: 1/2;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1/1;
+  }
+  &:hover,
+  &:focus-visible {
+    text-decoration: none;
+    color: #222;
+    font-weight: 700;
+    box-shadow: 0 0 10px 2px var(--faded-highlight);
+    .overlay {
+      display: block;
+      grid-column: 1/2;
+      grid-row: 1/2;
+      width: 100%;
+      height: 100%;
+      background: var(--background);
+      z-index: 2;
+      opacity: 15%;
+    }
+    
+  }
+  &:focus-visible {
+    outline-color: var(--highlight);
   }
   @media (width >= 550px) {
-    grid-template-rows: repeat(4, 1fr);
+    grid-template-rows: repeat(4, auto);
     max-width: 400px;
     max-height: 400px;    
     min-width: 200px;
     min-height: 200px;  
     justify-items: center; 
-    &:hover {
-      background-color: yellow;
-      opacity: .5;
-    }
+    text-align: center;
     img {
-      width: 100%;
-      height: 100%;
       grid-row: 1/5;
       grid-column: 1/2;
     } 
     .product-title {
+      display: none;
       grid-row: 2/3;
       grid-column: 1/2;
       font-size: 2rem;
       font-weight: 700;
+      max-width: 90%;
     }
     .product-price {
+      display: none;
       grid-column: 1/2;
       grid-row: 3/4;
+      font-size: 1.5rem;
+    }
+    &:hover,
+    &:focus-visible {
+      .product-title,
+      .product-price {
+        display: block;
+        z-index: 3;
+      }
+      .overlay {
+        grid-column: 1/2;
+        grid-row: 1/5;
+        opacity: 85%;
+      }
     }
   }
   p {
@@ -386,10 +432,6 @@ a {
     grid-template-columns: repeat(3, 1fr);
 
   }
-  // @media (width >= 768px) {
-  //   grid-template-columns: repeat(4, 1fr);
-
-  // }
 }
 
 .react-photo-album--image {

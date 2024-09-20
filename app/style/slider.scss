@@ -23,7 +23,8 @@
 }
 .embla__slide__image {
   max-height: 520px;
-  width: auto;
+  height: 100%;
+  width: 100%;
 }
 .embla__controls {
   display: grid;
@@ -65,6 +66,10 @@
   display: flex;
   align-items: center;
   content: '';
+  @media ( width <= 768px ) {
+    width: 1rem;
+    height: 1rem;
+  }
 }
 .embla__dot--selected:after {
  background: var(--highlight)
