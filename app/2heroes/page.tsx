@@ -70,7 +70,7 @@ export default async function TwoHeroes() {
         ))}
         <p className={`${styles.span3mobile} ${styles.necahual}`}><small>{necahual?.patreonDisclaimer}</small></p>
       </section>
-      <section className={``}>
+      <section className={`${styles.merchSection}`}>
         <h1 className={`${styles.title}`} >Merch</h1>
         <div className={`products`}>
         {allProducts.map((product : 

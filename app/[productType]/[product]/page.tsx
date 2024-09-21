@@ -62,7 +62,7 @@ export default async function Product({ params }: any) {
       <div className={`${styles.description}`} dangerouslySetInnerHTML={{__html:product?.description}}/>
       {product?.variation.length ?
         <>
-          <button className={`snipcart-add-item ${styles.add}`}
+          <button className={`snipcart-add-item ${styles.add} ${styles.addChoices}`}
             data-item-id={product?.id}
             data-item-price={product?.price}
             data-item-description={product?.description}
@@ -71,8 +71,8 @@ export default async function Product({ params }: any) {
             data-item-custom1-options={handleVariantion()}
           >
             Add to cart
-          </button>
-          <p>You can select which one you want in the cart.</p>
+          </button >
+          <p className={`${styles.cartInstruction}`}>*You can select which one you want in the cart.</p>
         </>
       : 
       <button className={`snipcart-add-item ${styles.add}`}

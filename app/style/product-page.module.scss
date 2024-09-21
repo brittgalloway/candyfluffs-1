@@ -1,3 +1,14 @@
+.imageWrapper {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(2, auto);
+  gap: 1rem;
+  @media (width >= 550px) {
+    grid-column: 1/2;
+    grid-row: 1/5;
+    width: 100%;
+  }
+}
 .largeDisplay {
   width: 100%;
   height: auto;
@@ -7,6 +18,7 @@
   @media (width >= 550px) {
     grid-row: 1/4;
     grid-column: 1/2;
+    max-width: 400px;
   }
 }
 
@@ -24,11 +36,19 @@
     color: #222;
   }
   @media (width >= 550px) {
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(4, auto);
-    // h1 {
-
-    // }
+    grid-template-columns: 4fr 3fr;
+    grid-template-rows: 20% 15% repeat(2, auto);
+    gap: 0;
+    max-width: 955px;
+    h1 {
+      grid-column: 2/3;
+      grid-row: 1/2;
+      margin: 0;
+      text-align: left;
+    }
+  }
+  @media (width <= 850px) {
+    gap:1rem;
   }
 }
 .add {
@@ -36,14 +56,37 @@
   background: var(--background);
   padding: 1rem 2rem;
   font-size: 1.25rem;
-  margin-block: 1rem;
+  margin-top: 1rem;
   width: 100%;
-
+  @media (width >= 550px) {
+    grid-column: 2/3;
+    grid-row: 4/5;
+    max-height: 70px;
+    align-self: end;
+    margin: 0;
+  }
+}
+.cartInstruction {
+  font-weight: 700;
+  @media (width >= 550px) {
+    grid-column: 2/3;
+    grid-row: 4/5;
+    align-self: end;
+  } 
+}
+.addChoices {
+  @media (width >= 550px) {
+    margin-bottom: 2rem;
+  } 
 }
 .price {
   font-size: 2rem;
   font-weight: 700;
   justify-self: start;
+  @media (width >= 550px) {
+    grid-column: 2/3;
+    grid-row: 2/3;
+  }
 }
 .description {
   font-size: 1.25rem;
@@ -53,5 +96,9 @@
   }
   li {
     list-style: circle;
+  }
+  @media (width >= 550px) {
+    grid-column: 2/3;
+    grid-row: 3/4;
   }
 }

@@ -5,6 +5,7 @@
   justify-items: center;
   gap: 1rem;
   width: 100%;
+  padding-bottom: 2rem;
   img {
     width: 300px;
     height: auto;
@@ -41,7 +42,11 @@
   }
 }
 .title {
-  grid-column: 1/5;
+  grid-column: 2/3;
+  margin-block: 3rem;
+  @media (width >= 550px){
+    grid-column: 1/5;
+  }
 }
 .webtoons {
   color: var(--highlight);
@@ -52,4 +57,7 @@
 }
 .alignCenter {
   align-self: center;
+}
+.merchSection {
+  margin-top: 2rem;
 }

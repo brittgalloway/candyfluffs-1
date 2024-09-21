@@ -442,7 +442,12 @@ a {
   max-width: 300px;
   overflow-x: scroll;
   gap:5px;
-  justify-self: start !important;
+  justify-content: start !important;
+  width: 100%;
+  border-radius: var(--radius);
+  @media (width >= 550px) {
+    max-width: 400px;
+  }
 }
 .react-photo-album--track {
   width: 100px !important;

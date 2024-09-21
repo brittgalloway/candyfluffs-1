@@ -19,7 +19,7 @@ export function ProductImages({photos}: any ) {
         alt: photo?.alt
     }))
   return (
-    <div>
+    <div className={`${styles.imageWrapper}`}>
       <Image 
         className={`${styles.largeDisplay}`}
         key= {photos[index]}
