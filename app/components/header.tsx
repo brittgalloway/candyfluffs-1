@@ -56,7 +56,7 @@ export function Header() {
           </span>search
         </div>
       )}
-      <p className={`tagline`}>
+      <p className={'tagline'}>
         Just a girl who likes to draw manga (ㆁᴗㆁ✿)
       </p>
       <Nav/>

@@ -22,6 +22,9 @@ export default async function Home() {
           value
         }
       }
+      _allProductsMeta {
+        count
+      }
       allProducts {
         id
         title
@@ -35,7 +38,7 @@ export default async function Home() {
     }
   `;
 
-  const { data: { allProducts, allBanners } } = await performRequest({ query: PAGE_CONTENT_QUERY });
+  const { data: { allProducts, allBanners, _allProductsMeta } } = await performRequest({ query: PAGE_CONTENT_QUERY });
   const OPTIONS: EmblaOptionsType = { direction: 'rtl', loop: true }
   const SLIDES = allBanners;
   return (

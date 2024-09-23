@@ -42,8 +42,6 @@ const PAGE_CONTENT_QUERY = `
   }
 `;
 
-export const tagline = "Necahual";
-
 export default async function TwoHeroes() {
   const { data: { necahual, allProducts} } = await performRequest({ query: PAGE_CONTENT_QUERY });
   const socialMedia = [

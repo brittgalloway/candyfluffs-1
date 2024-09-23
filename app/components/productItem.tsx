@@ -6,7 +6,7 @@ export function ProductItem({id, title, slug, url, alt, price}:
 
   const formatedPrice = price.toLocaleString("en-US", { style: "currency", currency: "USD" })
   return(
-    <Link href={`product/${slug}`} id={id} className="product-item">
+    <Link href={`products/${slug}`} id={id} className="product-item">
       <div className="overlay" />
       <Image 
         src={url}

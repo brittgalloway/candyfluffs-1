@@ -1,11 +1,17 @@
 import { performRequest } from '@/app/lib/datocms';
 import { ProductItem } from '@/app/components/productItem';
+import Dropdown from '../components/dropdown';
 
 
 export default async function ProductsByType({ params }: any) {
   const PAGE_CONTENT_QUERY = `
     query ProductsQuery {
-      allProducts(filter: {productType: {eq: "${params.productType}"}}) {
+      allProducts(
+        filter: {OR: 
+          [{fandoms: {matches: {pattern: "${params.productType}"}}}, 
+          {productType: {matches: {pattern: "${params.productType}"}}}]
+          }
+        ) {
         id
         title
         fandoms
@@ -22,6 +28,7 @@ export default async function ProductsByType({ params }: any) {
 
   return (
     <section className="products">
+      <Dropdown/>
       {allProducts.map((product: { id: string, title: string, price: number, slug: string, 
         image: [{ url: string, alt: string }] }) => (
         <ProductItem
