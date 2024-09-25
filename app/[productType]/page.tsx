@@ -1,6 +1,6 @@
 import { performRequest } from '@/app/lib/datocms';
 import { ProductItem } from '@/app/components/productItem';
-import Dropdown from '../components/dropdown';
+import Dropdown from '@/app/components/dropdown';
 
 
 export default async function ProductsByType({ params }: any) {
@@ -8,11 +8,17 @@ export default async function ProductsByType({ params }: any) {
     query ProductsQuery {
       allProducts(
         filter: {OR: 
-          [{fandoms: {matches: {pattern: "${params.productType}"}}}, 
-          {productType: {matches: {pattern: "${params.productType}"}}}]
-          }
-        ) {
-        id
+        [
+          { AND: [
+            {fandoms: {matches: {pattern: "${params.productType}"}}}, 
+            {productType: {matches: {pattern: "${params.productType}"}}}
+          ]}
+          {fandoms: {matches: {pattern: "${params.productType}"}}}, 
+          {productType: {matches: {pattern: "${params.productType}"}}},
+        ]
+      }
+    ) {
+          id
         title
         fandoms
         price

@@ -34,9 +34,16 @@ export default function RootLayout({
 
   return (
     <html lang="en">
-      <Script id="mcjs">
-        {`!function(c,h,i,m,p){m=c.createElement(h),p=c.getElementsByTagName(h)[0],m.async=1,m.src=i,p.parentNode.insertBefore(m,p)}(document,'script','https://chimpstatic.com/mcjs-connected/js/users/f0ccd4aae40398b03156934fd/716e06e6a8e0b1788b8cd6a33.js');`}
-      </Script>
+      <head>
+      <Script id="mcjs"
+        strategy="beforeInteractive"
+        dangerouslySetInnerHTML={{
+          __html: `
+          !function(c,h,i,m,p){m=c.createElement(h),p=c.getElementsByTagName(h)[0],m.async=1,m.src=i,p.parentNode.insertBefore(m,p)}(document,"script","https://chimpstatic.com/mcjs-connected/js/users/f0ccd4aae40398b03156934fd/716e06e6a8e0b1788b8cd6a33.js");
+          `
+        }}/>
+      </head>
+      {/* </Script> */}
 
       <body className={lato.className}>
         <Header />
@@ -128,9 +135,4 @@ export default function RootLayout({
   );
 }
 
-// Wrap the layout with the TaglineProvider
-export function RootLayoutWrapper({ children }: { children: React.ReactNode }) {
-  return (
-      <RootLayout>{children}</RootLayout>
-  );
-}
+
