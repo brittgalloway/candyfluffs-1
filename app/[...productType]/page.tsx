@@ -4,20 +4,30 @@ import Dropdown from '@/app/components/dropdown';
 
 
 export default async function ProductsByType({ params }: any) {
+  const productTypes = [
+    'Book',
+    'Print',
+    'Scroll',
+    'Charm',
+    'Button',
+    'Sticker'
+  ];
+  if( params.productType.length > 1 ) {
+    var productType = params.productType[0];
+    var category = params.productType[1];
+      } else if(productTypes.includes(params.productType[0])) {
+    productType = params.productType[0];
+    category = "";
+  } else {
+    productType = "";
+    category = params.productType[0];
+  }
   const PAGE_CONTENT_QUERY = `
     query ProductsQuery {
       allProducts(
-        filter: {OR: 
-        [
-          { AND: [
-            {fandoms: {matches: {pattern: "${params.productType}"}}}, 
-            {productType: {matches: {pattern: "${params.productType}"}}}
-          ]}
-          {fandoms: {matches: {pattern: "${params.productType}"}}}, 
-          {productType: {matches: {pattern: "${params.productType}"}}},
-        ]
-      }
-    ) {
+          filter: {fandoms: {matches: {pattern: "${category}"}}, 
+          productType: {matches: {pattern: "${productType}"}}}
+        ) {
           id
         title
         fandoms
@@ -31,10 +41,18 @@ export default async function ProductsByType({ params }: any) {
     }
   `;
   const { data: { allProducts } } = await performRequest({ query: PAGE_CONTENT_QUERY });
-
+  let fandomList:string[] = []
+  allProducts.forEach((fandom:any) => {
+    if (!fandomList.includes(fandom.fandoms)) {
+      fandomList.push(fandom.fandoms);
+    }
+  })
   return (
     <section className="products">
-      <Dropdown/>
+      <Dropdown
+        type={productType}
+        fandomList={fandomList}
+      />
       {allProducts.map((product: { id: string, title: string, price: number, slug: string, 
         image: [{ url: string, alt: string }] }) => (
         <ProductItem
