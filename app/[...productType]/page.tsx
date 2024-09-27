@@ -3,7 +3,6 @@ import { Product } from '@/app/lib/types';
 import { ProductItem } from '@/app/components/productItem';
 import Dropdown from '@/app/components/dropdown';
 import Pagination from '@/app/components/pagination';
-
 type ParamTypes ={
   params: {
     productType:string[]
@@ -16,8 +15,7 @@ type ParamTypes ={
 export default async function ProductsByType({ params, searchParams }: ParamTypes) {
   const pageNumber = Number.parseInt(searchParams?.page ?? '1');
   
-  const skip = pageNumber > 1 ? pageNumber * limit : 0;
-
+  const skip = pageNumber > 1 ? limit : 0;
   const productTypes = [
     'Book',
     'Print',
@@ -54,8 +52,11 @@ export default async function ProductsByType({ params, searchParams }: ParamType
         }
       }
       _allProductsMeta(
-          filter: {fandoms: {matches: {pattern: "${category}"}}, 
-          productType: {matches: {pattern: "${productType}"}}}
+          filter: {
+            fandoms: {matches: {pattern: "${category}"}}, 
+            productType: {matches: {pattern: "${productType}"}},
+            _status: {eq: published}
+          }
           ) {
             count
           }

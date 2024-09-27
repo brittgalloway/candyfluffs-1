@@ -19,7 +19,7 @@ export default function Pagination({ numberOfProducts, currentPage, maxItems }: 
     const pageNumber = (i - 1) / maxItems + 1;
     const isSelected = pageNumber === currentPage;
     pageItems.push(
-      <button
+      <button key={pageNumber}
         type="button"
         aria-current="page"
         className={`${
@@ -73,7 +73,7 @@ export default function Pagination({ numberOfProducts, currentPage, maxItems }: 
               }}
               className=""
             >
-              <span className="sr-only">Next</span>
+              <span className="">Next</span>
               <FontAwesomeIcon icon={faChevronRight}/>
             </button>
           )}

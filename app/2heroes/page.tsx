@@ -22,7 +22,8 @@ export default async function TwoHeroes({searchParams}: SearchParams) {
 
   const pageNumber = Number.parseInt(searchParams?.page ?? '1');
 
-  const skip = pageNumber > 1 ? pageNumber * limit : 0;
+  const skip = pageNumber > 1 ? limit : 0;
+  
   const PAGE_CONTENT_QUERY = `
     query NecahualQuery {
       necahual {
@@ -47,7 +48,7 @@ export default async function TwoHeroes({searchParams}: SearchParams) {
           url
         }
       }
-      _allProductsMeta(filter: {fandoms: {eq: "Necahual"}}) {
+      _allProductsMeta(filter: {fandoms: {eq: "Necahual"}, _status: {eq: published}}) {
         count
       }
     }

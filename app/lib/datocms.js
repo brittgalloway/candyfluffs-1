@@ -17,4 +17,5 @@ export const performRequest = async ({ query, variables = {}, includeDrafts = fa
   return responseBody;
 }
 
+// used for pagination, it's the limit of products displayed on the page
 export const limit = 12;
