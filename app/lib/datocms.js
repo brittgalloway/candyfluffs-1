@@ -16,3 +16,5 @@ export const performRequest = async ({ query, variables = {}, includeDrafts = fa
   
   return responseBody;
 }
+
+export const limit = 12;

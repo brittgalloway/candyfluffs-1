@@ -1,9 +1,9 @@
 'use client'
 import React, { useEffect, useState } from 'react';
 import { useMediaQuery } from 'react-responsive';
-import Link from "next/link";
-import { Nav } from "./nav";
-import Image from "next/image";
+import Link from 'next/link';
+import { Nav } from './nav';
+import Image from 'next/image';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBagShopping, faUser } from '@fortawesome/free-solid-svg-icons';
 import { 
@@ -47,13 +47,13 @@ export function Header() {
       </div>
       {isMobile ? null : (
         <div className={`shop-icons`}>
-          <span className="snipcart-customer-signin">
+          <button tabIndex={0} className="snipcart-customer-signin">
             <FontAwesomeIcon icon={faUser}/>
-          </span>
-          <span className="snipcart-checkout">
+          </button>
+          <button tabIndex={0} className="snipcart-checkout">
             <FontAwesomeIcon icon={faBagShopping}/>
             <span className="snipcart-items-count"></span>
-          </span>search
+          </button>search
         </div>
       )}
       <p className={'tagline'}>

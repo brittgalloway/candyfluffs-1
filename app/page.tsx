@@ -1,11 +1,15 @@
-import { performRequest } from '@/app/lib/datocms';
-import { EmblaOptionsType } from 'embla-carousel'
+import { performRequest, limit } from '@/app/lib/datocms';
+import { Product, SearchParams } from '@/app/lib/types';
+import { EmblaOptionsType } from 'embla-carousel';
 import { ProductItem } from './components/productItem';
 import Slider from './components/slider';
+import Pagination from './components/pagination';
 
+export default async function Home({searchParams}: SearchParams) {
+  const pageNumber = Number.parseInt(searchParams?.page ?? '1');
 
+  const skip = pageNumber > 1 ? pageNumber * limit : 0;
 
-export default async function Home() {
   const PAGE_CONTENT_QUERY = `
     query ProductsQuery {
       allBanners {
@@ -25,7 +29,7 @@ export default async function Home() {
       _allProductsMeta {
         count
       }
-      allProducts {
+      allProducts(first:${limit}, skip:${skip}) {
         id
         title
         price
@@ -39,6 +43,7 @@ export default async function Home() {
   `;
 
   const { data: { allProducts, allBanners, _allProductsMeta } } = await performRequest({ query: PAGE_CONTENT_QUERY });
+  const productCount = _allProductsMeta.count;
   const OPTIONS: EmblaOptionsType = { direction: 'rtl', loop: true }
   const SLIDES = allBanners;
   return (
@@ -47,22 +52,27 @@ export default async function Home() {
         slides={SLIDES} 
         options={OPTIONS} 
       />
-      <div className={`products`}>
-        {allProducts.map((product : 
-          {id:string, title:string, price:number, slug:string, 
-            image: [{url:string, alt:string}]}
-          ) => (
-          <ProductItem
-            key={product?.id}
-            id={product?.id}
-            title={product?.title}
-            slug={product?.slug}
-            url={product?.image[0].url}
-            alt={product?.image[0].alt}
-            price={product?.price}
+      <div>
+        <div className={`products`}>
+          {allProducts.map((product : Product
+            ) => (
+            <ProductItem
+              key={product?.id}
+              id={product?.id}
+              title={product?.title}
+              slug={product?.slug}
+              url={product?.image[0].url}
+              alt={product?.image[0].alt}
+              price={product?.price}
+            />
+          )
+          )}
+        </div>
+        <Pagination
+          numberOfProducts={productCount}
+          currentPage={pageNumber}
+          maxItems={limit}
           />
-        )
-        )}
       </div>
     </section>
   )

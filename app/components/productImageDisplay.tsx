@@ -3,12 +3,12 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 import { ColumnsPhotoAlbum } from "react-photo-album";
 import "react-photo-album/columns.css";
-import styles from '@/app/style/product-page.module.scss'
+import styles from '@/app/style/product-page.module.scss';
 
 export function ProductImages({photos}: any ) {
 
   const [index, setIndex] = useState(0);
-  const handleClick = ({ index: current }:any) => {
+  const handleClick = ({ index: current }:{index:number}) => {
     setIndex(current);
   }
   const slides = photos.map((photo:any) => (

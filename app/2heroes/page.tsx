@@ -1,8 +1,10 @@
-import { performRequest } from '@/app/lib/datocms';
+import { performRequest, limit } from '@/app/lib/datocms';
+import { Product, SearchParams } from '@/app/lib/types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faInstagram, faXTwitter, faPatreon } from '@fortawesome/free-brands-svg-icons';
 import Image from 'next/image';
 import { ProductItem } from '../components/productItem';
+import Pagination from '@/app/components/pagination';
 import styles from './page.module.scss'
 
 export const metadata = {
@@ -15,35 +17,43 @@ export const metadata = {
     nocache: true,
     },
 }
-const PAGE_CONTENT_QUERY = `
-  query NecahualQuery {
-    necahual {
-      pageTitle
-      patreonDisclaimer
-      summary {
-        value
-      }
-      id
-      necahualImage {
-        url
-        alt
-      }
-    }
-    allProducts(filter: {fandoms: {eq: "Necahual"}}) {
-      id
-      title
-      slug
-      price
-      image {
-        alt
-        url
-      }
-    }
-  }
-`;
 
-export default async function TwoHeroes() {
-  const { data: { necahual, allProducts} } = await performRequest({ query: PAGE_CONTENT_QUERY });
+export default async function TwoHeroes({searchParams}: SearchParams) {
+
+  const pageNumber = Number.parseInt(searchParams?.page ?? '1');
+
+  const skip = pageNumber > 1 ? pageNumber * limit : 0;
+  const PAGE_CONTENT_QUERY = `
+    query NecahualQuery {
+      necahual {
+        pageTitle
+        patreonDisclaimer
+        summary {
+          value
+        }
+        id
+        necahualImage {
+          url
+          alt
+        }
+      }
+      allProducts(filter: {fandoms: {eq: "Necahual"}}, first:${limit}, skip:${skip}) {
+        id
+        title
+        slug
+        price
+        image {
+          alt
+          url
+        }
+      }
+      _allProductsMeta(filter: {fandoms: {eq: "Necahual"}}) {
+        count
+      }
+    }
+  `;
+  const { data: { necahual, allProducts, _allProductsMeta} } = await performRequest({ query: PAGE_CONTENT_QUERY });
+  const productCount = _allProductsMeta.count;
   const socialMedia = [
     {href: 'https://www.patreon.com/2heroes', label: 'Link to 2Heroes\' Patreon', icon: faPatreon},
     {href: 'https://www.instagram.com/2.heroes/', label: 'Link to 2Heroes\' Instagram', icon: faInstagram},
@@ -60,7 +70,9 @@ export default async function TwoHeroes() {
           width={500}
           height={500}
         />
-        <h2 className={`${styles.span3mobile} ${styles.necahual} ${styles.alignCenter}`}>Read it on <a className={`${styles.webtoons}`} href="https://www.webtoons.com/en/canvas/necahual/list?title_no=216820">Webtoons</a>!</h2>
+        <h2 className={`${styles.span3mobile} ${styles.necahual} ${styles.alignCenter}`}>
+          Read it on <a className={`${styles.webtoons}`} href="https://www.webtoons.com/en/canvas/necahual/list?title_no=216820">Webtoons</a>!
+        </h2>
         <p className={`${styles.span3mobile} ${styles.necahual}`}>{necahual?.summary?.value?.document?.children[0]?.children[0]?.value}</p>
         <h2 className={`${styles.span3mobile} ${styles.necahual} ${styles.alignCenter}`}>Support us on:</h2>
         {socialMedia.map((link) => (
@@ -71,9 +83,7 @@ export default async function TwoHeroes() {
       <section className={`${styles.merchSection}`}>
         <h1 className={`${styles.title}`} >Merch</h1>
         <div className={`products`}>
-        {allProducts.map((product : 
-        {id:string, title:string, price:number, slug:string, 
-          image: [{url:string, alt:string}]}
+        {allProducts.map((product : Product
         ) => (
           <ProductItem
             key={product?.id}
@@ -86,6 +96,11 @@ export default async function TwoHeroes() {
           />
         ))}
         </div>
+        <Pagination
+          numberOfProducts={productCount}
+          currentPage={pageNumber}
+          maxItems={limit}
+          />
       </section>
     </>
   )

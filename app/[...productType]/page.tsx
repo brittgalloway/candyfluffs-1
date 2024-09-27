@@ -1,9 +1,23 @@
-import { performRequest } from '@/app/lib/datocms';
+import { performRequest, limit } from '@/app/lib/datocms';
+import { Product } from '@/app/lib/types';
 import { ProductItem } from '@/app/components/productItem';
 import Dropdown from '@/app/components/dropdown';
+import Pagination from '@/app/components/pagination';
 
+type ParamTypes ={
+  params: {
+    productType:string[]
+  }
+  searchParams: {
+    page?:string
+  }
+}
 
-export default async function ProductsByType({ params }: any) {
+export default async function ProductsByType({ params, searchParams }: ParamTypes) {
+  const pageNumber = Number.parseInt(searchParams?.page ?? '1');
+  
+  const skip = pageNumber > 1 ? pageNumber * limit : 0;
+
   const productTypes = [
     'Book',
     'Print',
@@ -26,7 +40,8 @@ export default async function ProductsByType({ params }: any) {
     query ProductsQuery {
       allProducts(
           filter: {fandoms: {matches: {pattern: "${category}"}}, 
-          productType: {matches: {pattern: "${productType}"}}}
+          productType: {matches: {pattern: "${productType}"}}},
+          first:${limit}, skip:${skip}
         ) {
           id
         title
@@ -38,23 +53,32 @@ export default async function ProductsByType({ params }: any) {
           url
         }
       }
+      _allProductsMeta(
+          filter: {fandoms: {matches: {pattern: "${category}"}}, 
+          productType: {matches: {pattern: "${productType}"}}}
+          ) {
+            count
+          }
     }
   `;
-  const { data: { allProducts } } = await performRequest({ query: PAGE_CONTENT_QUERY });
+  const { data: { allProducts, _allProductsMeta } } = await performRequest({ query: PAGE_CONTENT_QUERY });
+  const productCount = _allProductsMeta.count;
   let fandomList:string[] = []
   allProducts.forEach((fandom:any) => {
     if (!fandomList.includes(fandom.fandoms)) {
       fandomList.push(fandom.fandoms);
     }
   })
+
   return (
     <section className="products">
-      <Dropdown
-        type={productType}
-        fandomList={fandomList}
-      />
-      {allProducts.map((product: { id: string, title: string, price: number, slug: string, 
-        image: [{ url: string, alt: string }] }) => (
+      { params.productType.length > 1 ? null:
+        <Dropdown
+          type={productType}
+          fandomList={fandomList}
+        />
+      }
+      {allProducts.map((product: Product) => (
         <ProductItem
           key={product?.id}
           id={product?.id}
@@ -65,6 +89,11 @@ export default async function ProductsByType({ params }: any) {
           price={product?.price}
         />
       ))}
+      <Pagination
+          numberOfProducts={productCount}
+          currentPage={pageNumber}
+          maxItems={limit}
+          />
     </section>
   );
 }

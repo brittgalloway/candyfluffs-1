@@ -1,8 +1,15 @@
 import Link from "next/link";
 import Image from "next/image";
 
-export function ProductItem({id, title, slug, url, alt, price}: 
-  {id: string, title: string, slug: string, url: string, alt: string, price: number}) {
+type ProductData = {
+  id: string, 
+  title: string, 
+  slug: string, 
+  url: string, 
+  alt: string, 
+  price: number
+}
+export function ProductItem({id, title, slug, url, alt, price}: ProductData) {
 
   const formatedPrice = price.toLocaleString("en-US", { style: "currency", currency: "USD" })
   return(
