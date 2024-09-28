@@ -40,43 +40,42 @@ export default function Pagination({ numberOfProducts, currentPage, maxItems }: 
       ? 1 + currentPage * maxItems
       : numberOfProducts;
   return (
-    <div className={``}>
-        <p className="">
+    <div id={`pagination`}>
+        <p className="page-results">
           Showing <span className="font-medium">{firstProductIndex}</span> to
           <span className="font-medium"> {lastProductIndex}</span> of
           <span className="font-medium"> {numberOfProducts}</span> results
         </p>
         <nav
-          className=""
           aria-label="Pagination"
         >
-          {currentPage !== 1 && (
             <button key={"decrease"}
               type="button"
               onClick={() => {
-                exportQueryParameters('page', (currentPage - 1).toString());
+                currentPage !== 1 ?
+                exportQueryParameters('page', (currentPage - 1).toString()) :
+                null;
               }}
-              className=""
+              className={`arrow-nav ${currentPage == 1 ? "inactive" : "active"}`}
             >
-              <span className="">Previous</span>
               <FontAwesomeIcon icon={faChevronLeft}/>
+              <span>Previous</span>
             </button>
-          )}
           {pageItems.map((item) => {
             return item;
           })}
-          {!(lastProductIndex === numberOfProducts) && (
             <button key={"increase"}
               type="button"
               onClick={() => {
-                exportQueryParameters('page', (currentPage + 1).toString());
-              }}
-              className=""
+                  {!(lastProductIndex === numberOfProducts) ?
+                  exportQueryParameters('page', (currentPage + 1).toString()):
+                  null;
+              }}}
+              className={`arrow-nav next ${(lastProductIndex === numberOfProducts) ? "inactive" : "active"}`}
             >
-              <span className="">Next</span>
+              <span>Next</span>
               <FontAwesomeIcon icon={faChevronRight}/>
             </button>
-          )}
         </nav>
     </div>
   );
