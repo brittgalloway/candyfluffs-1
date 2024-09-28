@@ -50,7 +50,7 @@ export function Header() {
           <button tabIndex={0} className="snipcart-customer-signin">
             <FontAwesomeIcon icon={faUser}/>
           </button>
-          <button tabIndex={0} className="snipcart-checkout">
+          <button tabIndex={0} className="snipcart-checkout shopping-icon">
             <FontAwesomeIcon icon={faBagShopping}/>
             <span className="snipcart-items-count"></span>
           </button>search

@@ -13,10 +13,10 @@ const socialMedia = [
   {href: 'https://x.com/candy_fluffs', label: 'Link to Candy Fluffs\' X', icon: faXTwitter},
 ];
 const paymentMethods = [
-  {alt: 'Visa', icon: faCcVisa},
-  {alt: 'Mastercard', icon: faCcMastercard},
-  {alt: 'Amerrican Express', icon: faCcAmex},
-  {alt: 'Paypay', icon: faCcPaypal},
+  {alt: 'Visa card logo', icon: faCcVisa},
+  {alt: 'Mastercard card logo', icon: faCcMastercard},
+  {alt: 'Amerrican Express card logo', icon: faCcAmex},
+  {alt: 'Paypal logo', icon: faCcPaypal},
 ];
 
 export function Footer() {
@@ -47,7 +47,7 @@ export function Footer() {
             </ul>
           </>
         )}
-      <div className='payment-methods'>
+      <div className='payment-methods' aria-label="A list of accepted payment methods.">
         {paymentMethods.map((paymethod) => (
           <span key={paymethod?.alt} aria-label={paymethod?.alt}><FontAwesomeIcon icon={paymethod?.icon} size="lg"/></span>
         ))}

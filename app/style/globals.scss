@@ -20,6 +20,7 @@
 --borderColor-buttonSecondary-hover: var(--highlight);
 --bgColor-buttonPrimary-hover: #fff;
 --bgColor-buttonSecondary-hover: #fff;
+--borderColor-buttonPrimary-hover:var(--highlight);
 
 // /* Active */
 --color-buttonPrimary-active: var(--highlight);
@@ -160,6 +161,7 @@ header {
       gap: 1rem;
       font-size: 1.25rem;
       justify-items: center;
+      align-items: center;
     }
     button {
       font-size: 1.25rem;
@@ -245,6 +247,43 @@ header {
 }
 main {
   max-width: 90%;
+}
+.snipcart-customer-signin {
+  width:2rem;
+  height: 2rem;
+  svg {
+    width: 100%;
+    height: 100%;
+  }
+}
+.shopping-icon {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  width:2rem;
+  height: 2rem;
+  color: var(--gray);
+  &:hover {
+    color: var(--highlight);
+  }
+  svg {
+    grid-column: 1/3;
+    grid-row: 1/3;
+    width: 100%;
+    height: 100%;
+  }
+  .snipcart-items-count {
+    grid-column: 2/3;
+    grid-row: 1/2;
+    background: var(--background);
+    border-radius: 50%;
+    border: 1px solid var(--highlight);
+    z-index: 2;
+    font-size: 1rem;
+    font-weight: 400;
+    text-align: center;
+    color: var(--gray);
+  }
 }
 footer {
   grid-row: 3/4;
