@@ -15,7 +15,7 @@ type ParamTypes ={
 export default async function ProductsByType({ params, searchParams }: ParamTypes) {
   const pageNumber = Number.parseInt(searchParams?.page ?? '1');
   
-  const skip = pageNumber > 1 ? limit : 0;
+  const skip = pageNumber > 1 ? limit * (pageNumber - 1) : 0;
   const productTypes = [
     'Book',
     'Print',

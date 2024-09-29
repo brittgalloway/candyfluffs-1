@@ -22,25 +22,17 @@ const navMobile = [
 ];
 
 export function Nav() {
-  const [isMounted, setIsMounted] = useState(false);
-  const [isOpen, setIsOpen] = useState(false); // State to track if the menu is open
-
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
+  const [isOpen, setIsOpen] = useState(false);
 
   const isMobile = useMediaQuery({
     query: '(max-width: 768px)',
   });
 
-  // Toggle the menu open/close state
+
   const handleMenuToggle = () => {
     setIsOpen(!isOpen);
   };
 
-  if (!isMounted) {
-    return null; 
-  } 
   return(
     <nav>
       {isOpen ? 

@@ -8,7 +8,7 @@ import Pagination from './components/pagination';
 export default async function Home({searchParams}: SearchParams) {
   const pageNumber = Number.parseInt(searchParams?.page ?? '1');
 
-  const skip = pageNumber > 1 ? limit : 0;
+  const skip = pageNumber > 1 ? limit * (pageNumber - 1) : 0;
 
   const PAGE_CONTENT_QUERY = `
     query ProductsQuery {

@@ -17,24 +17,13 @@ const socialMedia = [
   {href: 'https://x.com/candy_fluffs', label: 'Link to Candy Fluffs\' X', icon: faXTwitter},
 ];
 export function Header() {
-  const [isMounted, setIsMounted] = useState(false);
-
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
 
   const isMobile = useMediaQuery({
     query: '(max-width: 768px)',
   });
+
   return(
     <header>
-      {isMobile ? null : (
-        <div className={`social-links`}>
-          {socialMedia.map((link) => (
-            <a key={link.href} href={link.href} aria-label={link.label}><FontAwesomeIcon icon={link?.icon} size="lg"/></a>
-          ))}
-        </div>
-      )}
       <div className={`logo`}>
        <Link href='/'>
         <Image
@@ -46,6 +35,12 @@ export function Header() {
        </Link>
       </div>
       {isMobile ? null : (
+        <>
+        <div className={`social-links`}>
+          {socialMedia.map((link) => (
+            <a key={link.href} href={link.href} aria-label={link.label}><FontAwesomeIcon icon={link?.icon} size="lg"/></a>
+          ))}
+        </div>
         <div className={`shop-icons`}>
           <button tabIndex={0} className="snipcart-customer-signin">
             <FontAwesomeIcon icon={faUser}/>
@@ -55,6 +50,7 @@ export function Header() {
             <span className="snipcart-items-count"></span>
           </button>
         </div>
+        </>
       )}
       <p className={'tagline'}>
         Just a girl who likes to draw manga (ㆁᴗㆁ✿)

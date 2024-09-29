@@ -22,7 +22,7 @@ export default async function TwoHeroes({searchParams}: SearchParams) {
 
   const pageNumber = Number.parseInt(searchParams?.page ?? '1');
 
-  const skip = pageNumber > 1 ? limit : 0;
+  const skip = pageNumber > 1 ? limit * (pageNumber - 1) : 0;
   
   const PAGE_CONTENT_QUERY = `
     query NecahualQuery {
