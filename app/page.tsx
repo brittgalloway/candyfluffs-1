@@ -47,12 +47,11 @@ export default async function Home({searchParams}: SearchParams) {
   const OPTIONS: EmblaOptionsType = { direction: 'rtl', loop: true }
   const SLIDES = allBanners;
   return (
-    <section>      
+    <>      
       <Slider 
         slides={SLIDES} 
         options={OPTIONS} 
       />
-      <div>
         <div className={`products`}>
           {allProducts.map((product : Product
             ) => (
@@ -73,7 +72,6 @@ export default async function Home({searchParams}: SearchParams) {
           currentPage={pageNumber}
           maxItems={limit}
           />
-      </div>
-    </section>
+    </>
   )
 }

@@ -1,14 +1,14 @@
 'use client'
 import React, { useEffect, useState } from 'react';
 import { useMediaQuery } from 'react-responsive';
-import Link from 'next/link';
-import { Nav } from './nav';
 import Image from 'next/image';
+import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBagShopping, faUser } from '@fortawesome/free-solid-svg-icons';
 import { 
   faInstagram, faXTwitter, faTumblr
- } from '@fortawesome/free-brands-svg-icons';
+} from '@fortawesome/free-brands-svg-icons';
+import { Nav } from './nav';
 import Logo from '@/public/logo.jpg'
 
 const socialMedia = [
@@ -53,7 +53,7 @@ export function Header() {
           <button tabIndex={0} className="snipcart-checkout shopping-icon">
             <FontAwesomeIcon icon={faBagShopping}/>
             <span className="snipcart-items-count"></span>
-          </button>search
+          </button>
         </div>
       )}
       <p className={'tagline'}>

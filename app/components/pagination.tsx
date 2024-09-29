@@ -36,8 +36,8 @@ export default function Pagination({ numberOfProducts, currentPage, maxItems }: 
 
   const firstProductIndex = 1 + (currentPage - 1) * maxItems;
   const lastProductIndex =
-    1 + currentPage * maxItems < numberOfProducts
-      ? 1 + currentPage * maxItems
+      currentPage * maxItems < numberOfProducts
+      ? currentPage * maxItems
       : numberOfProducts;
   return (
     <div id={`pagination`}>

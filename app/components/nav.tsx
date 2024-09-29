@@ -70,7 +70,6 @@ export function Nav() {
             onKeyDown={handleMenuToggle}
             tabIndex={1}
             />
-          <span>Search</span>
           <span className="snipcart-checkout shopping-icon">
             <FontAwesomeIcon icon={faBagShopping}/>
             <span className="snipcart-items-count"></span>

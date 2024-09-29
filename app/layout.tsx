@@ -43,7 +43,6 @@ export default function RootLayout({
           `
         }}/>
       </head>
-      {/* </Script> */}
 
       <body className={lato.className}>
         <Header />

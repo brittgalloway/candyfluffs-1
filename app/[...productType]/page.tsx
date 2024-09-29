@@ -72,29 +72,31 @@ export default async function ProductsByType({ params, searchParams }: ParamType
   })
 
   return (
-    <section className="products">
-      { params.productType.length > 1 ? null:
-        <Dropdown
-          type={productType}
-          fandomList={fandomList}
-        />
-      }
-      {allProducts.map((product: Product) => (
-        <ProductItem
-          key={product?.id}
-          id={product?.id}
-          title={product?.title}
-          slug={product?.slug}
-          url={product?.image[0]?.url}
-          alt={product?.image[0]?.alt}
-          price={product?.price}
-        />
-      ))}
+    <>
+      <div className="products">
+        { params.productType.length > 1 || !productTypes.includes(params.productType[0]) ? null:
+          <Dropdown
+            type={productType}
+            fandomList={fandomList}
+          />
+        }
+        {allProducts.map((product: Product) => (
+          <ProductItem
+            key={product?.id}
+            id={product?.id}
+            title={product?.title}
+            slug={product?.slug}
+            url={product?.image[0]?.url}
+            alt={product?.image[0]?.alt}
+            price={product?.price}
+          />
+        ))}
+      </div>
       <Pagination
           numberOfProducts={productCount}
           currentPage={pageNumber}
           maxItems={limit}
           />
-    </section>
+    </>
   );
 }
