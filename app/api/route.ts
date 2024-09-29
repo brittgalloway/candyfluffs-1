@@ -7,7 +7,7 @@ const getStock = async () => {
     method: 'GET',
     headers: {
       Accept: 'application/json',
-      Authorization: `Basic ${process.env.API_AUTH}`,
+      Authorization: `Basic ${process.env.BASE64_ENCODED_SECRET_API_KEY}`,
       'content-type': 'application/json'
     }
   };

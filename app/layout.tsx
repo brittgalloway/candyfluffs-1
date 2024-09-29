@@ -43,7 +43,6 @@ export default function RootLayout({
           `
         }}/>
       </head>
-
       <body className={lato.className}>
         <Header />
         <main>{children}</main>
