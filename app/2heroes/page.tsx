@@ -1,11 +1,11 @@
+import Image from 'next/image';
 import { performRequest, limit } from '@/app/lib/datocms';
 import { Product, SearchParams } from '@/app/lib/types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faInstagram, faXTwitter, faPatreon } from '@fortawesome/free-brands-svg-icons';
-import Image from 'next/image';
-import { ProductItem } from '../components/productItem';
+import { ProductItem } from '@/app/components/productItem';
 import Pagination from '@/app/components/pagination';
-import styles from './page.module.scss'
+import styles from './page.module.scss';
 
 export const metadata = {
   title: 'Candy Fluffs | Necahual',

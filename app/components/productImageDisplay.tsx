@@ -1,8 +1,8 @@
-'use client'
+'use client';
 import React, { useState } from 'react';
 import Image from 'next/image';
-import { ColumnsPhotoAlbum } from "react-photo-album";
-import "react-photo-album/columns.css";
+import { ColumnsPhotoAlbum } from 'react-photo-album';
+import 'react-photo-album/columns.css';
 import styles from '@/app/style/product-page.module.scss';
 
 export function ProductImages({photos}: any ) {

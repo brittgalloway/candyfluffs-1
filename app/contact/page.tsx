@@ -1,4 +1,4 @@
-import styles from './page.module.scss'
+import styles from './page.module.scss';
 
 export default function Contact() {
   return (
@@ -11,6 +11,5 @@ export default function Contact() {
             src="https://us16.list-manage.com/contact-form?u=f0ccd4aae40398b03156934fd&form_id=a52d1c81b8d8ff1a843eaa0798c8941e">
         </iframe>
     </section>
-
   )
 } 

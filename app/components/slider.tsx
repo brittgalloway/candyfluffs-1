@@ -1,11 +1,11 @@
-'use client'
-import React, { FC } from 'react'
-import { EmblaOptionsType } from 'embla-carousel'
-import { DotButton, useDotButton } from './sliderDots'
-import useEmblaCarousel from 'embla-carousel-react'
-import Autoplay from 'embla-carousel-autoplay'
-import '../style/slider.scss'
-import Image from 'next/image'
+'use client';
+import React, { FC } from 'react';
+import Image from 'next/image';
+import { EmblaOptionsType } from 'embla-carousel';
+import { DotButton, useDotButton } from './sliderDots';
+import useEmblaCarousel from 'embla-carousel-react';
+import Autoplay from 'embla-carousel-autoplay';
+import '../style/slider.scss';
 
 type PropType = {
   slides: any[]

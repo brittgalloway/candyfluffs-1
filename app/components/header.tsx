@@ -1,5 +1,4 @@
-'use client'
-import React, { useEffect, useState } from 'react';
+'use client';
 import { useMediaQuery } from 'react-responsive';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -9,7 +8,8 @@ import {
   faInstagram, faXTwitter, faTumblr
 } from '@fortawesome/free-brands-svg-icons';
 import { Nav } from './nav';
-import Logo from '@/public/logo.jpg'
+import Logo from '@/public/logo.jpg';
+import '@/app/style/header.scss';
 
 const socialMedia = [
   {href: 'https://candy-fluffs.tumblr.com/', label: 'Link to Candy Fluffs\' Tumblr', icon: faTumblr},

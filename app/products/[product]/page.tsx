@@ -1,6 +1,6 @@
 import { performRequest } from '@/app/lib/datocms';
 import { ProductImages } from '@/app/components/productImageDisplay';
-import styles from '../../style/product-page.module.scss'
+import styles from '@/app/style/product-page.module.scss';
 
 export default async function Product({ params }: any) {
   const PAGE_CONTENT_QUERY = `
@@ -31,8 +31,8 @@ export default async function Product({ params }: any) {
     }
   `;
   const { data: { product } } = await performRequest({ query: PAGE_CONTENT_QUERY });
-  // const domain = process.env.NODE_ENV == 'development' ? 'https://deploy-preview-22--candyfluffsdemo.netlify.app' 
-  //   : 'https://www.candyfluffs.com/';
+  const domain = process.env.NODE_ENV == 'development' ? 'https://deploy-preview-22--candyfluffsdemo.netlify.app' 
+    : 'https://www.candyfluffs.com';
   const formatedPrice = product?.price.toLocaleString("en-US", { style: "currency", currency: "USD" });
 
   function handleVariantion() {
@@ -67,7 +67,7 @@ export default async function Product({ params }: any) {
             data-item-price={product?.price}
             data-item-description={product?.description}
             data-item-name={product?.title}
-            data-item-url='/'
+            data-item-url={`${domain}/${params.product}`}
             data-item-custom1-name="Select one"
             data-item-custom1-options={handleVariantion()}
             >
@@ -81,7 +81,7 @@ export default async function Product({ params }: any) {
       data-item-price={product?.price}
       data-item-description={product?.description}
       data-item-name={product?.title}
-      data-item-url='/'
+      data-item-url={`${domain}/${params.product}`}
       >
         Add to cart
       </button>

@@ -1,4 +1,4 @@
-'use client'
+'use client';
 import { useMediaQuery } from 'react-responsive';
 import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -6,6 +6,7 @@ import {
   faInstagram, faXTwitter, faTumblr,
   faCcVisa, faCcMastercard, faCcAmex, faCcPaypal
  } from '@fortawesome/free-brands-svg-icons';
+ import '@/app/style/footer.scss';
 
 const socialMedia = [
   {href: 'https://candy-fluffs.tumblr.com/', label: 'Link to Candy Fluffs\' Tumblr', icon: faTumblr},

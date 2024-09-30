@@ -1,0 +1,108 @@
+.product-item {
+  display: grid;
+  border-radius: var(--radius);
+  overflow: hidden;
+  grid-template-columns: 1fr;
+  grid-template-rows: 6fr auto 1fr;
+  width: 100%;
+  align-items: start;
+  .overlay {
+    display: none;
+  }
+  #soldOut {
+    grid-column: 1/2;
+    grid-row: 1/2;
+    width: 100%;
+    height: 100%;
+    background: rgb(255, 255, 255, .75);
+    color: var(--warn-highlight);
+    font-size: 2rem;
+    font-weight: 700;
+    align-content: center;
+    text-align: center;
+  }
+  img {
+    grid-column: 1/2;
+    grid-row: 1/2;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1/1;
+  }
+  &:hover,
+  &:focus-visible {
+    text-decoration: none;
+    color: #222;
+    font-weight: 700;
+    box-shadow: 0 0 10px 2px var(--faded-highlight);
+    .overlay {
+      display: block;
+      grid-column: 1/2;
+      grid-row: 1/2;
+      width: 100%;
+      height: 100%;
+      background: var(--background);
+      z-index: 2;
+      opacity: 15%;
+    }
+    
+  }
+  &:focus-visible {
+    outline-color: var(--highlight);
+  }
+  @media (width >= 550px) {
+    grid-template-rows: repeat(4, auto);
+    max-width: 400px;
+    max-height: 400px;    
+    min-width: 200px;
+    min-height: 200px;  
+    justify-items: center; 
+    text-align: center;
+    &:has(#soldOut) {
+      &:hover {
+        cursor: default;
+      }
+    }
+    img {
+      grid-row: 1/5;
+      grid-column: 1/2;
+    } 
+    #soldOut {
+      grid-row: 1/5;
+      justify-self: center;
+      z-index: 4;
+      p {
+        margin: auto;
+      }
+    }
+    .product-title {
+      display: none;
+      grid-row: 2/3;
+      grid-column: 1/2;
+      font-size: 2rem;
+      font-weight: 400;
+      max-width: 90%;
+    }
+    .product-price {
+      display: none;
+      grid-column: 1/2;
+      grid-row: 3/4;
+      font-size: 1.5rem;
+    }
+    &:hover,
+    &:focus-visible {
+      .product-title,
+      .product-price {
+        display: block;
+        z-index: 3;
+      }
+      .overlay {
+        grid-column: 1/2;
+        grid-row: 1/5;
+        opacity: 85%;
+      }
+    }
+  }
+  p {
+    max-width: 150px;
+  }
+}

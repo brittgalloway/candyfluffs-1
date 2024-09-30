@@ -3,6 +3,7 @@ import { Product } from '@/app/lib/types';
 import { ProductItem } from '@/app/components/productItem';
 import Dropdown from '@/app/components/dropdown';
 import Pagination from '@/app/components/pagination';
+
 type ParamTypes ={
   params: {
     productType:string[]

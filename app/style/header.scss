@@ -1,0 +1,142 @@
+header {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(2, auto);
+  justify-items: center;
+  margin-top: 2rem;
+  p {
+    color: var(--highlight);
+  }
+  img {
+    mix-blend-mode: multiply;
+  }
+  @media ( width >= 550px ) {
+    grid-template-columns: 1fr 2fr 1fr;
+    gap: 1rem;
+    grid-template-areas: 
+    "logo logo logo" 
+    "social tag shop"
+    "nav nav nav";
+    .logo{
+      grid-area: logo;
+      grid-column: span 3;
+      justify-self: center;
+    }
+    .tagline{
+      grid-area: tag;
+    }
+    .social-links {
+      grid-area: social;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      font-size: 1.25rem;
+      a {
+        transform: scale(1);
+        color: var(--gray);
+        &:hover,
+        &:active,
+        &:focus {
+          cursor: pointer;
+          transform: scale(1.2);
+          color: var(--highlight);
+        }
+      }
+    }
+    .shop-icons {
+      grid-area: shop;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      font-size: 1.25rem;
+      justify-items: center;
+      align-items: center;
+    }
+    button {
+      font-size: 1.25rem;
+      transform: scale(1);
+      border: none;
+      background: transparent;
+      color: var(--gray);
+      &:hover,
+      &:active,
+      &:focus {
+        cursor: pointer;
+        transform: scale(1.2);
+        color: var(--highlight);
+      }
+    }
+  }
+  nav {
+    border-top: 2px solid var(--faded-highlight);
+    border-bottom: 1px solid var(--faded-highlight);
+    width: 100%;
+    z-index: 10;
+    position: fixed;
+    bottom: 0;
+    background: var(--background);
+    ul {
+      list-style: none;
+      text-align: center;
+      display: grid;
+      gap: 1rem;
+      padding-block: 1rem;
+    }
+    li,
+    li > a {
+      font-size: 1.5rem;
+      color: #222;
+      &:hover,
+      &:focus,
+      &:focus-visible {
+        display: block;
+        width: 100%;
+        background-color: var(--highlight);
+        color: white;
+        font-weight: 600;
+        border:none;
+        outline: none;
+      }
+    }
+    @media ( width >= 550px ) {
+      grid-area: nav;
+      position: static;
+      ul {
+        grid-template-columns: repeat(7, 1fr);
+        grid-template-rows: 1fr;
+        li {
+          &:hover,
+          &:focus,
+          &:focus-visible {
+            background-color: transparent;
+            color: #222;
+            font-weight: 400;
+          }
+        }
+        li > a {
+          &:hover,
+          &:focus,
+          &:focus-visible {
+            background-color: transparent;
+            color: var(--highlight);
+            font-weight: 600;
+            text-decoration: underline;
+          }
+        }
+      }
+    }
+    .mobile-menu {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap:1rem;
+      padding: 1rem;
+      .shopping-icon {
+        justify-self: end;
+      }
+      img {
+        justify-self: start;
+      }
+    }
+  }
+}

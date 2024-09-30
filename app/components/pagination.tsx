@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronRight, faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { Pageinate } from '@/app/lib/types';
+import '@/app/style/paginate.scss';
 
 export default function Pagination({ numberOfProducts, currentPage, maxItems }: Pageinate) {
   const router = useRouter();
