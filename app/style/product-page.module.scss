@@ -58,6 +58,12 @@
   font-size: 1.25rem;
   margin-top: 1rem;
   width: 100%;
+  &:hover {
+    cursor: pointer;
+    border: 2px solid var(--faded-highlight);
+    background: var(--highlight);
+    color: white;
+  }
   @media (width >= 550px) {
     grid-column: 2/3;
     grid-row: 4/5;

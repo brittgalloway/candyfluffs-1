@@ -67,7 +67,7 @@ export default async function Product({ params }: any) {
             data-item-price={product?.price}
             data-item-description={product?.description}
             data-item-name={product?.title}
-            data-item-url={`${domain}/${params.product}`}
+            data-item-url={`${domain}/products/${params.product}`}
             data-item-custom1-name="Select one"
             data-item-custom1-options={handleVariantion()}
             >
@@ -77,12 +77,12 @@ export default async function Product({ params }: any) {
         </>
       : 
       <button className={`snipcart-add-item ${styles.add}`}
-      data-item-id={product?.id}
-      data-item-price={product?.price}
-      data-item-description={product?.description}
-      data-item-name={product?.title}
-      data-item-url={`${domain}/${params.product}`}
-      >
+        data-item-id={product?.id}
+        data-item-price={product?.price}
+        data-item-description={product?.description}
+        data-item-name={product?.title}
+        data-item-url={`${domain}/products/${params.product}`}
+        >
         Add to cart
       </button>
     }
