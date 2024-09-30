@@ -211,6 +211,10 @@ a {
 .snipcart-modal__close-icon {
   color: var(--highlight) !important;
 }
+.snipcart-base-button__label,
+.snipcart-base-button__icon {
+  color: #fff;
+}
 .snipcart-button-icon.is-secondary {
   color: var(--highlight);
   background-color: #fff;

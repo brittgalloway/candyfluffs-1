@@ -74,7 +74,7 @@ export default async function ProductsByType({ params, searchParams }: ParamType
 
   return (
     <>
-      <div className="products">
+      <div className="products" id="products">
         { params.productType.length > 1 || !productTypes.includes(params.productType[0]) ? null:
           <Dropdown
             type={productType}

@@ -13,7 +13,7 @@ export default function Pagination({ numberOfProducts, currentPage, maxItems }: 
   function exportQueryParameters(key: string, value: string) {
     const params = new URLSearchParams(searchParams.toString());
     params.set(key, value);
-    router.push(`?${params.toString()}`);
+    router.push(`?${params.toString()}&#products`);
   }
 
   for (let i = 1; i <= numberOfProducts; i += maxItems) {

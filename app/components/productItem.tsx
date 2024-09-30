@@ -29,21 +29,35 @@ export async function ProductItem({id, title, slug, url, alt, price}: ProductDat
   const isSoldOut = data.totalStock == 0 ?  true : false;
 
   return(
-    <Link href={`products/${slug}`} id={id} className="product-item">
-      { isSoldOut ?  
+    <>
+    { isSoldOut ?  (
+      <div id={id} className="product-item">
         <div id="soldOut">
           <p>Sold Out</p>
         </div>
-      : null}
-      <div className="overlay" />
-      <Image 
-        src={url}
-        alt={alt}
-        width={250}
-        height={250}
+        <div className="overlay" />
+        <Image 
+          src={url}
+          alt={alt}
+          width={250}
+          height={250}
         />
         <p className="product-title">{title}</p>
         <p className="product-price">{formatedPrice}</p>
-    </Link>
+      </div>
+      ) : (
+        <Link href={`products/${slug}`} id={id} className="product-item">
+          <div className="overlay" />
+          <Image 
+            src={url}
+            alt={alt}
+            width={250}
+            height={250}
+          />
+          <p className="product-title">{title}</p>
+          <p className="product-price">{formatedPrice}</p>
+        </Link>
+      )}
+    </>
   )
 }

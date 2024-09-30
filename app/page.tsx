@@ -52,7 +52,7 @@ export default async function Home({searchParams}: SearchParams) {
         slides={SLIDES} 
         options={OPTIONS} 
       />
-        <div className={`products`}>
+        <div className={`products`} id="products">
           {allProducts.map((product : Product
             ) => (
             <ProductItem

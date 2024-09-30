@@ -82,7 +82,7 @@ export default async function TwoHeroes({searchParams}: SearchParams) {
         <p className={`${styles.span3mobile} ${styles.necahual}`}><small>{necahual?.patreonDisclaimer}</small></p>
       </section>
       <section className={`${styles.merchSection}`}>
-        <h1 className={`${styles.title}`} >Merch</h1>
+        <h1 className={`${styles.title}`} id="products" >Merch</h1>
         <div className={`products`}>
         {allProducts.map((product : Product
         ) => (
