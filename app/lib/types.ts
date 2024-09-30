@@ -17,7 +17,7 @@ export type Pageinate = {
   maxItems: number;
 }
 
-export type SearchParams ={
+export type SearchParams = {
   searchParams: {
     page?:string
   }

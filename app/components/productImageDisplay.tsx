@@ -22,7 +22,7 @@ export function ProductImages({photos}: any ) {
     <div className={`${styles.imageWrapper}`}>
       <Image 
         className={`${styles.largeDisplay}`}
-        key= {photos[index]}
+        key= {photos[index]?.url}
         src= {photos[index]?.url}
         width={500}
         height={500}

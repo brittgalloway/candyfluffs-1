@@ -214,6 +214,9 @@ a {
 .snipcart-base-button__label,
 .snipcart-base-button__icon {
   color: #fff;
+  &:hover {
+    color: var(--highlight) !important;
+  }
 }
 .snipcart-button-icon.is-secondary {
   color: var(--highlight);

@@ -32,7 +32,8 @@ export default async function Product({ params }: any) {
   `;
   const { data: { product } } = await performRequest({ query: PAGE_CONTENT_QUERY });
   const domain = process.env.NODE_ENV != 'production' ? 'https://deploy-preview-22--candyfluffsdemo.netlify.app' 
-    : 'https://www.candyfluffs.com';
+    : 'https://deploy-preview-22--candyfluffsdemo.netlify.app';
+    // : 'https://www.candyfluffs.com';
   const formatedPrice = product?.price.toLocaleString("en-US", { style: "currency", currency: "USD" });
 
   function handleVariantion() {
