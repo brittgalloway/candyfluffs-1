@@ -31,8 +31,9 @@ export default async function Product({ params }: any) {
     }
   `;
   const { data: { product } } = await performRequest({ query: PAGE_CONTENT_QUERY });
-  const domain = process.env.NODE_ENV == 'development' ? 'https://deploy-preview-22--candyfluffsdemo.netlify.app' 
-    : 'https://www.candyfluffs.com';
+  const domain = process.env.NODE_ENV == 'development' ? 'deploy-preview-22--candyfluffsdemo.netlify.app' 
+    : 'deploy-preview-22--candyfluffsdemo.netlify.app';
+    // : 'https://www.candyfluffs.com';
   const formatedPrice = product?.price.toLocaleString("en-US", { style: "currency", currency: "USD" });
 
   function handleVariantion() {
