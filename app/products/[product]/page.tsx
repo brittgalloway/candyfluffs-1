@@ -11,7 +11,6 @@ export default async function Product({ params }: any) {
         description(markdown: true)
         price
         size
-        slug
         title
         image {
           alt
@@ -32,7 +31,8 @@ export default async function Product({ params }: any) {
     }
   `;
   const { data: { product } } = await performRequest({ query: PAGE_CONTENT_QUERY });
-
+  // const domain = process.env.NODE_ENV == 'development' ? 'https://deploy-preview-22--candyfluffsdemo.netlify.app' 
+  //   : 'https://www.candyfluffs.com/';
   const formatedPrice = product?.price.toLocaleString("en-US", { style: "currency", currency: "USD" });
 
   function handleVariantion() {
@@ -67,19 +67,21 @@ export default async function Product({ params }: any) {
             data-item-price={product?.price}
             data-item-description={product?.description}
             data-item-name={product?.title}
+            data-item-url='/'
             data-item-custom1-name="Select one"
             data-item-custom1-options={handleVariantion()}
-          >
+            >
             Add to cart
           </button >
           <p className={`${styles.cartInstruction}`}>*You can select which one you want in the cart.</p>
         </>
       : 
       <button className={`snipcart-add-item ${styles.add}`}
-        data-item-id={product?.id}
-        data-item-price={product?.price}
-        data-item-description={product?.description}
-        data-item-name={product?.title}
+      data-item-id={product?.id}
+      data-item-price={product?.price}
+      data-item-description={product?.description}
+      data-item-name={product?.title}
+      data-item-url='/'
       >
         Add to cart
       </button>
