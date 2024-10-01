@@ -139,4 +139,32 @@ header {
       }
     }
   }
+  
+}
+.shopping-icon {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
+  width:2rem;
+  height: 2rem;
+  color: var(--gray);
+  align-items: self-end;
+  &:hover {
+    color: var(--highlight);
+  }
+  svg {
+    grid-column: 1/2;
+    grid-row: 1/2;
+    width: 100%;
+    height: 100%;
+  }
+  .snipcart-items-count {
+    grid-column: 1/2;
+    grid-row: 1/2;
+    z-index: 2;
+    font-size: 1rem;
+    font-weight: 400;
+    text-align: center;
+    color: white;
+  }
 }

@@ -33,7 +33,7 @@ export default async function Links() {
   <section className={``}>
     <h1>My Links!</h1>
     <nav aria-label='Links to CandyFluffs.com and various social media.'>
-      <ul>
+      <ul id="links">
         {allLinkPages.map((link:Link) => (
           <li key={link.id}>
             <a href={link.url}>{link.label}</a>

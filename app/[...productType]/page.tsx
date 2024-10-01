@@ -15,7 +15,7 @@ type ParamTypes ={
 
 export default async function ProductsByType({ params, searchParams }: ParamTypes) {
   const pageNumber = Number.parseInt(searchParams?.page ?? '1');
-  
+
   const skip = pageNumber > 1 ? limit * (pageNumber - 1) : 0;
   const productTypes = [
     'Book',
@@ -27,13 +27,13 @@ export default async function ProductsByType({ params, searchParams }: ParamType
   ];
   if( params.productType.length > 1 ) {
     var productType = params.productType[0];
-    var category = params.productType[1];
+    var category = params.productType[1].replace('-',' ');
       } else if(productTypes.includes(params.productType[0])) {
     productType = params.productType[0];
     category = "";
   } else {
     productType = "";
-    category = params.productType[0];
+    category = params.productType[0].replace('-',' ');
   }
   const PAGE_CONTENT_QUERY = `
     query ProductsQuery {

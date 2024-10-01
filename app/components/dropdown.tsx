@@ -15,9 +15,6 @@ export default function Dropdown(
       const $categoryList = document.getElementById("category");
       $categoryList?.toggleAttribute('hidden');
     }
-    const fandomSlugs = fandomList.map((fandom) =>{
-      fandom.replace(' ', '-');
-    })
   return(
     <nav id='category-menu' 
       aria-label='Click to open and filter by subject category instead.'>
@@ -29,7 +26,7 @@ export default function Dropdown(
       <ul id="category" hidden>
         {fandomList.map((fandom) => (
           <li key={fandom}>
-            <Link href={`/${type}/${fandom}`}>
+            <Link href={`/${type}/${fandom.replace(' ','-')}`}>
               {fandom}
             </Link>
           </li>
