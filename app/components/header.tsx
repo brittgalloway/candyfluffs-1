@@ -1,7 +1,7 @@
 'use client';
-import { useMediaQuery } from 'react-responsive';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useMediaQuery } from 'react-responsive';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBagShopping, faUser } from '@fortawesome/free-solid-svg-icons';
 import { 
@@ -23,17 +23,15 @@ export function Header() {
   });
 
   return(
-    <header>
-      <div className={`logo`}>
-       <Link href='/'>
-        <Image
-          src={Logo}
-          alt="Candy Fluffs logo with cotton candy next to the text."
-          width={300}
-          height={177}
-        />
-       </Link>
-      </div>
+    <header suppressHydrationWarning={true}>
+      <Link href='/' className={`logo`}>
+      <Image
+        src={Logo}
+        alt="Candy Fluffs logo with cotton candy next to the text."
+        width={300}
+        height={177}
+      />
+      </Link>
       {isMobile ? null : (
         <>
         <div className={`social-links`}>

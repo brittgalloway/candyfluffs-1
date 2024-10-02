@@ -25,6 +25,7 @@ header {
     }
     .tagline{
       grid-area: tag;
+      color:var(--highlight);
     }
     .social-links {
       grid-area: social;

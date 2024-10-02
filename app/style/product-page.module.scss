@@ -21,7 +21,16 @@
     max-width: 400px;
   }
 }
-
+.photoRow {
+  display: flex;
+  width: 100%;
+  overflow-x: scroll;
+  gap:10px;
+  border-radius: var(--radius);
+  img {
+    object-fit: cover;
+  }
+}
 .main {
   display: grid;
   grid-template-columns: 1fr;

@@ -157,24 +157,7 @@ a {
     max-width: 996px;
   }
 }
-.react-photo-album--image {
-  width: 100px !important;
-  height: 100px !important;
-}
-.react-photo-album--columns{
-  max-width: 300px;
-  overflow-x: scroll;
-  gap:5px;
-  justify-content: start !important;
-  width: 100%;
-  border-radius: var(--radius);
-  @media (width >= 550px) {
-    max-width: 400px;
-  }
-}
-.react-photo-album--track {
-  width: 100px !important;
-}
+
 .snipcart-modal__close-icon, 
 .snipcart-cart-header__icon,
 .snipcart-modal__close-icon {
