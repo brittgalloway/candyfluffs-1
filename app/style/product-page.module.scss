@@ -24,11 +24,13 @@
 .photoRow {
   display: flex;
   width: 100%;
+  max-width: 350px;
   overflow-x: scroll;
   gap:10px;
   border-radius: var(--radius);
   img {
     object-fit: cover;
+    cursor: pointer;
   }
 }
 .main {
