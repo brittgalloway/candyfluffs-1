@@ -113,7 +113,6 @@ main {
 }
 @media( width >= 550px ) {
   .snipcart-customer-signin {
-  
     width:2rem;
     height: 2rem;
     svg {
@@ -143,7 +142,6 @@ a {
     text-decoration: underline;
   }
 }
-
 .products {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -193,4 +191,46 @@ a {
   color: var(--highlight);
   background-color: #fff;
   border: 1px solid var(--highlight);
+}
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+#spinner {
+  color: var(--highlight);
+  font-size: 5rem;
+  margin: 4rem;
+  animation: rotate 2s linear infinite;
+}
+#errorH2 {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 300;
+  margin-block: 1rem;
+}
+#errorSpan {
+  text-align: center;
+  font-size: 3rem;
+  display: block;
+}
+#errorButton {
+  display: block;
+  max-width: 200px;
+  border-radius: var(--radius);
+  background: var(--background);
+  padding: .5rem 1rem;
+  font-size: 1.25rem;
+  margin: 2rem auto;
+  width: 100%;
+  color: #222;
+  &:hover {
+    cursor: pointer;
+    border: 2px solid var(--faded-highlight);
+    background: var(--highlight);
+    color: white;
+  }
 }

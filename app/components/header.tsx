@@ -42,10 +42,10 @@ export function Header() {
           ))}
         </div>
         <div className={`shop-icons`}>
-          <button tabIndex={0} className="snipcart-customer-signin">
+          <button tabIndex={0} className="snipcart-customer-signin" aria-label='Your Account'>
             <FontAwesomeIcon icon={faUser}/>
           </button>
-          <button tabIndex={0} className="snipcart-checkout shopping-icon">
+          <button tabIndex={0} className="snipcart-checkout shopping-icon" aria-label='Checkout'>
             <span className="snipcart-items-count"></span>
             <FontAwesomeIcon icon={faBagShopping}/>
           </button>

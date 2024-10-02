@@ -31,8 +31,9 @@ export default async function Product({ params }: any) {
     }
   `;
   const { data: { product } } = await performRequest({ query: PAGE_CONTENT_QUERY });
-  const domain = process.env.NODE_ENV == 'development' ? 'https://deploy-preview-22--candyfluffsdemo.netlify.app' 
-    : 'https://www.candyfluffs.com';
+  const domain = 'https://deploy-preview-22--candyfluffsdemo.netlify.app';
+  // const domain = process.env.NODE_ENV == 'development' ? 'https://deploy-preview-22--candyfluffsdemo.netlify.app' 
+  //   : 'https://www.candyfluffs.com';
   const formatedPrice = product?.price.toLocaleString("en-US", { style: "currency", currency: "USD" });
 
   function handleVariantion() {
@@ -52,11 +53,19 @@ export default async function Product({ params }: any) {
     return `${options}|${product.title}`;
   }
 
+  const photos = product?.image.map((photo:any)=>(
+    {
+      src: photo?.url,
+      width: 100,
+      height: 100,
+      alt: photo?.alt
+    }
+  ))
   return (
     <section className={`${styles.main}`}>
       <h1>{product?.title}</h1>
       <ProductImages
-        photos={product?.image}
+        photos={photos}
       />
       <p className={`${styles.price}`}>{formatedPrice}</p>
       <div className={`${styles.description}`} dangerouslySetInnerHTML={{__html:product?.description}}/>

@@ -46,7 +46,7 @@ export async function ProductItem({id, title, slug, url, alt, price}: ProductDat
         <p className="product-price">{formatedPrice}</p>
       </div>
       ) : (
-        <Link href={`products/${slug}`} id={id} className="product-item">
+        <Link href={`/products/${slug}`} id={id} className="product-item">
           <div className="overlay" />
           <Image 
             src={url}
