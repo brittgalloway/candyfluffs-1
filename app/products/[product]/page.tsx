@@ -31,7 +31,6 @@ export default async function Product({ params }: any) {
     }
   `;
   const { data: { product } } = await performRequest({ query: PAGE_CONTENT_QUERY });
-  // const domain = 'https://deploy-preview-22--candyfluffsdemo.netlify.app';
   const domain = process.env.NODE_ENV == 'development' ? 'https://deploy-preview-22--candyfluffsdemo.netlify.app' 
     : '';
   const formatedPrice = product?.price.toLocaleString("en-US", { style: "currency", currency: "USD" });
