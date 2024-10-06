@@ -121,6 +121,7 @@ header {
             background-color: transparent;
             color: #222;
             font-weight: 400;
+            padding-block: 0;
           }
         }
         li > a {
@@ -131,6 +132,7 @@ header {
             color: var(--highlight);
             font-weight: 600;
             text-decoration: underline;
+            margin-block: 0;
           }
         }
       }
