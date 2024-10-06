@@ -22,7 +22,6 @@ const navMobile = [
 ];
 
 export function Nav() {
-  const [isOpen, setIsOpen] = useState(false);
 
   const isMobile = useMediaQuery({
     query: '(max-width: 768px)',
@@ -30,26 +29,25 @@ export function Nav() {
 
 
   const handleMenuToggle = () => {
-    setIsOpen(!isOpen);
+    const $navToggle = document.getElementById("navToggle");
+    $navToggle?.toggleAttribute('hidden');
   };
 
   return(
     <nav>
-      {isOpen ? 
-        (<ul>
-          {nav.map((link) => (
-            <li onClick={handleMenuToggle} key={link.label}><Link href={link.href}>{link.label}</Link></li>
-          ))}
-          {isMobile ? 
-            (<>
-              <li onClick={handleMenuToggle} onKeyDown={handleMenuToggle} className="snipcart-customer-signin">Account</li>
-              {navMobile.map((link) => (
-                <li onClick={handleMenuToggle} onKeyDown={handleMenuToggle} key={link.label}><Link href={link.href}>{link.label}</Link></li>
-              ))}
-            </>) :
-            null }
-        </ul>) : null
-      }
+      <ul id="navToggle" hidden>
+        {nav.map((link) => (
+          <li onClick={handleMenuToggle} key={link.label}><Link href={link.href}>{link.label}</Link></li>
+        ))}
+        {isMobile ? 
+          (<>
+            <li onClick={handleMenuToggle} onKeyDown={handleMenuToggle} className="snipcart-customer-signin">Account</li>
+            {navMobile.map((link) => (
+              <li onClick={handleMenuToggle} onKeyDown={handleMenuToggle} key={link.label}><Link href={link.href}>{link.label}</Link></li>
+            ))}
+          </>) :
+          null }
+      </ul>
       {isMobile ? (
         <div className='mobile-menu'>
           <Image
@@ -68,11 +66,7 @@ export function Nav() {
           </span>
         </div>
         ) : 
-        <ul>
-          {nav.map((link) => (
-            <li key={link.label}><Link href={link.href}>{link.label}</Link></li>
-          ))}
-        </ul>}
+        null}
     </nav>
   )
 }

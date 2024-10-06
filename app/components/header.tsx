@@ -34,12 +34,12 @@ export function Header() {
       </Link>
       {isMobile ? null : (
         <>
-        <div className={`social-links`}>
+        <div className={`social-links desktop`}>
           {socialMedia.map((link) => (
             <a key={link.href} href={link.href} aria-label={link.label}><FontAwesomeIcon icon={link?.icon} size="lg"/></a>
           ))}
         </div>
-        <div className={`shop-icons`}>
+        <div className={`shop-icons desktop`}>
           <button tabIndex={0} className="snipcart-customer-signin" aria-label='Your Account'>
             <FontAwesomeIcon icon={faUser}/>
           </button>

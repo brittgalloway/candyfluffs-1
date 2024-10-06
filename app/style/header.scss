@@ -5,6 +5,9 @@ header {
   grid-template-rows: repeat(2, auto);
   justify-items: center;
   margin-top: 2rem;
+  .desktop {
+    display: none;
+  }
   p {
     color: var(--highlight);
   }
@@ -18,6 +21,9 @@ header {
     "logo logo logo" 
     "social tag shop"
     "nav nav nav";
+    .desktop {
+      display: grid;
+    }
     .logo{
       grid-area: logo;
       grid-column: span 3;
@@ -80,14 +86,13 @@ header {
     ul {
       list-style: none;
       text-align: center;
-      display: grid;
-      gap: 1rem;
       padding-block: 1rem;
     }
     li,
     li > a {
       font-size: 1.5rem;
       color: #222;
+      margin-block: 1rem;
       &:hover,
       &:focus,
       &:focus-visible {
@@ -106,6 +111,9 @@ header {
       ul {
         grid-template-columns: repeat(7, 1fr);
         grid-template-rows: 1fr;
+        display: grid;
+        gap: 1rem;
+        padding-block: 0;
         li {
           &:hover,
           &:focus,
