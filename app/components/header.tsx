@@ -19,7 +19,7 @@ const socialMedia = [
 export function Header() {
 
   const isMobile = useMediaQuery({
-    query: '(max-width: 768px)',
+    query: '(max-width: 549px)',
   });
 
   return(
