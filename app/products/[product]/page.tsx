@@ -11,6 +11,7 @@ export default async function Product({ params }: any) {
         description(markdown: true)
         price
         size
+        weight
         title
         image {
           alt

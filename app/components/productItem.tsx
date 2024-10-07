@@ -19,7 +19,7 @@ export async function ProductItem({id, title, slug, url, alt, price}: ProductDat
     method: 'GET',
     headers: {
       Accept: 'application/json',
-      Authorization: `Basic ${process.env.BASE64_ENCODED_SECRET_API_KEY}`,
+      Authorization: `Basic ${process.env.BASE64_ENCODED_SECRET_API_KEY}:`,
       'content-type': 'application/json'
     }
   };
