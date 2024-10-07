@@ -24,7 +24,7 @@ const navMobile = [
 export function Nav() {
 
   const isMobile = useMediaQuery({
-    query: '(max-width: 768px)',
+    query: '(max-width: 549px)',
   });
 
 
