@@ -73,9 +73,6 @@ To run Candy Fluffs locally or deploy it, follow these steps:
 
    Your Candy Fluffs site should now be running locally at [http://localhost:8000](http://localhost:8000).
 
-### Configuration
-
-For detailed configuration instructions and additional information, refer to the [Configuration](./docs/configuration.md) documentation.
 
 ---
 
@@ -139,14 +136,16 @@ As a user, on the home page all of the products are availilable, navigation to t
 
 ## Future Features
 
-Next steps for this store is to add Jest or Cypress to adding testing to the app.
----
+- Next steps for this store is to add Jest or Cypress to adding testing to the app.
+- Use Stripe Checkout
+- Add better search and indexing
+
+
 
 ## License
 
 This project is licensed under the [The BSD Zero Clause License](./LICENSE).
 
-=========
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
