@@ -1,0 +1,181 @@
+header {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(2, auto);
+  justify-items: center;
+  margin-top: 2rem;
+  .desktop {
+    display: none;
+  }
+  p {
+    color: var(--highlight);
+  }
+  img {
+    mix-blend-mode: multiply;
+  }
+  @media ( width >= 550px ) {
+    grid-template-columns: 1fr 2fr 1fr;
+    gap: 1rem;
+    grid-template-areas: 
+    "logo logo logo" 
+    "social tag shop"
+    "nav nav nav";
+    .desktop {
+      display: grid;
+    }
+    .logo{
+      grid-area: logo;
+      grid-column: span 3;
+      justify-self: center;
+    }
+    .tagline{
+      grid-area: tag;
+      color:var(--highlight);
+    }
+    .social-links {
+      grid-area: social;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      font-size: 1.25rem;
+      a {
+        transform: scale(1);
+        color: var(--gray);
+        &:hover,
+        &:active,
+        &:focus {
+          cursor: pointer;
+          transform: scale(1.2);
+          color: var(--highlight);
+        }
+      }
+    }
+    .shop-icons {
+      grid-area: shop;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      font-size: 1.25rem;
+      justify-items: center;
+      align-items: center;
+    }
+    button {
+      font-size: 1.25rem;
+      transform: scale(1);
+      border: none;
+      background: transparent;
+      color: var(--gray);
+      &:hover,
+      &:active,
+      &:focus {
+        cursor: pointer;
+        transform: scale(1.2);
+        color: var(--highlight);
+      }
+    }
+  }
+  nav {
+    border-top: 2px solid var(--faded-highlight);
+    border-bottom: 1px solid var(--faded-highlight);
+    width: 100%;
+    z-index: 10;
+    position: fixed;
+    bottom: 0;
+    background: var(--background);
+    ul {
+      list-style: none;
+      text-align: center;
+      padding-block: 1rem;
+    }
+    li,
+    li > a {
+      font-size: 1.5rem;
+      color: #222;
+      margin-block: 1rem;
+      &:hover,
+      &:focus,
+      &:focus-visible {
+        display: block;
+        width: 100%;
+        background-color: var(--highlight);
+        color: white;
+        font-weight: 600;
+        border:none;
+        outline: none;
+      }
+    }
+    @media ( width >= 550px ) {
+      grid-area: nav;
+      position: static;
+      ul {
+        grid-template-columns: repeat(7, 1fr);
+        grid-template-rows: 1fr;
+        display: grid;
+        gap: 1rem;
+        padding-block: 0;
+        li {
+          &:hover,
+          &:focus,
+          &:focus-visible {
+            background-color: transparent;
+            color: #222;
+            font-weight: 400;
+            padding-block: 0;
+          }
+        }
+        li > a {
+          &:hover,
+          &:focus,
+          &:focus-visible {
+            background-color: transparent;
+            color: var(--highlight);
+            font-weight: 600;
+            text-decoration: underline;
+            margin-block: 0;
+          }
+        }
+      }
+    }
+    .mobile-menu {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap:1rem;
+      padding: 1rem;
+      .shopping-icon {
+        justify-self: end;
+      }
+      img {
+        justify-self: start;
+      }
+    }
+  }
+  
+}
+.shopping-icon {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
+  width:2rem;
+  height: 2rem;
+  color: var(--gray);
+  align-items: self-end;
+  &:hover {
+    color: var(--highlight);
+  }
+  svg {
+    grid-column: 1/2;
+    grid-row: 1/2;
+    width: 100%;
+    height: 100%;
+  }
+  .snipcart-items-count {
+    grid-column: 1/2;
+    grid-row: 1/2;
+    z-index: 2;
+    font-size: 1rem;
+    font-weight: 400;
+    text-align: center;
+    color: white;
+  }
+}

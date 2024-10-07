@@ -1,0 +1,70 @@
+footer {
+  grid-row: 3/4;
+  width: 100%;
+  display: grid;
+  grid-template-rows: auto;
+  grid-template-columns: 1fr;
+  justify-items: center;
+  border-top: 2px solid var(--faded-highlight);
+  padding-block: 1rem;
+  margin-bottom: 45px;
+  .social-links {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 1fr;
+    gap: 1rem;
+    a {
+      color: var(--gray);
+      font-size: 1.5rem;
+      transform: scale(1);
+      &:hover,
+      &:active,
+      &:focus {
+        transform: scale(1.2);
+        color: var(--highlight);
+      }
+    }
+    @media ( width >= 550px ) {
+      grid-area: connect;
+      grid-template-rows: repeat(2, 1fr);
+      p {
+        grid-column: 1/4;
+      }
+    }
+  }
+  .payment-methods {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    font-size: 1.5rem;
+    margin-block: 1rem;
+    color: var(--light-gray);
+    @media ( width >= 550px ) {
+      grid-area: pay;
+      font-size: 2rem;
+    }
+  }
+  @media ( width >= 550px ) {
+    grid-template-areas: 
+    "connect contact extra" 
+    "connect contact extra" 
+    "pay pay pay";
+    grid-template-columns: repeat(3, 1fr);
+    margin-top:3rem;
+    margin-bottom: 0;
+    gap: 1rem;
+    font-size: 1.5rem;
+    .contact {
+      grid-area: contact;
+    }
+    .extra-links {
+      grid-area: extra;
+      display: grid;
+      justify-items: center;
+    }
+    ul {
+      list-style: none;
+    }
+
+  }
+}
