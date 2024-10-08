@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { 
   faInstagram, faXTwitter, faTumblr,
-  faCcVisa, faCcMastercard, faCcAmex, faCcPaypal
+  faCcVisa, faCcMastercard, faCcPaypal
  } from '@fortawesome/free-brands-svg-icons';
  import '@/app/style/footer.scss';
 
@@ -16,7 +16,6 @@ const socialMedia = [
 const paymentMethods = [
   {alt: 'Visa card logo', icon: faCcVisa},
   {alt: 'Mastercard card logo', icon: faCcMastercard},
-  {alt: 'Amerrican Express card logo', icon: faCcAmex},
   {alt: 'Paypal logo', icon: faCcPaypal},
 ];
 
