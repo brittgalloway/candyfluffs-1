@@ -1,6 +1,6 @@
 {
   "name": "candyfluffs",
-  "version": "0.1.0",
+  "version": "2.0.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -9,12 +9,18 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@datocms/cda-client": "^0.2.2",
     "@fortawesome/free-brands-svg-icons": "^6.5.2",
-    "@fortawesome/react-fontawesome": "^0.2.2",
-    "next": "14.2.3",
+    "@fortawesome/free-solid-svg-icons": "^6.5.2",
+    "@fortawesome/react-fontawesome": "^0.2.0",
+    "@netlify/plugin-nextjs": "^5.7.2",
+    "embla-carousel-autoplay": "^8.3.0",
+    "embla-carousel-react": "^8.3.0",
+    "next": "^14.2.12",
     "react": "^18",
     "react-dom": "^18",
-    "react-responsive": "^10.0.0"
+    "react-responsive": "^10.0.0",
+    "sharp": "^0.33.5"
   },
   "devDependencies": {
     "@types/node": "^20",
@@ -22,6 +28,7 @@
     "@types/react-dom": "^18",
     "eslint": "^8",
     "eslint-config-next": "14.2.3",
+    "sass": "^1.78.0",
     "typescript": "^5"
   }
 }

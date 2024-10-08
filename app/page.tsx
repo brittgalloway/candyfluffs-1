@@ -1,95 +1,77 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+import { performRequest, limit } from '@/app/lib/datocms';
+import { Product, SearchParams } from '@/app/lib/types';
+import { EmblaOptionsType } from 'embla-carousel';
+import { ProductItem } from './components/productItem';
+import Slider from './components/slider';
+import Pagination from './components/pagination';
 
-export default function Home() {
+export default async function Home({searchParams}: SearchParams) {
+  const pageNumber = Number.parseInt(searchParams?.page ?? '1');
+
+  const skip = pageNumber > 1 ? limit * (pageNumber - 1) : 0;
+
+  const PAGE_CONTENT_QUERY = `
+    query ProductsQuery {
+      allBanners {
+        banner {
+          id
+          alt
+          responsiveImage {
+            src
+            width
+            height
+          }
+        }
+        link {
+          value
+        }
+      }
+      _allProductsMeta(filter: {_status: {eq: published}}) {
+        count
+      }
+      allProducts(first:${limit}, skip:${skip}) {
+        id
+        title
+        price
+        slug
+        image {
+          alt
+          url
+        }
+      }
+    }
+  `;
+
+  const { data: { allProducts, allBanners, _allProductsMeta } } = await performRequest({ query: PAGE_CONTENT_QUERY });
+  const productCount = _allProductsMeta.count;
+  const OPTIONS: EmblaOptionsType = { direction: 'rtl', loop: true }
+  const SLIDES = allBanners;
   return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>app/page.tsx</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
+    <>      
+      <Slider 
+        slides={SLIDES} 
+        options={OPTIONS} 
+      />
+        <div className={`products`} id="products">
+          {allProducts.map((product : Product
+            ) => (
+            <ProductItem
+              key={product?.id}
+              id={product?.id}
+              title={product?.title}
+              slug={product?.slug}
+              url={product?.image[0].url}
+              alt={product?.image[0].alt}
+              price={product?.price}
             />
-          </a>
+          )
+          )}
         </div>
-      </div>
-
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore starter templates for Next.js.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
-  );
+        <Pagination
+          numberOfProducts={productCount}
+          currentPage={pageNumber}
+          maxItems={limit}
+          />
+    </>
+  )
 }

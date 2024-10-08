@@ -36,12 +36,8 @@ Candy Fluffs is powered by the following technologies and services:
 - npm
 - GraphQL
 - DatoCMS
+- Snipcart
 - Stripe
-https://docs.stripe.com/docs/checkout/embedded/quickstart
-https://docs.stripe.com/payments/accept-a-payment?platform=web&ui=embedded-form
-https://www.npmjs.com/package/gatsby-source-stripe
-https://www.gatsbyjs.com/tutorial/ecommerce-tutorial/#example-2-import-skus-via-source-plugin
-https://useshoppingcart.com/docs/welcome/getting-started-client-mode
 - Mailchimp
 - [Figma](https://www.figma.com/file/IndaqA3RP8qZew4yHcXYQI/candyFluffs?node-id=26%3A9)
 - Netlify
@@ -77,9 +73,6 @@ To run Candy Fluffs locally or deploy it, follow these steps:
 
    Your Candy Fluffs site should now be running locally at [http://localhost:8000](http://localhost:8000).
 
-### Configuration
-
-For detailed configuration instructions and additional information, refer to the [Configuration](./docs/configuration.md) documentation.
 
 ---
 
@@ -143,14 +136,16 @@ As a user, on the home page all of the products are availilable, navigation to t
 
 ## Future Features
 
-Next steps for this store is to add Jest or Cypress to adding testing to the app.
----
+- Next steps for this store is to add Jest or Cypress to adding testing to the app.
+- Use Stripe Checkout
+- Add better search and indexing
+
+
 
 ## License
 
 This project is licensed under the [The BSD Zero Clause License](./LICENSE).
 
-=========
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 

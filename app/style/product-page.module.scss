@@ -1,0 +1,122 @@
+.imageWrapper {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(2, auto);
+  gap: 1rem;
+  @media (width >= 550px) {
+    grid-column: 1/2;
+    grid-row: 1/5;
+    width: 100%;
+  }
+}
+.largeDisplay {
+  width: 100%;
+  height: auto;
+  max-width: 350px;
+  border-radius: var(--radius);
+  grid-row: 1/2;
+  @media (width >= 550px) {
+    grid-row: 1/4;
+    grid-column: 1/2;
+    max-width: 400px;
+  }
+}
+.photoRow {
+  display: flex;
+  width: 100%;
+  max-width: 350px;
+  overflow-x: scroll;
+  gap:10px;
+  border-radius: var(--radius);
+  img {
+    object-fit: cover;
+    cursor: pointer;
+  }
+}
+.main {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(5, auto);
+  justify-items: center;
+  gap: 1rem;
+  margin-block: 2rem;
+  h1 {
+    margin-bottom: 1rem;
+    grid-row: 2/3;
+    justify-self: start;
+    color: #222;
+  }
+  @media (width >= 550px) {
+    grid-template-columns: 4fr 3fr;
+    grid-template-rows: 20% 15% repeat(2, auto);
+    gap: 0;
+    max-width: 955px;
+    h1 {
+      grid-column: 2/3;
+      grid-row: 1/2;
+      margin: 0;
+      text-align: left;
+    }
+  }
+  @media (width <= 850px) {
+    gap:1rem;
+  }
+}
+.add {
+  border-radius: var(--radius);
+  background: var(--background);
+  padding: 1rem 2rem;
+  font-size: 1.25rem;
+  margin-top: 1rem;
+  width: 100%;
+  color: #222;
+  &:hover {
+    cursor: pointer;
+    border: 2px solid var(--faded-highlight);
+    background: var(--highlight);
+    color: white;
+  }
+  @media (width >= 550px) {
+    grid-column: 2/3;
+    grid-row: 4/5;
+    max-height: 70px;
+    align-self: end;
+    margin: 0;
+  }
+}
+.cartInstruction {
+  font-weight: 700;
+  @media (width >= 550px) {
+    grid-column: 2/3;
+    grid-row: 4/5;
+    align-self: end;
+  } 
+}
+.addChoices {
+  @media (width >= 550px) {
+    margin-bottom: 2rem;
+  } 
+}
+.price {
+  font-size: 2rem;
+  font-weight: 700;
+  justify-self: start;
+  @media (width >= 550px) {
+    grid-column: 2/3;
+    grid-row: 2/3;
+  }
+}
+.description {
+  font-size: 1.25rem;
+  width: 100%;
+  ul {
+    margin-left: 1rem;
+  }
+  li {
+    list-style: circle;
+  }
+  @media (width >= 550px) {
+    grid-column: 2/3;
+    grid-row: 3/4;
+  }
+}
