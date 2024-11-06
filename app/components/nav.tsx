@@ -26,16 +26,15 @@ export function Nav() {
   const isMobile = useMediaQuery({
     query: '(max-width: 549px)',
   });
-
+  const [isOpen, setIsOpen] = useState(false);
 
   const handleMenuToggle = () => {
-    const $navToggle = document.getElementById("navToggle");
-    $navToggle?.toggleAttribute('hidden');
+    isOpen == false ? setIsOpen(true) : setIsOpen(false);
   };
 
   return(
     <nav>
-      <ul id="navToggle" hidden>
+      <ul id="navToggle" className={isOpen ? 'open' : ''}>
         {nav.map((link) => (
           <li onClick={handleMenuToggle} key={link.label}><Link href={link.href}>{link.label}</Link></li>
         ))}
@@ -48,7 +47,6 @@ export function Nav() {
           </>) :
           null }
       </ul>
-      {isMobile ? (
         <div className='mobile-menu'>
           <Image
             src={Burger}
@@ -65,8 +63,6 @@ export function Nav() {
             <span className="snipcart-items-count"></span>
           </span>
         </div>
-        ) : 
-        null}
     </nav>
   )
 }

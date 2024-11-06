@@ -148,6 +148,21 @@ header {
       img {
         justify-self: start;
       }
+      @media ( width >= 550px ) {
+        display: none;
+      }
+    }
+    .open {
+      display: block !important;
+      @media ( width >= 550px ) {
+        display: grid !important;
+      }
+    }
+    #navToggle {
+      display: none;
+      @media ( width >= 550px ) {
+        display: grid;
+      }
     }
   }
   
