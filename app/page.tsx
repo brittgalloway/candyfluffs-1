@@ -52,26 +52,26 @@ export default async function Home({searchParams}: SearchParams) {
         slides={SLIDES} 
         options={OPTIONS} 
       />
-        <div className={`products`} id="products">
-          {allProducts.map((product : Product
-            ) => (
-            <ProductItem
-              key={product?.id}
-              id={product?.id}
-              title={product?.title}
-              slug={product?.slug}
-              url={product?.image[0].url}
-              alt={product?.image[0].alt}
-              price={product?.price}
-            />
-          )
-          )}
-        </div>
-        <Pagination
-          numberOfProducts={productCount}
-          currentPage={pageNumber}
-          maxItems={limit}
+      <div className={`products`} id="products">
+        {allProducts.map((product : Product
+          ) => (
+          <ProductItem
+            key={product?.id}
+            id={product?.id}
+            title={product?.title}
+            slug={product?.slug}
+            url={product?.image[0].url}
+            alt={product?.image[0].alt}
+            price={product?.price}
           />
+        )
+        )}
+      </div>
+      <Pagination
+        numberOfProducts={productCount}
+        currentPage={pageNumber}
+        maxItems={limit}
+      />
     </>
   )
 }
