@@ -3,7 +3,7 @@ import { useMediaQuery } from 'react-responsive';
 import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { 
-  faInstagram, faXTwitter, faTumblr,
+  faInstagram, faTumblr, faBluesky,
   faCcVisa, faCcMastercard, faCcPaypal
  } from '@fortawesome/free-brands-svg-icons';
  import '@/app/style/footer.scss';
@@ -11,7 +11,7 @@ import {
 const socialMedia = [
   {href: 'https://candy-fluffs.tumblr.com/', label: 'Link to Candy Fluffs\' Tumblr', icon: faTumblr},
   {href: 'http://instagram.com/candy_fluffs', label: 'Link to Candy Fluffs\' Instagram', icon: faInstagram},
-  {href: 'https://x.com/candy_fluffs', label: 'Link to Candy Fluffs\' X', icon: faXTwitter},
+  {href: 'https://bsky.app/profile/candyfluffs.bsky.social', label: 'Link to Candy Fluffs\' Bluesky', icon: faBluesky},
 ];
 const paymentMethods = [
   {alt: 'Visa card logo', icon: faCcVisa},

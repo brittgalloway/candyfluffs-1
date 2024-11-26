@@ -5,7 +5,7 @@ import { useMediaQuery } from 'react-responsive';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBagShopping, faUser } from '@fortawesome/free-solid-svg-icons';
 import { 
-  faInstagram, faXTwitter, faTumblr
+  faInstagram, faBluesky, faTumblr
 } from '@fortawesome/free-brands-svg-icons';
 import { Nav } from './nav';
 import Logo from '@/public/logo.jpg';
@@ -14,7 +14,7 @@ import '@/app/style/header.scss';
 const socialMedia = [
   {href: 'https://candy-fluffs.tumblr.com/', label: 'Link to Candy Fluffs\' Tumblr', icon: faTumblr},
   {href: 'http://instagram.com/candy_fluffs', label: 'Link to Candy Fluffs\' Instagram', icon: faInstagram},
-  {href: 'https://x.com/candy_fluffs', label: 'Link to Candy Fluffs\' X', icon: faXTwitter},
+  {href: 'https://bsky.app/profile/candyfluffs.bsky.social', label: 'Link to Candy Fluffs\' Bluesky', icon: faBluesky},
 ];
 export function Header() {
 
