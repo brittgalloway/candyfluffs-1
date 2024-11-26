@@ -21,23 +21,25 @@ const Slider: FC<PropType> = (props) => {
     useDotButton(emblaApi);
     return (
       <header className="embla" dir="rtl">
-      <div className="embla__viewport" ref={emblaRef}>
-        <div className="embla__container">
-          {slides.map((slide) => {
-            return (
-            <div className="embla__slide" key={slide.banner[0].id}>
-              <Image
-                className="embla__slide__image"
-                src={slide.banner[0].responsiveImage.src}
-                width={slide.banner[0].responsiveImage.width}
-                height={slide.banner[0].responsiveImage.height}
-                alt={slide.banner[0].alt}
-              />
-            </div>
-          )}
-          )}
+        <div className="embla__viewport" ref={emblaRef}>
+          <div className="embla__container">
+            {slides.map((slide) => {
+              const link = slide.link.value.document.children[0].children[0].url;
+              return (
+              <a href={link} className="embla__slide" key={slide.banner[0].id}>
+                <Image
+                  className="embla__slide__image"
+                  src={slide.banner[0].responsiveImage.src}
+                  width={slide.banner[0].responsiveImage.width}
+                  height={slide.banner[0].responsiveImage.height}
+                  alt={slide.banner[0].alt}
+                />
+              
+              </a>
+            )}
+            )}
+          </div>
         </div>
-      </div>
 
       <div className="embla__controls">
         <div className="embla__dots">
