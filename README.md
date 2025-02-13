@@ -1,7 +1,9 @@
 # Candy Fluffs
 
 Candy Fluffs is an eCommerce website for illustrator Candy Joy, designed with love in Figma and powered by modern web technologies. Originally built with Gatsby, the project was overhauled and migrated to Next.js and TypeScript, improving performance and maintainability. It integrates DatoCMS, Snipcart, Stripe, and Mailchimp to provide a seamless shopping experience.
-![CandyFluffs Home page](https://github.com/brittgalloway/candyfluffs-1/assets/50898741/c286b558-8255-4735-9d3b-b57cb75ccc48)
+
+![CandyFluffs Home page](https://github.com/user-attachments/assets/1607adca-3209-4353-819b-d2e7a8125571)
+
 
 ## Project Evolution
 
@@ -58,8 +60,14 @@ Candy Fluffs offers a smooth and user-friendly shopping experience:
 
 ## Preview
 
-![Product type gallery](https://github.com/brittgalloway/candyfluffs-1/assets/50898741/49f41c25-1474-4538-a3fe-6fd69e4bdef7)
-![Product page](https://github.com/brittgalloway/candyfluffs-1/assets/50898741/17472f43-f4c0-45e2-950e-59d6d9150b2d)
+![Product type gallery](https://github.com/user-attachments/assets/d1dbc4eb-803a-4829-851b-250b75fb0580)
+
+![Product page](https://github.com/user-attachments/assets/e818cc53-064b-4287-813d-961075958561)
+![Necahual Page](https://github.com/user-attachments/assets/0ab49f9b-1be6-47b9-a70e-2a6aabf17637)
+![Page footer and pagination](https://github.com/user-attachments/assets/0b288079-b77b-476d-b3a3-bf6962fcc55e)
+
+
+
 
 ---
 
