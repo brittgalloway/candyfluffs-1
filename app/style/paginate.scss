@@ -26,6 +26,7 @@
       width: 1.5rem;
       height: 1.5rem;
       color: #222;
+      transition: all var(--transition);
       @media (width >= 550px) {
         width: 2rem;
         height: 2rem;
