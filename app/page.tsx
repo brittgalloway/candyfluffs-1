@@ -6,7 +6,8 @@ import Slider from './components/slider';
 import Pagination from './components/pagination';
 
 export default async function Home({searchParams}: SearchParams) {
-  const pageNumber = Number.parseInt(searchParams?.page ?? '1');
+  const {page} = await searchParams;
+  const pageNumber = Number.parseInt( page ?? '1');
 
   const skip = pageNumber > 1 ? limit * (pageNumber - 1) : 0;
 

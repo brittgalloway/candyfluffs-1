@@ -19,8 +19,8 @@ export const metadata = {
 }
 
 export default async function TwoHeroes({searchParams}: SearchParams) {
-
-  const pageNumber = Number.parseInt(searchParams?.page ?? '1');
+  const {page} = await searchParams;
+  const pageNumber = Number.parseInt(page ?? '1');
 
   const skip = pageNumber > 1 ? limit * (pageNumber - 1) : 0;
   

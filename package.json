@@ -5,8 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
+    "start": "next start"
   },
   "dependencies": {
     "@datocms/cda-client": "^0.2.2",
@@ -16,9 +15,9 @@
     "@netlify/plugin-nextjs": "^5.7.2",
     "embla-carousel-autoplay": "^8.3.0",
     "embla-carousel-react": "^8.3.0",
-    "next": "^14.2.12",
-    "react": "^18",
-    "react-dom": "^18",
+    "next": "^16.0.7",
+    "react": "^19.2.1",
+    "react-dom": "^19.2.1",
     "react-responsive": "^10.0.0",
     "sharp": "^0.33.5"
   },
@@ -26,8 +25,6 @@
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
-    "eslint": "^8",
-    "eslint-config-next": "14.2.3",
     "sass": "^1.78.0",
     "typescript": "^5"
   }

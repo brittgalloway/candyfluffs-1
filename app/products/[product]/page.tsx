@@ -3,9 +3,10 @@ import { ProductImages } from '@/app/components/productImageDisplay';
 import styles from '@/app/style/product-page.module.scss';
 
 export default async function Product({ params }: any) {
+  const { product } = await params;
   const PAGE_CONTENT_QUERY = `
     query productQuery {
-      product(filter: {slug: {eq: "${params.product}"}}) {
+      product(filter: {slug: {eq: "${product}"}}) {
         id
         fandoms
         description(markdown: true)
@@ -31,29 +32,29 @@ export default async function Product({ params }: any) {
       }
     }
   `;
-  const { data: { product } } = await performRequest({ query: PAGE_CONTENT_QUERY });
+  const { data } = await performRequest({ query: PAGE_CONTENT_QUERY });
+  const datoProduct = data.product;
   const domain = process.env.NODE_ENV == 'development' ? 'https://deploy-preview-22--candyfluffsdemo.netlify.app' 
     : '';
-  const formatedPrice = product?.price.toLocaleString("en-US", { style: "currency", currency: "USD" });
-
+  const formatedPrice = datoProduct.price.toLocaleString("en-US", { style: "currency", currency: "USD" });
   function handleVariantion() {
-    const options = product.variation.map((variant: {title: string, price:number}) => {
-      if (variant.price != product.price) {
-        if(product.price < variant.price) {
-          const difference = variant.price - product.price;
+    const options = datoProduct.variation.map((variant: {title: string, price:number}) => {
+      if (variant.price != datoProduct.price) {
+        if(datoProduct.price < variant.price) {
+          const difference = variant.price - datoProduct.price;
           return `${variant.title}[+${difference}]`;
         } else {
-          const difference = product.price - variant.price;
+          const difference = datoProduct.price - variant.price;
           return `${variant.title}[-${difference}]`;
         }
       } else {
         return variant.title;
       }
     }).join("|");
-    return `${options}|${product.title}`;
+    return `${options}|${datoProduct.title}`;
   }
 
-  const photos = product?.image.map((photo:any)=>(
+  const photos = datoProduct?.image.map((photo:any)=>(
     {
       src: photo?.url,
       width: 100,
@@ -63,21 +64,21 @@ export default async function Product({ params }: any) {
   ))
   return (
     <section className={`${styles.main}`}>
-      <h1>{product?.title}</h1>
+      <h1>{datoProduct.title}</h1>
       <ProductImages
         photos={photos}
       />
       <p className={`${styles.price}`}>{formatedPrice}</p>
-      <div className={`${styles.description}`} dangerouslySetInnerHTML={{__html:product?.description}}/>
-      {product?.variation.length ?
+      <div className={`${styles.description}`} dangerouslySetInnerHTML={{__html:datoProduct.description}}/>
+      {datoProduct.variation.length ?
         <>
           <button className={`snipcart-add-item ${styles.add} ${styles.addChoices}`}
-            data-item-id={product?.id}
-            data-item-price={product?.price}
-            data-item-description={product?.description}
-            data-item-name={product?.title}
-            data-item-url={`${domain}/products/${params.product}`}
-            data-item-weight={product?.weight}
+            data-item-id={datoProduct.id}
+            data-item-price={datoProduct.price}
+            data-item-description={datoProduct.description}
+            data-item-name={datoProduct.title}
+            data-item-url={`${domain}/products/${product}`}
+            data-item-weight={datoProduct.weight}
             data-item-custom1-name="Select one"
             data-item-custom1-options={handleVariantion()}
             >
@@ -87,12 +88,12 @@ export default async function Product({ params }: any) {
         </>
       : 
       <button className={`snipcart-add-item ${styles.add}`}
-        data-item-id={product?.id}
-        data-item-price={product?.price}
-        data-item-description={product?.description}
-        data-item-name={product?.title}
-        data-item-weight={product?.weight}
-        data-item-url={`${domain}/products/${params.product}`}
+        data-item-id={datoProduct.id}
+        data-item-price={datoProduct.price}
+        data-item-description={datoProduct.description}
+        data-item-name={datoProduct.title}
+        data-item-weight={datoProduct.weight}
+        data-item-url={`${domain}/products/${product}`}
         >
         Add to cart
       </button>
