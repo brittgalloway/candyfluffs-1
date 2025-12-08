@@ -6,7 +6,6 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
   },
   "dependencies": {
     "@datocms/cda-client": "^0.2.2",
@@ -26,8 +25,6 @@
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
-    "eslint": "^8",
-    "eslint-config-next": "^16.0.7",
     "sass": "^1.78.0",
     "typescript": "^5"
   }
