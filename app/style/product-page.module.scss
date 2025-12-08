@@ -119,5 +119,7 @@
   @media (width >= 550px) {
     grid-column: 2/3;
     grid-row: 3/4;
+    max-height: 255px;
+    overflow-y: auto;
   }
 }

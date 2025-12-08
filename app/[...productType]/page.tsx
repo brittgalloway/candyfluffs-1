@@ -14,8 +14,9 @@ type ParamTypes ={
 }
 
 export default async function ProductsByType({ params, searchParams }: ParamTypes) {
-  const pageNumber = Number.parseInt(searchParams?.page ?? '1');
-
+  const {page} = await searchParams;
+  const pageNumber = Number.parseInt(page ?? '1');
+  const {productType} = await params;
   const skip = pageNumber > 1 ? limit * (pageNumber - 1) : 0;
   const productTypes = [
     'Book',
@@ -25,15 +26,15 @@ export default async function ProductsByType({ params, searchParams }: ParamType
     'Button',
     'Sticker'
   ];
-  if( params.productType.length > 1 ) {
-    var productType = params.productType[0];
-    var category = params.productType[1].replace('-',' ');
-      } else if(productTypes.includes(params.productType[0])) {
-    productType = params.productType[0];
+  if( productType.length > 1 ) {
+    var productTypeParam = productType[0];
+    var category = productType[1].replace('-',' ');
+      } else if(productTypes.includes(productType[0])) {
+    productTypeParam = productType[0];
     category = "";
   } else {
-    productType = "";
-    category = params.productType[0].replace('-',' ');
+    productTypeParam = "";
+    category = productType[0].replace('-',' ');
   }
   const PAGE_CONTENT_QUERY = `
     query ProductsQuery {
@@ -75,9 +76,9 @@ export default async function ProductsByType({ params, searchParams }: ParamType
   return (
     <>
       <div className="products" id="products">
-        { params.productType.length > 1 || !productTypes.includes(params.productType[0]) ? null:
+        { productType.length > 1 || !productTypes.includes(productType[0]) ? null:
           <Dropdown
-            type={productType}
+            type={productTypeParam}
             fandomList={fandomList}
           />
         }
