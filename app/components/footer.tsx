@@ -6,6 +6,7 @@ import {
   faInstagram, faTumblr, faBluesky,
   faCcVisa, faCcMastercard, faCcPaypal
  } from '@fortawesome/free-brands-svg-icons';
+ import {Kofi} from './kofi'
  import '@/app/style/footer.scss';
 
 const socialMedia = [
@@ -27,6 +28,7 @@ export function Footer() {
 
   return(
     <footer>
+      <Kofi/>
       <div className="social-links">
         {
           isMobile ? null : <p>Connect With Me</p>
