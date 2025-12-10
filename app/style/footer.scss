@@ -8,6 +8,10 @@ footer {
   border-top: 2px solid var(--faded-highlight);
   padding-block: 1rem;
   margin-bottom: 45px;
+  iframe {
+    grid-row: 1/2;
+    grid-column: 1/4;
+  }
   .social-links {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -26,7 +30,7 @@ footer {
     }
     @media ( width >= 550px ) {
       grid-area: connect;
-      grid-template-rows: repeat(2, 1fr);
+      grid-template-rows: repeat(3, 1fr);
       p {
         grid-column: 1/4;
       }
@@ -46,6 +50,7 @@ footer {
   }
   @media ( width >= 550px ) {
     grid-template-areas: 
+    ". iframe ." 
     "connect contact extra" 
     "connect contact extra" 
     "pay pay pay";
@@ -54,6 +59,9 @@ footer {
     margin-bottom: 0;
     gap: 1rem;
     font-size: 1.5rem;
+    iframe{
+      grid-area: iframe;
+    }
     .contact {
       grid-area: contact;
     }
