@@ -14,6 +14,7 @@ type ParamTypes ={
 }
 
 export default async function ProductsByType({ params, searchParams }: ParamTypes) {
+  try{
   const {page} = await searchParams;
   const pageNumber = Number.parseInt(page ?? '1');
   const {productType} = await params;
@@ -101,4 +102,12 @@ export default async function ProductsByType({ params, searchParams }: ParamType
           />
     </>
   );
+}catch{
+   return (
+    <div>
+      <h2 id="errorH2">Taking a Short break!</h2>
+      <span id="errorSpan">Will be back April 1st!</span>
+    </div>
+  )
+}
 }

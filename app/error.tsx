@@ -14,8 +14,17 @@ export default function Error({
  
   return (
     <div>
-      <h2 id="errorH2">Taking a Short break!</h2>
-      <span id="errorSpan">Will be back April 1st!</span>
+      <h2 id="errorH2">Something went wrong!</h2>
+      <span id="errorSpan">Σ(‘◉⌓◉’)</span>
+      <button
+        id="errorButton"
+        onClick={
+          // Attempt to recover by trying to re-render the segment
+          () => reset()
+        }
+      >
+        Try again
+      </button>
     </div>
   )
 }

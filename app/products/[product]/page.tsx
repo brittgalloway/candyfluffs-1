@@ -3,6 +3,7 @@ import { ProductImages } from '@/app/components/productImageDisplay';
 import styles from '@/app/style/product-page.module.scss';
 
 export default async function Product({ params }: any) {
+  try {
   const { product } = await params;
   const PAGE_CONTENT_QUERY = `
     query productQuery {
@@ -101,4 +102,12 @@ export default async function Product({ params }: any) {
       
     </section>
   );
+} catch  {
+ return (
+    <div>
+      <h2 id="errorH2">Taking a Short break!</h2>
+      <span id="errorSpan">Will be back April 1st!</span>
+    </div>
+  )
+}
 }
