@@ -15,6 +15,7 @@ const PAGE_CONTENT_QUERY = `
 `;
 
 export default async function Events() {
+  try {
   const { data: { allLiveEvents } } = await performRequest({ query: PAGE_CONTENT_QUERY });
 
   const formatDateTime = (dateString: string) => {
@@ -48,4 +49,13 @@ export default async function Events() {
       ))}
     </section>
   )
+} catch(error) {
+  console.error("Error fetching live events:", error);
+ return (
+    <div>
+      <h2 id="errorH2">Taking a Short break!</h2>
+      <span id="errorSpan">Will be back April 1st!</span>
+    </div>
+  )
+}
 }

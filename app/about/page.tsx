@@ -27,6 +27,7 @@ const PAGE_CONTENT_QUERY = `
 `;
 
 export default async function About() {
+  try {
   const { data: { aboutMe } } = await performRequest({ query: PAGE_CONTENT_QUERY });
 
   return (
@@ -47,6 +48,16 @@ export default async function About() {
     </div>
   </section>
   )
+} catch (error) {
+  console.error('Error fetching about page content:', error);
+ return (
+    <div>
+      <h2 id="errorH2">Taking a Short break!</h2>
+      <span id="errorSpan">Will be back April 1st!</span>
+    </div>
+  )
+
+}
 }
 
 
