@@ -1,37 +1,22 @@
 import {defineField, defineType} from 'sanity'
 
-export const liveEvent = defineType({
-  name: 'live_event',
-  title: 'Live Events',
+export const links = defineType({
+  name: 'links',
+  title: 'Link Page',
   type: 'document',
   fields: [
     defineField({
-      title: 'Event Name',
-      name: 'event_name',
+      title: 'Website Name',
+      name: 'website_name',
       type: 'string',
     }),
     defineField({
-      title: 'Website',
+      title: 'Website Link',
       name: 'href',
       type: 'url',
       validation: Rule => Rule.uri({
         scheme: ['http', 'https', 'mailto', 'tel']
       })
-    }),
-    defineField({
-      title: 'Start Date',
-      name: 'start_date',
-      type: 'date',
-    }),
-    defineField({
-      title: 'End Date',
-      name: 'end_date',
-      type: 'date',
-    }),
-    defineField({
-      title: 'Address',
-      name: 'address',
-      type: 'string',
     }),
     defineField({
       name: 'updatedAt',
