@@ -1,23 +1,22 @@
 'use client';
 import { useMediaQuery } from 'react-responsive';
 import Link from 'next/link';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { 
-  faInstagram, faTumblr, faBluesky,
-  faCcVisa, faCcMastercard, faCcPaypal
- } from '@fortawesome/free-brands-svg-icons';
+  FaInstagram, FaTumblr, FaBluesky,
+  FaCcVisa, FaCcMastercard, FaCcPaypal
+ } from '@/app/lib/icon-svg';
  import {Kofi} from './kofi'
  import '@/app/style/footer.scss';
 
 const socialMedia = [
-  {href: 'https://candy-fluffs.tumblr.com/', label: 'Link to Candy Fluffs\' Tumblr', icon: faTumblr},
-  {href: 'http://instagram.com/candy_fluffs', label: 'Link to Candy Fluffs\' Instagram', icon: faInstagram},
-  {href: 'https://bsky.app/profile/candyfluffs.bsky.social', label: 'Link to Candy Fluffs\' Bluesky', icon: faBluesky},
+  {href: 'https://candy-fluffs.tumblr.com/', label: 'Link to Candy Fluffs\' Tumblr', icon: <FaTumblr/>},
+  {href: 'http://instagram.com/candy_fluffs', label: 'Link to Candy Fluffs\' Instagram', icon: <FaInstagram/>},
+  {href: 'https://bsky.app/profile/candyfluffs.bsky.social', label: 'Link to Candy Fluffs\' Bluesky', icon: <FaBluesky/>},
 ];
 const paymentMethods = [
-  {alt: 'Visa card logo', icon: faCcVisa},
-  {alt: 'Mastercard card logo', icon: faCcMastercard},
-  {alt: 'Paypal logo', icon: faCcPaypal},
+  {alt: 'Visa card logo', icon: <FaCcVisa/>},
+  {alt: 'Mastercard card logo', icon: <FaCcMastercard/>},
+  {alt: 'Paypal logo', icon: <FaCcPaypal/>},
 ];
 
 export function Footer() {
@@ -34,7 +33,7 @@ export function Footer() {
           isMobile ? null : <p>Connect With Me</p>
         }
           {socialMedia.map((link) => (
-            <a key={link?.href} href={link?.href} aria-label={link?.label}><FontAwesomeIcon icon={link?.icon} size="lg"/></a>
+            <a key={link?.href} href={link?.href} aria-label={link?.label}>{link?.icon}</a>
           ))}
       </div>
       {isMobile ? null :
@@ -51,7 +50,7 @@ export function Footer() {
         )}
       <div className='payment-methods' aria-label="A list of accepted payment methods.">
         {paymentMethods.map((paymethod) => (
-          <span key={paymethod?.alt} title={paymethod?.alt}><FontAwesomeIcon icon={paymethod?.icon} size="lg"/></span>
+          <span key={paymethod?.alt} title={paymethod?.alt}>{paymethod?.icon}</span>
         ))}
       </div>
     </footer>

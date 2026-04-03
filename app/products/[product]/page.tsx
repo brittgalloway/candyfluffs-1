@@ -1,4 +1,3 @@
-import { performRequest } from '@/app/lib/datocms';
 import { ProductImages } from '@/app/components/productImageDisplay';
 import styles from '@/app/style/product-page.module.scss';
 

@@ -1,7 +1,6 @@
 'use client';
 import Link from 'next/link';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
+import { FaChevronDown } from '@/app/lib/icon-svg';
 import '@/app/style/dropdown.scss';
 
 type Filters = {
@@ -21,7 +20,7 @@ export default function Dropdown(
       <button
         onClick={handleClick} 
         tabIndex={0} >
-          Categories <FontAwesomeIcon icon={faChevronDown} />
+          Categories <FaChevronDown/>
       </button>
       <ul id="category" hidden>
         {fandomList.map((fandom) => (

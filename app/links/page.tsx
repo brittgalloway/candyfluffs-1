@@ -35,6 +35,9 @@ export default async function Links() {
     <h1>My Links!</h1>
     <nav aria-label='Links to CandyFluffs.com and various social media.'>
       <ul id="links">
+        <li>
+          Ichigo Tarot (coming soon)
+        </li>
         {allLinkPages.map((link:Link) => (
           <li key={link.id}>
             <a href={link.url}>{link.label}</a>

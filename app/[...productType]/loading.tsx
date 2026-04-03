@@ -1,8 +1,7 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSpinner } from '@fortawesome/free-solid-svg-icons';
+import Loader from "../components/loader"
 
 const TypesLoader = () => {
-  return <FontAwesomeIcon icon={faSpinner} id="spinner" size="lg"/> 
+  return <Loader />
 }
 
-export default TypesLoader
+export default TypesLoader;
