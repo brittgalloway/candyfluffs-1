@@ -4,9 +4,9 @@ import Link from 'next/link';
 import { 
   FaInstagram, FaTumblr, FaBluesky,
   FaCcVisa, FaCcMastercard, FaCcPaypal
- } from '@/app/lib/icon-svg';
+ } from '@/lib/icon-svg';
  import {Kofi} from './kofi'
- import '@/app/style/footer.scss';
+ import '@/style/footer.scss';
 
 const socialMedia = [
   {href: 'https://candy-fluffs.tumblr.com/', label: 'Link to Candy Fluffs\' Tumblr', icon: <FaTumblr/>},

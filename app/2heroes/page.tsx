@@ -1,8 +1,8 @@
 import Image from 'next/image';
-import { Product, SearchParams } from '@/app/lib/types';
-import { FaInstagram, FaXTwitter, FaPatreon } from '@/app/lib/icon-svg';
-import { ProductItem } from '@/app/components/productItem';
-import Pagination from '@/app/components/pagination';
+import { Product, SearchParams } from '@/lib/types';
+import { FaInstagram, FaXTwitter, FaPatreon } from '@/lib/icon-svg';
+import { ProductItem } from '@/components/productItem';
+import Pagination from '@/components/pagination';
 import styles from './page.module.scss';
 
 export const metadata = {

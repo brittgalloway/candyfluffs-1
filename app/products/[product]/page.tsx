@@ -1,5 +1,5 @@
-import { ProductImages } from '@/app/components/productImageDisplay';
-import styles from '@/app/style/product-page.module.scss';
+import { ProductImages } from '@/components/productImageDisplay';
+import styles from '@/style/product-page.module.scss';
 
 export default async function Product({ params }: any) {
   try {

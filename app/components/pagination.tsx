@@ -1,8 +1,8 @@
 'use client';
-import { FaChevronRight, FaChevronLeft } from '@/app/lib/icon-svg';
+import { FaChevronRight, FaChevronLeft } from '@/lib/icon-svg';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { Pageinate } from '@/app/lib/types';
-import '@/app/style/paginate.scss';
+import { Pageinate } from '@/lib/types';
+import '@/style/paginate.scss';
 
 export default function Pagination({ numberOfProducts, currentPage, maxItems }: Pageinate) {
   const router = useRouter();

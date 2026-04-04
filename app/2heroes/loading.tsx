@@ -1,4 +1,4 @@
-import Loader from '@/app/components/loader';
+import Loader from '@/components/loader';
 const HeroesLoader = () => {
   return <Loader />
 }

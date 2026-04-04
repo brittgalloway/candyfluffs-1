@@ -1,7 +1,7 @@
 'use client';
 import Link from 'next/link';
-import { FaChevronDown } from '@/app/lib/icon-svg';
-import '@/app/style/dropdown.scss';
+import { FaChevronDown } from '@/lib/icon-svg';
+import '@/style/dropdown.scss';
 
 type Filters = {
   type: string,

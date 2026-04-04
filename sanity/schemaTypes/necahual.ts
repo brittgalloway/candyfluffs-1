@@ -34,7 +34,7 @@ export const necahualPage = defineType({
           type: 'string',
         }),
         defineField({
-          name: 'attribution',
+          name: 'alt_text',
           type: 'string',
         })
       ]

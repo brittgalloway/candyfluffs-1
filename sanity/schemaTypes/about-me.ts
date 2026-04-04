@@ -22,7 +22,7 @@ export const aboutMe = defineType({
           type: 'string',
         }),
         defineField({
-          name: 'attribution',
+          name: 'alt_text',
           type: 'string',
         })
       ]

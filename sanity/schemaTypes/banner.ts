@@ -23,7 +23,7 @@ export const banner = defineType({
           type: 'string',
         }),
         defineField({
-          name: 'attribution',
+          name: 'alt_text',
           type: 'string',
         })
       ]

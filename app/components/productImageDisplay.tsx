@@ -1,7 +1,7 @@
 'use client';
 import React, { useState } from 'react';
 import Image from 'next/image';
-import styles from '@/app/style/product-page.module.scss';
+import styles from '@/style/product-page.module.scss';
 
 type Photo ={
   src:string,

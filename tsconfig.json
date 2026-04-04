@@ -23,8 +23,36 @@
     ],
     "paths": {
       "@/*": [
-        "./*"
-      ]
+        "./*",
+      ],
+      "@/2heroes/*": [
+        "./app/2heroes/*",
+      ],
+      "@/about*/": [
+        "./app/about/*",
+      ],
+      "@/components/*": [
+        "./app/components/*",
+      ],
+      "@/contact/*": [
+        "./app/contact/*",
+      ],
+      "@/lib/*": [
+        "./app/lib/*",
+      ],
+      "@/links/*": [
+        "./app/links/*",
+      ],
+      "@/events/*": [
+        "./app/events/*",
+      ],
+      "@/products/*": [
+        "./app/products/*",
+      ],
+      "@/style/*": [
+        "./app/style/*",
+      ],
+      
     },
     "target": "ES2017"
   },

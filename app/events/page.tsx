@@ -1,4 +1,3 @@
-import { performRequest } from '@/app/lib/datocms';
 import styles from "./page.module.scss";
 
 const PAGE_CONTENT_QUERY = `

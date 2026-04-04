@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { useMediaQuery } from 'react-responsive';
 import Link from 'next/link';
 import Image from 'next/image';
-import {FaBagShopping } from '@/app/lib/icon-svg';
+import {FaBagShopping } from '@/lib/icon-svg';
 import Burger from '@/public/hamburger.svg';
 
 const nav = [

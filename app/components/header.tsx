@@ -4,10 +4,10 @@ import Link from 'next/link';
 import { useMediaQuery } from 'react-responsive';
 import { 
   FaInstagram, FaBluesky, FaTumblr, FaBagShopping,FaUser
-} from '@/app/lib/icon-svg';
+} from '@/lib/icon-svg';
 import { Nav } from './nav';
 import Logo from '@/public/logo.jpg';
-import '@/app/style/header.scss';
+import '@/style/header.scss';
 
 const socialMedia = [
   {href: 'https://candy-fluffs.tumblr.com/', label: 'Link to Candy Fluffs\' Tumblr', icon: <FaTumblr/>},
