@@ -8,18 +8,19 @@
     "start": "next start"
   },
   "dependencies": {
-    "@datocms/cda-client": "^0.2.2",
-    "@fortawesome/free-brands-svg-icons": "^6.5.2",
-    "@fortawesome/free-solid-svg-icons": "^6.5.2",
-    "@fortawesome/react-fontawesome": "^0.2.0",
     "@netlify/plugin-nextjs": "^5.7.2",
+    "@sanity/image-url": "^2.1.1",
+    "@sanity/vision": "^5.19.0",
     "embla-carousel-autoplay": "^8.3.0",
     "embla-carousel-react": "^8.3.0",
     "next": "^16.0.7",
+    "next-sanity": "^12.1.1",
     "react": "^19.2.1",
     "react-dom": "^19.2.1",
     "react-responsive": "^10.0.0",
-    "sharp": "^0.33.5"
+    "sanity": "^5.14.1",
+    "sharp": "^0.33.5",
+    "styled-components": "^6.3.12"
   },
   "devDependencies": {
     "@types/node": "^20",

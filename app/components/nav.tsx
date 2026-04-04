@@ -3,8 +3,7 @@ import React, { useState } from 'react';
 import { useMediaQuery } from 'react-responsive';
 import Link from 'next/link';
 import Image from 'next/image';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBagShopping } from '@fortawesome/free-solid-svg-icons';
+import {FaBagShopping } from '@/lib/icon-svg';
 import Burger from '@/public/hamburger.svg';
 
 const nav = [
@@ -59,7 +58,7 @@ export function Nav() {
             tabIndex={1}
             />
           <span className="snipcart-checkout shopping-icon">
-            <FontAwesomeIcon icon={faBagShopping}/>
+            <FaBagShopping/>
             <span className="snipcart-items-count"></span>
           </span>
         </div>

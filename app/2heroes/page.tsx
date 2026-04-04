@@ -1,10 +1,8 @@
 import Image from 'next/image';
-import { performRequest, limit } from '@/app/lib/datocms';
-import { Product, SearchParams } from '@/app/lib/types';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faInstagram, faXTwitter, faPatreon } from '@fortawesome/free-brands-svg-icons';
-import { ProductItem } from '@/app/components/productItem';
-import Pagination from '@/app/components/pagination';
+import { Product, SearchParams } from '@/lib/types';
+import { FaInstagram, FaXTwitter, FaPatreon } from '@/lib/icon-svg';
+import { ProductItem } from '@/components/productItem';
+import Pagination from '@/components/pagination';
 import styles from './page.module.scss';
 
 export const metadata = {
@@ -57,9 +55,9 @@ export default async function TwoHeroes({searchParams}: SearchParams) {
   const { data: { necahual, allProducts, _allProductsMeta} } = await performRequest({ query: PAGE_CONTENT_QUERY });
   const productCount = _allProductsMeta.count;
   const socialMedia = [
-    {href: 'https://www.patreon.com/2heroes', label: 'Link to 2Heroes\' Patreon', icon: faPatreon},
-    {href: 'https://www.instagram.com/2.heroes/', label: 'Link to 2Heroes\' Instagram', icon: faInstagram},
-    {href: 'https://twitter.com/2Heroes1/', label: 'Link to 2Heroes\' X', icon: faXTwitter},
+    {href: 'https://www.patreon.com/2heroes', label: 'Link to 2Heroes\' Patreon', icon: <FaPatreon/>},
+    {href: 'https://www.instagram.com/2.heroes/', label: 'Link to 2Heroes\' Instagram', icon: <FaInstagram/>},
+    {href: 'https://twitter.com/2Heroes1/', label: 'Link to 2Heroes\' X', icon: <FaXTwitter/>},
   ]
   return (
     <>
@@ -78,7 +76,7 @@ export default async function TwoHeroes({searchParams}: SearchParams) {
         <p className={`${styles.span3mobile} ${styles.necahual}`}>{necahual?.summary?.value?.document?.children[0]?.children[0]?.value}</p>
         <h2 className={`${styles.span3mobile} ${styles.necahual} ${styles.alignCenter}`}>Support us on:</h2>
         {socialMedia.map((link) => (
-          <a key={link.href} href={link.href} aria-label={link.label}><FontAwesomeIcon icon={link.icon} size="lg"/></a>
+          <a key={link.href} href={link.href} aria-label={link.label}>{link.icon}</a>
         ))}
         <p className={`${styles.span3mobile} ${styles.necahual}`}><small>{necahual?.patreonDisclaimer}</small></p>
       </section>
@@ -109,8 +107,7 @@ export default async function TwoHeroes({searchParams}: SearchParams) {
 } catch{
    return (
     <div>
-      <h2 id="errorH2">Taking a Short break!</h2>
-      <span id="errorSpan">Will be back April 1st!</span>
+      <h2 id="errorH2">Opps! We had a problem loading the page.</h2>
     </div>
   )
 }

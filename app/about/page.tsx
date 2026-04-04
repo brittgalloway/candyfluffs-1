@@ -1,5 +1,4 @@
 import Image from 'next/image';
-import { performRequest } from '@/app/lib/datocms';
 import styles from './page.module.scss';
 
 export const metadata = {

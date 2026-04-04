@@ -1,9 +1,8 @@
 'use client';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronRight, faChevronLeft } from '@fortawesome/free-solid-svg-icons';
+import { FaChevronRight, FaChevronLeft } from '@/lib/icon-svg';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { Pageinate } from '@/app/lib/types';
-import '@/app/style/paginate.scss';
+import { Pageinate } from '@/lib/types';
+import '@/style/paginate.scss';
 
 export default function Pagination({ numberOfProducts, currentPage, maxItems }: Pageinate) {
   const router = useRouter();
@@ -59,7 +58,7 @@ export default function Pagination({ numberOfProducts, currentPage, maxItems }: 
               }}
               className={`arrow-nav ${currentPage == 1 ? "inactive" : "active"}`}
             >
-              <FontAwesomeIcon icon={faChevronLeft}/>
+              <FaChevronLeft/>
               <span>Previous</span>
             </button>
           {pageItems.map((item) => {
@@ -75,7 +74,7 @@ export default function Pagination({ numberOfProducts, currentPage, maxItems }: 
               className={`arrow-nav next ${(lastProductIndex === numberOfProducts) ? "inactive" : "active"}`}
             >
               <span>Next</span>
-              <FontAwesomeIcon icon={faChevronRight}/>
+              <FaChevronRight/>
             </button>
         </nav>
     </div>

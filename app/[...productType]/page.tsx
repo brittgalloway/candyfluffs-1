@@ -1,8 +1,7 @@
-import { performRequest, limit } from '@/app/lib/datocms';
-import { Product } from '@/app/lib/types';
-import { ProductItem } from '@/app/components/productItem';
-import Dropdown from '@/app/components/dropdown';
-import Pagination from '@/app/components/pagination';
+import { Product } from '@/lib/types';
+import { ProductItem } from '@/components/productItem';
+import Dropdown from '@/components/dropdown';
+import Pagination from '@/components/pagination';
 
 type ParamTypes ={
   params: {
