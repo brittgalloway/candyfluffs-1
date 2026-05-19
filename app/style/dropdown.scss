@@ -2,31 +2,69 @@
   grid-column: 1/3;
   text-align: center;
   font-size: 1.5rem;
-  z-index: 5;
-  height: 30px;
   margin-bottom: 2rem;
+
   @media (width >= 550px) {
     grid-column: 1/4;
   }
   @media (width >= 1440px) {
     grid-column: 1/5;
   }
+
   button {
     color: var(--gray);
     font-size: 1.5rem;
     cursor: pointer;
     background: transparent;
     border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    margin: 0 auto;
+
+    // Rotate chevron when popover is open
+    &:has(+ #category:popover-open) svg {
+      transform: rotate(180deg);
+      transition: transform 0.2s ease;
+    }
   }
-  ul {
-    list-style: none;
-    margin-top: 1rem;
-    padding: 2rem;
+
+  #category {
+    // Reset browser popover defaults
     border: 2px solid var(--faded-highlight);
     border-radius: var(--radius);
     background: var(--background);
+    padding: 1rem 2rem;
+    margin: 0;
+
+    // Position anchored below the button
+    position-area: bottom;
+    position-anchor: --category-anchor;
+    min-width: 200px;
+
+    list-style: none;
+
     li {
       margin-block: 1rem;
     }
+
+    // Animate open/close
+    transition: display 0.2s allow-discrete, opacity 0.2s ease;
+    opacity: 1;
+
+    &:not(:popover-open) {
+      opacity: 0;
+    }
+
+    @starting-style {
+      &:popover-open {
+        opacity: 0;
+      }
+    }
   }
+}
+
+#category-trigger {
+  anchor-name: --category-anchor;
 }
