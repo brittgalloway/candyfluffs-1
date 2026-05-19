@@ -52,7 +52,9 @@
       "@/style/*": [
         "./app/style/*",
       ],
-      
+      "b/sanityLib/*": [
+        "./sanity/lib/*"
+      ]
     },
     "target": "ES2017"
   },

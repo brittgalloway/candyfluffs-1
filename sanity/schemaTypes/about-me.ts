@@ -6,6 +6,12 @@ export const aboutMe = defineType({
   type: 'document',
   fields: [
     defineField({
+      title: 'gretting',
+      name: 'greeting',
+      type: 'string',
+      description:'Greeting to the reader'
+    }),
+    defineField({
       title: 'Bio',
       name: 'bio',
       type: 'text',
