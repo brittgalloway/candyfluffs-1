@@ -1,5 +1,5 @@
 'use client';
-import { FaChevronRight, FaChevronLeft } from '@/lib/icon-svg';
+import { FaChevronRight, FaChevronLeft } from './icons';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { Pageinate } from '@/lib/types';
 import '@/style/paginate.scss';
@@ -19,15 +19,12 @@ export default function Pagination({ numberOfProducts, currentPage, maxItems }: 
     const pageNumber = (i - 1) / maxItems + 1;
     const isSelected = pageNumber === currentPage;
     pageItems.push(
-      <button key={pageNumber}
+      <button
+        key={pageNumber}
         type="button"
-        aria-current="page"
-        className={`${
-          isSelected ? 'selected' : ''
-        }`}
-        onClick={() => {
-          exportQueryParameters('page', pageNumber.toString());
-        }}
+        aria-current={isSelected ? 'page' : undefined}
+        className={isSelected ? 'selected' : ''}
+        onClick={() => exportQueryParameters('page', pageNumber.toString())}
       >
         {pageNumber}
       </button>,
@@ -36,47 +33,43 @@ export default function Pagination({ numberOfProducts, currentPage, maxItems }: 
 
   const firstProductIndex = 1 + (currentPage - 1) * maxItems;
   const lastProductIndex =
-      currentPage * maxItems <= numberOfProducts
+    currentPage * maxItems <= numberOfProducts
       ? currentPage * maxItems
       : numberOfProducts;
+  const isLastPage = lastProductIndex === numberOfProducts;
+
   return (
-    <div id={`pagination`}>
-        <p className="page-results">
-          Showing <span className="font-medium">{firstProductIndex}</span> to
-          <span className="font-medium"> {lastProductIndex}</span> of
-          <span className="font-medium"> {numberOfProducts}</span> results
-        </p>
-        <nav
-          aria-label="Pagination"
+    <div id='pagination'>
+      <p className="page-results">
+        Showing <span className="font-medium">{firstProductIndex}</span> to
+        <span className="font-medium"> {lastProductIndex}</span> of
+        <span className="font-medium"> {numberOfProducts}</span> results
+      </p>
+      <nav aria-label="Pagination">
+        <button
+          type="button"
+          onClick={() => {
+            if (currentPage !== 1) exportQueryParameters('page', (currentPage - 1).toString());
+          }}
+          aria-disabled={currentPage === 1}
+          className={`arrow-nav ${currentPage === 1 ? 'inactive' : 'active'}`}
         >
-            <button key={"decrease"}
-              type="button"
-              onClick={() => {
-                currentPage !== 1 ?
-                exportQueryParameters('page', (currentPage - 1).toString()) :
-                null;
-              }}
-              className={`arrow-nav ${currentPage == 1 ? "inactive" : "active"}`}
-            >
-              <FaChevronLeft/>
-              <span>Previous</span>
-            </button>
-          {pageItems.map((item) => {
-            return item;
-          })}
-            <button key={"increase"}
-              type="button"
-              onClick={() => {
-                  {!(lastProductIndex === numberOfProducts) ?
-                  exportQueryParameters('page', (currentPage + 1).toString()):
-                  null;
-              }}}
-              className={`arrow-nav next ${(lastProductIndex === numberOfProducts) ? "inactive" : "active"}`}
-            >
-              <span>Next</span>
-              <FaChevronRight/>
-            </button>
-        </nav>
+          <FaChevronLeft size={14} />
+          <span>Previous</span>
+        </button>
+        {pageItems}
+        <button
+          type="button"
+          onClick={() => {
+            if (!isLastPage) exportQueryParameters('page', (currentPage + 1).toString());
+          }}
+          aria-disabled={isLastPage}
+          className={`arrow-nav next ${isLastPage ? 'inactive' : 'active'}`}
+        >
+          <span>Next</span>
+          <FaChevronRight size={14} />
+        </button>
+      </nav>
     </div>
   );
-};
+}

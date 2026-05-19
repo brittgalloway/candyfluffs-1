@@ -1,12 +1,12 @@
 import { ProductImages } from '@/components/productImageDisplay';
 import styles from '@/style/product-page.module.scss';
 
-export default async function Product({ params }: any) {
+export default async function Product({ params }: { params: Promise<{ product: string }> }) {
   try {
   const { product } = await params;
   const PAGE_CONTENT_QUERY = `
-    query productQuery {
-      product(filter: {slug: {eq: "${product}"}}) {
+    query productQuery($slug: String!) {
+      product(filter: {slug: {eq: $slug}}) {
         id
         fandoms
         description(markdown: true)
@@ -32,10 +32,11 @@ export default async function Product({ params }: any) {
       }
     }
   `;
-  const { data } = await performRequest({ query: PAGE_CONTENT_QUERY });
+  const { data } = await performRequest({ query: PAGE_CONTENT_QUERY, variables: { slug: product } });
   const datoProduct = data.product;
-  const domain = process.env.NODE_ENV == 'development' ? 'https://deploy-preview-22--candyfluffsdemo.netlify.app' 
-    : '';
+  const domain = process.env.NODE_ENV === 'production'
+    ? (process.env.NEXT_PUBLIC_SITE_URL ?? '')
+    : 'http://localhost:3000';
   const formatedPrice = datoProduct.price.toLocaleString("en-US", { style: "currency", currency: "USD" });
   function handleVariantion() {
     const options = datoProduct.variation.map((variant: {title: string, price:number}) => {

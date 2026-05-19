@@ -122,4 +122,15 @@
     max-height: 255px;
     overflow-y: auto;
   }
+}.thumbnailButton {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  border-radius: var(--radius);
+  flex-shrink: 0;
+  &[aria-pressed="true"] img {
+    outline: 2px solid var(--highlight);
+    border-radius: var(--radius);
+  }
 }

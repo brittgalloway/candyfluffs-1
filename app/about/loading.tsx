@@ -1,7 +1,7 @@
-import Loader from "../components/loader"
+import { FaSpinner } from '@/app/components/icons';
 
 const AboutLoader = () => {
-  return <Loader />
-}
+  return <FaSpinner size={80} id="spinner" />;
+};
 
 export default AboutLoader;

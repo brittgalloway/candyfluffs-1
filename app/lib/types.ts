@@ -1,14 +1,12 @@
 export type Product = {
-  id: string, 
-  title: string, 
-  price: number, 
-  slug: string, 
-  image: [
-    { 
-      url: string, 
-      alt: string 
-    }
-  ]
+  id: string;
+  title: string;
+  price: number;
+  slug: string;
+  image: Array<{
+    url: string;
+    alt: string;
+  }>;
 }
 
 export type Pageinate = {
@@ -18,8 +16,34 @@ export type Pageinate = {
 }
 
 export type SearchParams = {
-  searchParams: {
-    page?:string
-  }
+  searchParams: Promise<{
+    page?: string;
+  }>;
 }
 
+export type Banner = {
+  link: {
+    value: {
+      document: {
+        children: Array<{
+          children: Array<{ url: string }>;
+        }>;
+      };
+    };
+  };
+  banner: Array<{
+    id: string;
+    alt: string;
+    responsiveImage: {
+      src: string;
+      width: number;
+      height: number;
+    };
+  }>;
+}
+
+export type Link = {
+  id: string;
+  url: string;
+  label: string;
+}

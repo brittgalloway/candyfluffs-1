@@ -24,9 +24,9 @@ export async function ProductItem({id, title, slug, url, alt, price}: ProductDat
     }
   };
   const response = await fetch(apiUrl, options);
-  const data = response.status == 200 ? await response.json() : 0;
+  const data = response.status === 200 ? await response.json() : null;
   
-  const isSoldOut = data.totalStock == 0 ?  true : false;
+  const isSoldOut = data?.totalStock === 0;
 
   return(
     <>
