@@ -37,7 +37,9 @@ export function Nav() {
         ))}
         {isMobile ? (
           <>
-            <li onClick={handleMenuToggle} onKeyDown={handleMenuToggle} className="snipcart-customer-signin">Account</li>
+            <li>
+              <button onClick={handleMenuToggle} className="snipcart-customer-signin">Account</button>
+            </li>
             {navMobile.map((link) => (
               <li onClick={handleMenuToggle} onKeyDown={handleMenuToggle} key={link.label}>
                 <Link href={link.href}>{link.label}</Link>

@@ -20,7 +20,7 @@ const Slider: FC<PropType> = (props) => {
   const { selectedIndex, scrollSnaps, onDotButtonClick } =
     useDotButton(emblaApi);
     return (
-      <header className="embla" dir="rtl">
+      <section className="embla" dir="rtl" aria-label="Banner carousel">
         <div className="embla__viewport" ref={emblaRef}>
           <div className="embla__container">
             {slides.map((slide) => {
@@ -47,6 +47,8 @@ const Slider: FC<PropType> = (props) => {
             <DotButton
               key={index}
               onClick={() => onDotButtonClick(index)}
+              aria-label={`Go to slide ${index + 1}`}
+              aria-current={index === selectedIndex ? 'true' : undefined}
               className={'embla__dot'.concat(
                 index === selectedIndex ? ' embla__dot--selected' : ''
               )}
@@ -54,7 +56,7 @@ const Slider: FC<PropType> = (props) => {
           ))}
         </div>
       </div>
-    </header>
+    </section>
   )
 }
 
