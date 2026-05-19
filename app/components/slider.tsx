@@ -5,10 +5,11 @@ import { EmblaOptionsType } from 'embla-carousel';
 import { DotButton, useDotButton } from './sliderDots';
 import useEmblaCarousel from 'embla-carousel-react';
 import Autoplay from 'embla-carousel-autoplay';
+import { Banner } from '@/app/lib/types';
 import '../style/slider.scss';
 
 type PropType = {
-  slides: any[]
+  slides: Banner[]
   options?: EmblaOptionsType
 }
 
@@ -20,7 +21,7 @@ const Slider: FC<PropType> = (props) => {
   const { selectedIndex, scrollSnaps, onDotButtonClick } =
     useDotButton(emblaApi);
     return (
-      <header className="embla" dir="rtl">
+      <section className="embla" dir="rtl" aria-label="Banner carousel">
         <div className="embla__viewport" ref={emblaRef}>
           <div className="embla__container">
             {slides.map((slide) => {
@@ -47,6 +48,8 @@ const Slider: FC<PropType> = (props) => {
             <DotButton
               key={index}
               onClick={() => onDotButtonClick(index)}
+              aria-label={`Go to slide ${index + 1}`}
+              aria-current={index === selectedIndex ? 'true' : undefined}
               className={'embla__dot'.concat(
                 index === selectedIndex ? ' embla__dot--selected' : ''
               )}
@@ -54,7 +57,7 @@ const Slider: FC<PropType> = (props) => {
           ))}
         </div>
       </div>
-    </header>
+    </section>
   )
 }
 

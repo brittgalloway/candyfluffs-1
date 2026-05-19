@@ -1,4 +1,10 @@
-export const performRequest = async ({ query, variables = {}, includeDrafts = false }) => {
+type PerformRequestParams = {
+  query: string;
+  variables?: Record<string, unknown>;
+  includeDrafts?: boolean;
+};
+
+export const performRequest = async ({ query, variables = {}, includeDrafts = false }: PerformRequestParams) => {
   try {
     const response = await fetch("https://graphql.datocms.com/", {
       headers: {
@@ -8,18 +14,19 @@ export const performRequest = async ({ query, variables = {}, includeDrafts = fa
       method: "POST",
       body: JSON.stringify({ query, variables }),
     });
-    
+
     const responseBody = await response.json();
-    
+
     if (!response.ok) {
       throw new Error(`${response.status} ${response.statusText}: ${JSON.stringify(responseBody)}`);
     }
-    
+
     return responseBody;
   } catch (error) {
     console.error("Error performing request:", error);
-    throw error; // Rethrow the error after logging it
+    throw error;
   }
-}
+};
+
 // used for pagination, it's the limit of products displayed on the page
 export const limit = 16;

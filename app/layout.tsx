@@ -3,11 +3,7 @@ import Script from 'next/script';
 import { Header } from './components/header';
 import { Footer } from './components/footer';
 import { lato } from './fonts';
-import { config } from '@fortawesome/fontawesome-svg-core';
-import '@fortawesome/fontawesome-svg-core/styles.css';
 import './style/globals.scss';
-
-config.autoAddCss = false;
 
 export const metadata: Metadata = {
   title: 'Candy Fluffs',
@@ -52,7 +48,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{
             __html: `
               window.SnipcartSettings = {
-                publicApiKey: "${process.env.SNIPCART_APIKEY}",
+                publicApiKey: "${process.env.NEXT_PUBLIC_SNIPCART_APIKEY}",
                 loadStrategy: "on-user-interaction",
                 currency: "usd",
                 modalStyle: "side",
@@ -131,5 +127,3 @@ export default function RootLayout({
     </html>
   );
 }
-
-
