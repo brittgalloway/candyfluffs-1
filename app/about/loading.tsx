@@ -1,8 +1,7 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSpinner } from '@fortawesome/free-solid-svg-icons';
+import { FaSpinner } from '@/app/components/icons';
 
 const AboutLoader = () => {
-  return <FontAwesomeIcon icon={faSpinner} id="spinner" size="lg"/>  
-}
+  return <FaSpinner size={24} id="spinner" />;
+};
 
-export default AboutLoader
+export default AboutLoader;

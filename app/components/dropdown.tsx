@@ -1,37 +1,31 @@
 'use client';
+import { useState } from 'react';
 import Link from 'next/link';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
+import { FaChevronDown } from './icons';
 import '@/app/style/dropdown.scss';
 
 type Filters = {
-  type: string,
-  fandomList: string[]
-}
-export default function Dropdown(
-  {type, fandomList}: Filters) 
-  {
-    function handleClick() {
-      const $categoryList = document.getElementById("category");
-      $categoryList?.toggleAttribute('hidden');
-    }
-  return(
-    <nav id='category-menu' 
-      aria-label='Click to open and filter by subject category instead.'>
-      <button
-        onClick={handleClick} 
-        tabIndex={0} >
-          Categories <FontAwesomeIcon icon={faChevronDown} />
+  type: string;
+  fandomList: string[];
+};
+
+export default function Dropdown({ type, fandomList }: Filters) {
+  const [isOpen, setIsOpen] = useState(false);
+
+  return (
+    <nav id='category-menu' aria-label='Filter by subject category'>
+      <button onClick={() => setIsOpen(prev => !prev)}>
+        Categories <FaChevronDown size={14} />
       </button>
-      <ul id="category" hidden>
+      <ul id="category" hidden={!isOpen}>
         {fandomList.map((fandom) => (
           <li key={fandom}>
-            <Link href={`/${type}/${fandom.replace(' ','-')}`}>
+            <Link href={`/${type}/${fandom.replaceAll(' ', '-')}`}>
               {fandom}
             </Link>
           </li>
         ))}
       </ul>
     </nav>
-  )
+  );
 }
