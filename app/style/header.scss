@@ -89,8 +89,16 @@ header {
       text-align: center;
       padding-block: 1rem;
     }
+    li > button {
+      background: none;
+      border: none;
+      padding: 0;
+      width: 100%;
+      cursor: pointer;
+    }
     li,
-    li > a {
+    li > a,
+    li > button {
       font-size: 1.5rem;
       color: #222;
       margin-block: 1rem;
@@ -172,6 +180,8 @@ header {
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: 1fr;
+  width:2rem;
+  height: 2rem;
   color: var(--gray);
   align-items: self-end;
   &:hover {

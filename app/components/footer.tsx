@@ -45,7 +45,7 @@ export function Footer() {
       <div className='payment-methods' aria-label="Accepted payment methods">
         {paymentMethods.map((method) => (
           <span key={method.label} title={method.label}>
-            <method.Icon size={50} />
+            <method.Icon size={80} />
           </span>
         ))}
       </div>

@@ -1,10 +1,11 @@
 type IconProps = {
   size?: number;
   className?: string;
+  id?: string;
   'aria-label'?: string;
 };
 
-function Icon({ size = 24, className, 'aria-label': ariaLabel, viewBox, children }: IconProps & { viewBox: string; children: React.ReactNode }) {
+function Icon({ size = 24, className, 'aria-label': ariaLabel, viewBox, id, children }: IconProps & { viewBox: string; children: React.ReactNode }) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -15,6 +16,7 @@ function Icon({ size = 24, className, 'aria-label': ariaLabel, viewBox, children
       aria-hidden={ariaLabel ? undefined : true}
       aria-label={ariaLabel}
       className={className}
+      id={id}
     >
       {children}
     </svg>

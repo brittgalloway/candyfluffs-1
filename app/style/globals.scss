@@ -115,6 +115,8 @@ main {
 }
 @media( width >= 550px ) {
   .snipcart-customer-signin {
+    width:2rem;
+    height: 2rem;
     svg {
       width: 100%;
       height: 100%;
@@ -189,9 +191,13 @@ a {
 }
 #spinner {
   color: var(--highlight);
-  font-size: 5rem;
-  margin: 4rem;
+  fill: var(--highlight);
+  width: 5rem;
+  height: 5rem;
+  margin: 4rem auto;
+  display: block;
   animation: rotate 2s linear infinite;
+  transform-origin: center center;
 }
 #errorH2 {
   text-align: center;
