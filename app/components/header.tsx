@@ -31,17 +31,17 @@ export function Header() {
           <div className='social-links desktop'>
             {socialMedia.map((link) => (
               <a key={link.href} href={link.href} aria-label={link.label}>
-                <link.Icon size={20} />
+                <link.Icon size={26} />
               </a>
             ))}
           </div>
           <div className='shop-icons desktop'>
             <button className="snipcart-customer-signin" aria-label='Your Account'>
-              <FaUser size={20} />
+              <FaUser size={26} />
             </button>
             <button className="snipcart-checkout shopping-icon" aria-label='Checkout'>
               <span className="snipcart-items-count"></span>
-              <FaBagShopping size={20} />
+              <FaBagShopping size={26} />
             </button>
           </div>
         </>

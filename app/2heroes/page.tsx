@@ -69,7 +69,7 @@ export default async function TwoHeroes({ searchParams }: SearchParams) {
           <h2 className={`${styles.span3mobile} ${styles.necahual} ${styles.alignCenter}`}>Support us on:</h2>
           {socialMedia.map((link) => (
             <a key={link.href} href={link.href} aria-label={link.label}>
-              <link.Icon size={20} />
+              <link.Icon size={30} />
             </a>
           ))}
           <p className={`${styles.span3mobile} ${styles.necahual}`}><small>{necahual?.patreonDisclaimer}</small></p>

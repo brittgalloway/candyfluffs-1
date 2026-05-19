@@ -15,7 +15,7 @@ export default function Dropdown({ type, fandomList }: Filters) {
   return (
     <nav id='category-menu' aria-label='Filter by subject category'>
       <button onClick={() => setIsOpen(prev => !prev)}>
-        Categories <FaChevronDown size={14} />
+        Categories <FaChevronDown size={18} />
       </button>
       <ul id="category" hidden={!isOpen}>
         {fandomList.map((fandom) => (

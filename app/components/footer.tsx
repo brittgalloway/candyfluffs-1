@@ -27,7 +27,7 @@ export function Footer() {
         {isMobile ? null : <p>Connect With Me</p>}
         {socialMedia.map((link) => (
           <a key={link.href} href={link.href} aria-label={link.label}>
-            <link.Icon size={20} />
+            <link.Icon size={26} />
           </a>
         ))}
       </div>
@@ -45,7 +45,7 @@ export function Footer() {
       <div className='payment-methods' aria-label="Accepted payment methods">
         {paymentMethods.map((method) => (
           <span key={method.label} title={method.label}>
-            <method.Icon size={20} />
+            <method.Icon size={50} />
           </span>
         ))}
       </div>
