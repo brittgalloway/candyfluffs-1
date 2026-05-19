@@ -5,10 +5,11 @@ import { EmblaOptionsType } from 'embla-carousel';
 import { DotButton, useDotButton } from './sliderDots';
 import useEmblaCarousel from 'embla-carousel-react';
 import Autoplay from 'embla-carousel-autoplay';
+import { Banner } from '@/app/lib/types';
 import '../style/slider.scss';
 
 type PropType = {
-  slides: any[]
+  slides: Banner[]
   options?: EmblaOptionsType
 }
 
