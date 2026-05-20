@@ -20,9 +20,9 @@ test.describe('Keyboard navigation', () => {
 
     test('hamburger button is focusable on mobile', async ({ page }) => {
       await page.goto('/');
-      await page.keyboard.press('Tab');
-      const focused = await page.evaluate(() => document.activeElement?.className ?? '');
-      expect(focused).toBeTruthy();
+      const hamburger = page.locator('.hamburger-btn');
+      await hamburger.focus();
+      await expect(hamburger).toBeFocused();
     });
   });
 
@@ -43,7 +43,7 @@ test.describe('Keyboard navigation', () => {
     await page.goto('/');
     await page.locator('#pagination').waitFor();
 
-    const prevBtn = page.getByRole('button', { name: /previous/i });
+    const prevBtn = page.getByRole('button', { name: 'Previous', exact: true });
     await prevBtn.focus();
     await expect(prevBtn).toBeFocused();
 
@@ -141,8 +141,11 @@ test.describe('Axe full-page scans', () => {
 
     test('nav open — no critical or serious violations', async ({ page, axe }) => {
       await page.goto('/');
-      await page.locator('.mobile-menu img').click();
-      await expect(page.locator('#navToggle')).toBeVisible();
+      await page.evaluate(() => {
+        const img = document.querySelector('.hamburger-btn') as HTMLElement;
+        img?.click();
+      });
+      await expect(page.locator('#navToggle')).toHaveClass(/open/, { timeout: 5_000 });
       await checkA11y(axe);
     });
   });

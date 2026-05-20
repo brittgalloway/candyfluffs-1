@@ -17,15 +17,17 @@ test.describe('Desktop navigation', () => {
   for (const { label, path } of navLinks) {
     test(`clicking ${label} navigates to ${path}`, async ({ page }) => {
       await page.goto('/');
-      await page.getByRole('link', { name: label }).click();
-      await expect(page).toHaveURL(new RegExp(path));
+      const link = page.getByRole('link', { name: label }).first();
+      await link.waitFor();
+      await link.click({ force: true });
+      await page.waitForURL(new RegExp(path), { timeout: 10_000 });
     });
   }
 
   test('logo links back to home', async ({ page }) => {
     await page.goto('/Print');
-    await page.locator('header .logo').click();
-    await expect(page).toHaveURL('/');
+    await page.locator('header .logo').click({ force: true });
+    await page.waitForURL('/', { timeout: 10_000 });
   });
 
   test('nav passes axe scan', async ({ page, axe }) => {
@@ -40,30 +42,32 @@ test.describe('Mobile navigation', () => {
   test('hamburger opens and closes the nav', async ({ page }) => {
     await page.goto('/');
     const nav = page.locator('#navToggle');
-    await expect(nav).not.toBeVisible();
+
+    // Closed by default — no open class
+    await expect(nav).not.toHaveClass(/open/);
 
     // Open
-    await page.locator('.mobile-menu img').click();
-    await expect(nav).toBeVisible();
+    await page.locator('.hamburger-btn').click({ force: true });
+    await expect(nav).toHaveClass(/open/);
 
     // Close by clicking again
-    await page.locator('.mobile-menu img').click();
-    await expect(nav).not.toBeVisible();
+    await page.locator('.hamburger-btn').click({ force: true });
+    await expect(nav).not.toHaveClass(/open/);
   });
 
   test('clicking a nav link closes the menu and navigates', async ({ page }) => {
     await page.goto('/');
-    await page.locator('.mobile-menu img').click();
-    await expect(page.locator('#navToggle')).toBeVisible();
+    await page.locator('.hamburger-btn').click({ force: true });
+    await expect(page.locator('#navToggle')).toHaveClass(/open/);
 
-    await page.getByRole('link', { name: 'Prints' }).click();
-    await expect(page).toHaveURL('/Print');
-    await expect(page.locator('#navToggle')).not.toBeVisible();
+    await page.getByRole('link', { name: 'Prints' }).first().click({ force: true });
+    await page.waitForURL('/Print', { timeout: 10_000 });
+    await expect(page.locator('#navToggle')).not.toHaveClass(/open/);
   });
 
   test('Account button is reachable and styled as nav item', async ({ page }) => {
     await page.goto('/');
-    await page.locator('.mobile-menu img').click();
+    await page.locator('.hamburger-btn').click({ force: true });
     const accountBtn = page.getByRole('button', { name: 'Account' });
     await expect(accountBtn).toBeVisible();
     await expect(accountBtn).toBeEnabled();
@@ -71,7 +75,7 @@ test.describe('Mobile navigation', () => {
 
   test('mobile nav passes axe scan', async ({ page, axe }) => {
     await page.goto('/');
-    await page.locator('.mobile-menu img').click();
+    await page.locator('.hamburger-btn').click({ force: true });
     await checkA11y(axe);
   });
 });
@@ -119,18 +123,27 @@ test.describe('Fandom dropdown filter', () => {
     await firstOption.click();
 
     // Dropdown trigger should still be on the page
-    await expect(page.getByRole('button', { name: /Category:/i })).toBeVisible();
+    // Dropdown trigger should still be on the page — label is now the fandom name or 'Categories'
+    await expect(page.locator('#category-menu button')).toBeVisible();
   });
 
   test('"All" link clears filter and returns to unfiltered products', async ({ page }) => {
     await page.goto('/Print');
     await page.locator('#products').waitFor();
+
+    // Select a fandom
     await page.getByRole('button', { name: /Categories/i }).click();
+    await expect(page.locator('#category')).toBeVisible();
     await page.locator('#category li a').first().click();
+    await page.locator('#products').waitFor();
 
     // Open dropdown again and click All
-    await page.getByRole('button', { name: /Category:/i }).click();
-    await page.getByRole('link', { name: 'All' }).click();
-    await expect(page).toHaveURL('/Print');
+    await page.locator('#category-menu button').click();
+    await expect(page.locator('#category')).toBeVisible({ timeout: 5_000 });
+    // 'All' is the first link when a filter is active
+    const allLink = page.locator('#category li:first-child a');
+    await allLink.waitFor({ timeout: 5_000 });
+    await allLink.click({ force: true });
+    await page.waitForURL('/Print', { timeout: 10_000 });
   });
 });

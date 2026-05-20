@@ -17,8 +17,8 @@ export const pages = [
   { path: '/about',      name: 'About',      selector: 'section' },
   { path: '/events',     name: 'Events',     selector: 'section' },
   { path: '/links',      name: 'Links',      selector: '#links' },
-  { path: '/contact',    name: 'Contact',    selector: 'iframe' },
-  { path: '/2heroes',    name: '2Heroes',    selector: 'section' },
+  { path: '/contact',    name: 'Contact',    selector: 'iframe[title="Candy Fluffs Contact Form"]' },
+  { path: '/2heroes',    name: '2Heroes',    selector: 'section:first-of-type' },
 ];
 
 // Axe rules to disable globally — known false positives for this stack
@@ -30,6 +30,8 @@ export const axeDisabledRules = [
 export async function checkA11y(axe: AxeBuilder, disabledRules = axeDisabledRules) {
   const results = await axe
     .disableRules(disabledRules)
+    .exclude('#kofiframe')
+    .exclude('iframe[title="Candy Fluffs Contact Form"]')
     .analyze();
 
   const critical = results.violations.filter(

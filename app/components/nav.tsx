@@ -49,16 +49,20 @@ export function Nav() {
         ) : null}
       </ul>
       <div className='mobile-menu'>
-        <Image
-          src={Burger}
-          alt='3 horizontal lines to represent a hamburger menu trigger'
-          width={37}
-          height={24}
-          aria-label='Click here to open the navigation menu.'
+        <button
+          className='hamburger-btn'
           onClick={handleMenuToggle}
-          onKeyDown={handleMenuToggle}
-          tabIndex={1}
-        />
+          aria-label='Open navigation menu'
+          aria-expanded={isOpen}
+          aria-controls='navToggle'
+        >
+          <Image
+            src={Burger}
+            alt=''
+            width={37}
+            height={24}
+          />
+        </button>
         <span className="snipcart-checkout shopping-icon">
           <FaBagShopping size={20} />
           <span className="snipcart-items-count"></span>

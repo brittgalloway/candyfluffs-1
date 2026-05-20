@@ -36,10 +36,10 @@ export function Header() {
             ))}
           </div>
           <div className='shop-icons desktop'>
-            <button className="snipcart-customer-signin" aria-label='Your Account'>
+            <button className="snipcart-customer-signin" name="account" aria-label='Your Account'>
               <FaUser size={26} />
             </button>
-            <button className="snipcart-checkout shopping-icon" aria-label='Checkout'>
+            <button className="snipcart-checkout shopping-icon" name="checkout" aria-label='Checkout'>
               <span className="snipcart-items-count"></span>
               <FaBagShopping size={26} />
             </button>

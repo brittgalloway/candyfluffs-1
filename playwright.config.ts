@@ -35,13 +35,14 @@ export default defineConfig({
     },
   ],
 
-  // Start Next.js dev server automatically when running locally
+  // Start Next.js server automatically when running locally
+  // Uses the built app (next start) to avoid Next.js dev overlay interfering with tests
   webServer: process.env.CI
     ? undefined
     : {
-        command: 'npm run dev',
+        command: 'npm run build && npm run start',
         url: 'http://localhost:3000',
-        reuseExistingServer: true,
+        reuseExistingServer: false,
         timeout: 120_000,
       },
 });

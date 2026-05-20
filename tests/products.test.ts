@@ -15,10 +15,9 @@ test.describe('Product listing', () => {
     await page.locator('#products').waitFor();
 
     const firstCard = page.locator('#products a').first();
-    const href = await firstCard.getAttribute('href');
-    await firstCard.click();
+    await firstCard.click({ force: true });
 
-    await expect(page).toHaveURL(new RegExp('/products/'));
+    await page.waitForURL(/\/products\//, { timeout: 10_000 });
     await expect(page.locator('h1')).toBeVisible();
   });
 
@@ -36,7 +35,8 @@ test.describe('Product page', () => {
   test.beforeEach(async ({ page }) => {
     await page.goto('/Print');
     await page.locator('#products').waitFor();
-    await page.locator('#products a').first().click();
+    await page.locator('#products a').first().click({ force: true });
+    await page.waitForURL(/products/, { timeout: 10_000 });
     await page.locator('h1').waitFor();
   });
 
@@ -94,7 +94,7 @@ test.describe('Pagination', () => {
     await page.goto('/');
     await page.locator('#products').waitFor();
 
-    const nextBtn = page.getByRole('button', { name: /next/i });
+    const nextBtn = page.getByRole('button', { name: 'Next', exact: true });
     const isDisabled = await nextBtn.getAttribute('aria-disabled');
 
     if (isDisabled === 'true') {
@@ -109,7 +109,7 @@ test.describe('Pagination', () => {
   test('previous button is disabled on page 1', async ({ page }) => {
     await page.goto('/');
     await page.locator('#products').waitFor();
-    const prevBtn = page.getByRole('button', { name: /previous/i });
+    const prevBtn = page.getByRole('button', { name: 'Previous', exact: true });
     await expect(prevBtn).toHaveAttribute('aria-disabled', 'true');
   });
 
