@@ -53,3 +53,8 @@ jobs:
           name: playwright-report
           path: playwright-report/
           retention-days: 30
+
+      - name: Trigger Netlify deploy
+        if: success()
+        run: |
+          curl -X POST -d {} ${{ secrets.NETLIFY_DEPLOY_HOOK }}
