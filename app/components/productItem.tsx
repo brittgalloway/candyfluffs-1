@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import '@/app/style/product-item.scss';
+import '@/style/product-item.scss';
 
 type ProductData = {
   id: string, 

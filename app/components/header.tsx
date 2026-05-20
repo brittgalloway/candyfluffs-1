@@ -4,8 +4,8 @@ import Link from 'next/link';
 import { useMediaQuery } from 'react-responsive';
 import { FaBagShopping, FaUser, FaInstagram, FaBluesky, FaTumblr } from './icons';
 import { Nav } from './nav';
-import Logo from '@/public/logo.jpg';
-import '@/app/style/header.scss';
+import Logo from 'p/logo.jpg';
+import '@/style/header.scss';
 
 const socialMedia = [
   { href: 'https://candy-fluffs.tumblr.com/', label: "Link to Candy Fluffs' Tumblr", Icon: FaTumblr },
@@ -36,10 +36,10 @@ export function Header() {
             ))}
           </div>
           <div className='shop-icons desktop'>
-            <button className="snipcart-customer-signin" aria-label='Your Account'>
+            <button className="snipcart-customer-signin" name="account" aria-label='Your Account'>
               <FaUser size={26} />
             </button>
-            <button className="snipcart-checkout shopping-icon" aria-label='Checkout'>
+            <button className="snipcart-checkout shopping-icon" name="checkout" aria-label='Checkout'>
               <span className="snipcart-items-count"></span>
               <FaBagShopping size={26} />
             </button>

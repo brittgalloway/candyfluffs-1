@@ -1,6 +1,6 @@
-import { performRequest } from '@/app/lib/datocms';
-import { ProductImages } from '@/app/components/productImageDisplay';
-import styles from '@/app/style/product-page.module.scss';
+import { performRequest } from '@/lib/datocms';
+import { ProductImages } from '@/components/productImageDisplay';
+import styles from '@/style/product-page.module.scss';
 
 export default async function Product({ params }: { params: Promise<{ product: string }> }) {
   try {

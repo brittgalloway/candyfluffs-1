@@ -3,7 +3,7 @@ import { useMediaQuery } from 'react-responsive';
 import Link from 'next/link';
 import { FaInstagram, FaTumblr, FaBluesky, FaCcVisa, FaCcMastercard, FaCcPaypal } from './icons';
 import { Kofi } from './kofi';
-import '@/app/style/footer.scss';
+import '@/style/footer.scss';
 
 const socialMedia = [
   { href: 'https://candy-fluffs.tumblr.com/', label: "Link to Candy Fluffs' Tumblr", Icon: FaTumblr },
@@ -45,7 +45,7 @@ export function Footer() {
       <div className='payment-methods' aria-label="Accepted payment methods">
         {paymentMethods.map((method) => (
           <span key={method.label} title={method.label}>
-            <method.Icon size={80} />
+            <method.Icon size={50} />
           </span>
         ))}
       </div>

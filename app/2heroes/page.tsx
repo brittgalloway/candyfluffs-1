@@ -1,9 +1,9 @@
 import Image from 'next/image';
-import { performRequest, limit } from '@/app/lib/datocms';
-import { Product, SearchParams } from '@/app/lib/types';
-import { FaInstagram, FaXTwitter, FaPatreon } from '@/app/components/icons';
-import { ProductItem } from '@/app/components/productItem';
-import Pagination from '@/app/components/pagination';
+import { performRequest, limit } from '@/lib/datocms';
+import { Product, SearchParams } from '@/lib/types';
+import { FaInstagram, FaXTwitter, FaPatreon } from '@/components/icons';
+import { ProductItem } from '@/components/productItem';
+import Pagination from '@/components/pagination';
 import styles from './page.module.scss';
 
 export const metadata = {
