@@ -1,4 +1,4 @@
-import { FaSpinner } from '@/app/components/icons';
+import { FaSpinner } from '@/components/icons';
 
 const HeroesLoader = () => {
   return <FaSpinner size={80} id="spinner" />;

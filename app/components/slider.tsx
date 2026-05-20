@@ -1,11 +1,11 @@
 'use client';
-import React, { FC } from 'react';
+import { FC } from 'react';
 import Image from 'next/image';
 import { EmblaOptionsType } from 'embla-carousel';
 import { DotButton, useDotButton } from './sliderDots';
 import useEmblaCarousel from 'embla-carousel-react';
 import Autoplay from 'embla-carousel-autoplay';
-import { Banner } from '@/app/lib/types';
+import { Banner } from '@/lib/types';
 import '../style/slider.scss';
 
 type PropType = {

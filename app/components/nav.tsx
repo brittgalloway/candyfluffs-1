@@ -4,7 +4,7 @@ import { useMediaQuery } from 'react-responsive';
 import Link from 'next/link';
 import Image from 'next/image';
 import { FaBagShopping } from './icons';
-import Burger from '@/public/hamburger.svg';
+import Burger from 'p/hamburger.svg';
 
 const nav = [
   { href: '/Book', label: 'Books' },

@@ -23,8 +23,23 @@
     ],
     "paths": {
       "@/*": [
-        "./*"
-      ]
+        "./app/*"
+      ],
+      "p/*": [
+        "./public/*"
+      ],
+      "@/components/*": [
+        "./app/components/*"
+      ],
+      "@/lib/*": [
+        "./app/lib/*"
+      ],
+      "@/style/*": [
+        "./app/style/*"
+      ],
+      "@/products/*": [
+        "./app/products/*"
+      ],
     },
     "target": "ES2017"
   },

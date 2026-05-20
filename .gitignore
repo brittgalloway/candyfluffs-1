@@ -45,3 +45,5 @@ public/static
 public/~partytown
 
 /.vscode/
+/test-results/
+/playwright-report

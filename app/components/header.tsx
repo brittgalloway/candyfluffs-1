@@ -4,8 +4,8 @@ import Link from 'next/link';
 import { useMediaQuery } from 'react-responsive';
 import { FaBagShopping, FaUser, FaInstagram, FaBluesky, FaTumblr } from './icons';
 import { Nav } from './nav';
-import Logo from '@/public/logo.jpg';
-import '@/app/style/header.scss';
+import Logo from 'p/logo.jpg';
+import '@/style/header.scss';
 
 const socialMedia = [
   { href: 'https://candy-fluffs.tumblr.com/', label: "Link to Candy Fluffs' Tumblr", Icon: FaTumblr },

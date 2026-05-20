@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { FaChevronDown } from './icons';
-import '@/app/style/dropdown.scss';
+import '@/style/dropdown.scss';
 
 type Filters = {
   type: string;

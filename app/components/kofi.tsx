@@ -1,4 +1,4 @@
-import styles from '@/app/style/kofi.module.scss';
+import styles from '@/style/kofi.module.scss';
 
 export function Kofi() {
   return (
