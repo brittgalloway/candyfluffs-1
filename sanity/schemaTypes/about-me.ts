@@ -1,49 +1,30 @@
-import {defineField, defineType} from 'sanity'
+import { defineField, defineType } from 'sanity';
 
 export const aboutMe = defineType({
-  name: 'about_me',
+  name: 'aboutMe',
   title: 'About Me',
   type: 'document',
+  // Singleton — only one document of this type
+  __experimental_actions: ['update', 'publish'],
   fields: [
     defineField({
-      title: 'gretting',
-      name: 'greeting',
-      type: 'string',
-      description:'Greeting to the reader'
-    }),
-    defineField({
-      title: 'Bio',
       name: 'bio',
-      type: 'text',
-      description:'This is a blurb about you!'
+      title: 'Bio',
+      type: 'array',
+      of: [{ type: 'block' }],
+      validation: (r) => r.required(),
     }),
     defineField({
-      title: 'Image',
-      name: 'image',
+      name: 'bioImage',
+      title: 'Bio Image',
       type: 'image',
-      description:'Likely the C Joy image. WEBP and PNG prefered.',
+      options: { hotspot: true },
       fields: [
-        defineField({
-          name: 'caption',
-          type: 'string',
-        }),
-        defineField({
-          name: 'alt_text',
-          type: 'string',
-        })
-      ]
-    }),
-    defineField({
-      name: 'updatedAt',
-      type: 'datetime',
-      initialValue: () => new Date().toISOString(),
-      validation: (rule) => rule.required(),
-    }),
-    defineField({
-      name: 'publishedAt',
-      type: 'datetime',
-      initialValue: () => new Date().toISOString(),
-      validation: (rule) => rule.required(),
+        defineField({ name: 'alt', title: 'Alt text', type: 'string', validation: (r) => r.required() }),
+      ],
     }),
   ],
-})
+  preview: {
+    select: { title: 'bio.0.children.0.text', media: 'bioImage' },
+  },
+});

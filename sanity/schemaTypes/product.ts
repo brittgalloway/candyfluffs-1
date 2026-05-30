@@ -1,166 +1,56 @@
-import {defineField, defineType} from 'sanity'
-
-const variantID = crypto.randomUUID();
+import { defineField, defineType } from 'sanity';
 
 export const product = defineType({
   name: 'product',
   title: 'Product',
   type: 'document',
   fields: [
+    defineField({ name: 'title', title: 'Title', type: 'string', validation: (r) => r.required() }),
+    defineField({ name: 'slug', title: 'Slug', type: 'slug', options: { source: 'title' }, validation: (r) => r.required() }),
+    defineField({ name: 'price', title: 'Price', type: 'number', validation: (r) => r.required().min(0) }),
+    defineField({ name: 'weight', title: 'Weight (grams)', type: 'number' }),
+    defineField({ name: 'size', title: 'Size', type: 'string' }),
+    defineField({ name: 'fandoms', title: 'Fandom', type: 'string' }),
     defineField({
-      title: 'Product Title',
-      name: 'product_title',
+      name: 'productType',
+      title: 'Product Type',
       type: 'string',
+      options: {
+        list: ['Book', 'Print', 'Scroll', 'Charm', 'Button', 'Sticker'],
+      },
     }),
     defineField({
-      title: 'Price',
-      name: 'price',
-      type: 'number',
-    }),
-    defineField({
-      title: 'Description',
       name: 'description',
-      type: 'text',
-    }),
-    defineField({
-        name: 'productType',
-        type: 'string',
-        options: {
-            list: [
-              { title: "book", value: "book" },
-              { title: "button", value: "button" },
-              { title: "print", value: "print" },
-              { title: "charm", value: "charm" },
-              { title: "sticker", value: "sticker" },
-              { title: "scroll", value: "scroll" },
-              { title: "shirt", value: "shirt" },
-            ],
-        },
-        validation: (rule) => rule.required(),
-    }),
-    defineField({
-        name: 'fandom',
-        type: 'string',
-        options: {
-            list: [
-              { title: "castlevania", value: "castlevania" },
-              { title: "danmei", value: "danmei" },
-              { title: "ghibli", value: "ghibli" },
-              { title: "inuyasha", value: "inuyasha" },
-              { title: "miraculous ladybug", value: "miraculous-ladybug" },
-              { title: "necahual", value: "necahual" },
-              { title: "shonen", value: "shonen" },
-              { title: "shoujo", value: "shoujo" },
-              { title: "vampire hunter d", value: "vampire-hunter-d" },
-            ],
-        },
-        validation: (rule) => rule.required(),
-    }),
-     defineField({
-        title: 'Display Image(s)',
-        name: 'display_images',
-        type: 'reference', 
-        to: [{type: 'imageGallery'}],
-        description: 'The 1st image is also the thumbnail, so it should be a square. WEBP and JPG prefered.',
-        validation: (rule) => rule.required(),
-    }),
-    defineField({
-      name: 'variant',
+      title: 'Description',
       type: 'array',
-      of: [{ type:'document',
+      of: [{ type: 'block' }],
+    }),
+    defineField({
+      name: 'image',
+      title: 'Images',
+      type: 'array',
+      of: [{ type: 'image', options: { hotspot: true }, fields: [
+        defineField({ name: 'alt', title: 'Alt text', type: 'string' }),
+      ]}],
+      validation: (r) => r.required().min(1),
+    }),
+    defineField({
+      name: 'variation',
+      title: 'Variations',
+      type: 'array',
+      of: [{
+        type: 'object',
         fields: [
-            defineField({
-                name: 'ID',
-                type: 'string',
-                description: 'Identifier',
-                initialValue: variantID,
-            }),
-            defineField({
-                name: 'title',
-                type: 'string',
-                description: 'The defining difference, usually size, color,  or character name. Please put the default first.',
-            }),
-            defineField({
-              title: 'Variant Image',
-              name: 'variant_image',
-              type: 'image',
-              fields: [
-                defineField({
-                  name: 'caption',
-                  type: 'string',
-                }),
-                defineField({
-                  name: 'alt_text',
-                  type: 'string',
-                })
-              ]
-            }),
-            defineField({
-                name: 'price',
-                type: 'number',
-                description: 'variant price',
-            }),
-            defineField({
-              title: 'Weight (g)',
-              name: 'weight',
-              type: 'number',
-            }),
-            defineField({
-              title: 'Size (H x W)',
-              name: 'height',
-              type: 'string',
-            }),
-            defineField({
-                name: 'stock',
-                type: 'number',
-                description: 'No negative numbers',
-            }),
-        ]
+          defineField({ name: 'title', title: 'Title', type: 'string' }),
+          defineField({ name: 'price', title: 'Price', type: 'number' }),
+          defineField({ name: 'size', title: 'Size', type: 'string' }),
+          defineField({ name: 'weight', title: 'Weight', type: 'number' }),
+          defineField({ name: 'image', title: 'Image', type: 'image', options: { hotspot: true }, }),
+        ],
       }],
     }),
-    defineField({
-      title: 'Stock',
-      name: 'stock',
-      type: 'number',
-    }),
-    defineField({
-      title: 'SKU',
-      name: 'sku',
-      type: 'string',
-    }),
-    defineField({
-      title: 'Weight (g)',
-      name: 'weight',
-      type: 'number',
-    }),
-    defineField({
-      title: 'Size (H x W)',
-      name: 'height',
-      type: 'string',
-    }),
-    defineField({
-      title: 'Slug',
-      name: 'slug',
-      type: 'slug',
-      options: {
-      source: 'title',
-      slugify: input => input
-                .toLowerCase()
-                .replace(/\s+/g, '-')
-                .slice(0, 200)
-    }
-    }),
-    defineField({
-      name: 'updatedAt',
-      type: 'datetime',
-      initialValue: () => new Date().toISOString(),
-      validation: (rule) => rule.required(),
-    }),
-    defineField({
-      name: 'publishedAt',
-      type: 'datetime',
-      initialValue: () => new Date().toISOString(),
-      validation: (rule) => rule.required(),
-    }),
   ],
-})
+  preview: {
+    select: { title: 'title', media: 'image.0' },
+  },
+});

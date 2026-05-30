@@ -1,10 +1,10 @@
 export type Product = {
-  id: string;
+  _id: string;
   title: string;
   price: number;
-  slug: string;
+  slug: { current: string };
   image: Array<{
-    url: string;
+    asset: { _ref: string };
     alt: string;
   }>;
 }
@@ -22,28 +22,25 @@ export type SearchParams = {
 }
 
 export type Banner = {
-  link: {
-    value: {
-      document: {
-        children: Array<{
-          children: Array<{ url: string }>;
-        }>;
-      };
-    };
-  };
-  banner: Array<{
-    id: string;
+  _id: string;
+  image: {
+    asset: { _ref: string };
     alt: string;
-    responsiveImage: {
-      src: string;
-      width: number;
-      height: number;
-    };
-  }>;
+  };
+  link: string;
 }
 
 export type Link = {
-  id: string;
+  _id: string;
   url: string;
   label: string;
+}
+
+export type LiveEvent = {
+  _id: string;
+  eventName: string;
+  startDate: string;
+  endDate: string;
+  website: string;
+  address: string;
 }

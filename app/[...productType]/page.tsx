@@ -1,12 +1,13 @@
-import { performRequest, limit } from '@/lib/datocms';
+import { sanityClient, urlFor, limit } from '@/lib/sanity';
 import { Product } from '@/lib/types';
 import { ProductItem } from '@/components/productItem';
 import Dropdown from '@/components/dropdown';
 import Pagination from '@/components/pagination';
+import ErrorFallback from '@/components/errorFallback';
 
 type ParamTypes = {
-  params: Promise<{ productType: string[] }>
-  searchParams: Promise<{ page?: string }>
+  params: Promise<{ productType: string[] }>;
+  searchParams: Promise<{ page?: string }>;
 }
 
 const productTypes = ['Book', 'Print', 'Scroll', 'Charm', 'Button', 'Sticker'];
@@ -18,87 +19,54 @@ export default async function ProductsByType({ params, searchParams }: ParamType
     const { productType } = await params;
     const skip = pageNumber > 1 ? limit * (pageNumber - 1) : 0;
 
-    // Determine productTypeParam and active fandom filter from URL
     let productTypeParam: string;
     let category: string;
 
     if (productType.length > 1) {
-      // e.g. /Print/My-Hero-Academia
       productTypeParam = productType[0];
       category = productType[1].replaceAll('-', ' ');
     } else if (productTypes.includes(productType[0])) {
-      // e.g. /Print
       productTypeParam = productType[0];
       category = '';
     } else {
-      // e.g. /My-Hero-Academia (fandom only, no type)
       productTypeParam = '';
       category = productType[0].replaceAll('-', ' ');
     }
 
     const isTypePage = productTypes.includes(productType[0]);
 
-    // Fetch filtered products and ALL fandoms for this type in parallel
-    const PRODUCTS_QUERY = `
-      query ProductsQuery($category: String!, $productTypeParam: String!, $limit: IntType!, $skip: IntType!) {
-        allProducts(
-          filter: {
-            fandoms: { matches: { pattern: $category } }
-            productType: { matches: { pattern: $productTypeParam } }
-          }
-          first: $limit
-          skip: $skip
-        ) {
-          id
-          title
-          fandoms
-          price
-          slug
-          image { alt url }
-        }
-        _allProductsMeta(
-          filter: {
-            fandoms: { matches: { pattern: $category } }
-            productType: { matches: { pattern: $productTypeParam } }
-            _status: { eq: published }
-          }
-        ) {
-          count
-        }
-      }
-    `;
+    // Build GROQ filters
+    const typeFilter = productTypeParam ? `productType == "${productTypeParam}"` : '';
+    const categoryFilter = category ? `fandoms == "${category}"` : '';
+    const filters = [typeFilter, categoryFilter].filter(Boolean).join(' && ');
+    const where = filters ? `&& ${filters}` : '';
 
-    // Fetch all products for this type (unfiltered) to build the full fandom list
-    const ALL_FANDOMS_QUERY = `
-      query AllFandomsQuery($productTypeParam: String!) {
-        allProducts(
-          filter: { productType: { matches: { pattern: $productTypeParam } } }
-          first: 100
-        ) {
-          fandoms
+    const [products, total, allFandomProducts] = await Promise.all([
+      sanityClient.fetch<Product[]>(`
+        *[_type == "product" ${where}] | order(_createdAt desc) [$skip...$end] {
+          _id, title, price, slug, fandoms,
+          image[]{ asset, alt }
         }
-      }
-    `;
+      `, { skip, end: skip + limit }),
 
-    const [productsResult, fandomsResult] = await Promise.all([
-      performRequest({ query: PRODUCTS_QUERY, variables: { category, productTypeParam, limit, skip } }),
+      sanityClient.fetch<number>(`count(*[_type == "product" ${where}])`),
+
       isTypePage
-        ? performRequest({ query: ALL_FANDOMS_QUERY, variables: { productTypeParam } })
-        : Promise.resolve(null),
+        ? sanityClient.fetch<Array<{ fandoms: string }>>(`
+            *[_type == "product" && productType == $productTypeParam] {
+              fandoms
+            }
+          `, { productTypeParam })
+        : Promise.resolve([]),
     ]);
 
-    const { allProducts, _allProductsMeta } = productsResult.data;
-    const productCount = _allProductsMeta.count;
-
-    // Build deduplicated fandom list from unfiltered results
+    // Build deduplicated fandom list
     const fandomList: string[] = [];
-    if (fandomsResult) {
-      fandomsResult.data.allProducts.forEach((item: { fandoms: string }) => {
-        if (item.fandoms && !fandomList.includes(item.fandoms)) {
-          fandomList.push(item.fandoms);
-        }
-      });
-    }
+    allFandomProducts.forEach((item) => {
+      if (item.fandoms && !fandomList.includes(item.fandoms)) {
+        fandomList.push(item.fandoms);
+      }
+    });
 
     return (
       <>
@@ -110,31 +78,27 @@ export default async function ProductsByType({ params, searchParams }: ParamType
           />
         )}
         <div className="products" id="products">
-          {allProducts.map((product: Product) => (
+          {products.map((product: Product) => (
             <ProductItem
-              key={product?.id}
-              id={product?.id}
-              title={product?.title}
-              slug={product?.slug}
-              url={product?.image[0]?.url}
-              alt={product?.image[0]?.alt}
-              price={product?.price}
+              key={product._id}
+              id={product._id}
+              title={product.title}
+              slug={product.slug.current}
+              url={urlFor(product.image[0].asset).width(500).url()}
+              alt={product.image[0].alt}
+              price={product.price}
             />
           ))}
         </div>
         <Pagination
-          numberOfProducts={productCount}
+          numberOfProducts={total}
           currentPage={pageNumber}
           maxItems={limit}
         />
       </>
     );
-  } catch {
-    return (
-      <div>
-        <h2 id="errorH2">Taking a Short break!</h2>
-        <p id="errorMessage">Check back soon!</p>
-      </div>
-    );
+  } catch (error) {
+    console.error('Error fetching page:', error);
+    return <ErrorFallback />;
   }
 }

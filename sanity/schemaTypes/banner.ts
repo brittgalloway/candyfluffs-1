@@ -1,4 +1,4 @@
-import {defineField, defineType} from 'sanity'
+import { defineField, defineType } from 'sanity';
 
 export const banner = defineType({
   name: 'banner',
@@ -6,39 +6,27 @@ export const banner = defineType({
   type: 'document',
   fields: [
     defineField({
-      title: 'Link',
-      name: 'href',
-      type: 'url',
-      validation: Rule => Rule.uri({
-        scheme: ['http', 'https', 'mailto', 'tel']
-      })
-    }),
-    defineField({
+      name: 'image',
       title: 'Banner Image',
-      name: 'banner_image',
       type: 'image',
+      options: { hotspot: true },
       fields: [
-        defineField({
-          name: 'caption',
-          type: 'string',
-        }),
-        defineField({
-          name: 'alt_text',
-          type: 'string',
-        })
-      ]
+        defineField({ name: 'alt', title: 'Alt text', type: 'string', validation: (r) => r.required() }),
+      ],
+      validation: (r) => r.required(),
     }),
     defineField({
-      name: 'updatedAt',
-      type: 'datetime',
-      initialValue: () => new Date().toISOString(),
-      validation: (rule) => rule.required(),
+      name: 'link',
+      title: 'Link URL',
+      type: 'url',
     }),
     defineField({
-      name: 'publishedAt',
-      type: 'datetime',
-      initialValue: () => new Date().toISOString(),
-      validation: (rule) => rule.required(),
+      name: 'order',
+      title: 'Display Order',
+      type: 'number',
     }),
   ],
-})
+  preview: {
+    select: { title: 'image.alt', media: 'image' },
+  },
+});

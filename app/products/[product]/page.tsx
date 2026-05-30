@@ -1,114 +1,93 @@
-import { performRequest } from '@/lib/datocms';
+import { sanityClient, urlFor } from '@/lib/sanity';
+import { PortableText } from '@portabletext/react';
 import { ProductImages } from '@/components/productImageDisplay';
+import ErrorFallback from '@/components/errorFallback';
 import styles from '@/style/product-page.module.scss';
 
 export default async function Product({ params }: { params: Promise<{ product: string }> }) {
   try {
-  const { product } = await params;
-  const PAGE_CONTENT_QUERY = `
-    query productQuery($slug: String!) {
-      product(filter: {slug: {eq: $slug}}) {
-        id
-        fandoms
-        description(markdown: true)
-        price
-        size
-        weight
-        title
-        image {
-          alt
-          url
-        }
-        variation {
-          id
-          price
-          size
-          title
-          weight
-          image {
-            alt
-            url
+    const { product: slug } = await params;
+
+    const sanityProduct = await sanityClient.fetch(`
+      *[_type == "product" && slug.current == $slug][0] {
+        _id, title, price, weight, size, fandoms, productType,
+        description,
+        slug,
+        image[]{ asset, alt },
+        variation[]{ title, price, size, weight, image{ asset } }
+      }
+    `, { slug });
+
+    const domain = process.env.NODE_ENV === 'production'
+      ? (process.env.NEXT_PUBLIC_SITE_URL ?? '')
+      : 'http://localhost:3000';
+
+    const formattedPrice = sanityProduct.price.toLocaleString('en-US', {
+      style: 'currency',
+      currency: 'USD',
+    });
+
+    function handleVariation() {
+      const options = sanityProduct.variation.map((variant: { title: string; price: number }) => {
+        if (variant.price !== sanityProduct.price) {
+          if (sanityProduct.price < variant.price) {
+            return `${variant.title}[+${variant.price - sanityProduct.price}]`;
+          } else {
+            return `${variant.title}[-${sanityProduct.price - variant.price}]`;
           }
         }
-      }
-    }
-  `;
-  const { data } = await performRequest({ query: PAGE_CONTENT_QUERY, variables: { slug: product } });
-  const datoProduct = data.product;
-  const domain = process.env.NODE_ENV === 'production'
-    ? (process.env.NEXT_PUBLIC_SITE_URL ?? '')
-    : 'http://localhost:3000';
-  const formatedPrice = datoProduct.price.toLocaleString("en-US", { style: "currency", currency: "USD" });
-  function handleVariantion() {
-    const options = datoProduct.variation.map((variant: {title: string, price:number}) => {
-      if (variant.price != datoProduct.price) {
-        if(datoProduct.price < variant.price) {
-          const difference = variant.price - datoProduct.price;
-          return `${variant.title}[+${difference}]`;
-        } else {
-          const difference = datoProduct.price - variant.price;
-          return `${variant.title}[-${difference}]`;
-        }
-      } else {
         return variant.title;
-      }
-    }).join("|");
-    return `${options}|${datoProduct.title}`;
-  }
+      }).join('|');
+      return `${options}|${sanityProduct.title}`;
+    }
 
-  const photos = datoProduct?.image.map((photo:any)=>(
-    {
-      src: photo?.url,
-      width: 100,
-      height: 100,
-      alt: photo?.alt
-    }
-  ))
-  return (
-    <section className={`${styles.main}`}>
-      <h1>{datoProduct.title}</h1>
-      <ProductImages
-        photos={photos}
-      />
-      <p className={`${styles.price}`}>{formatedPrice}</p>
-      <div className={`${styles.description}`} dangerouslySetInnerHTML={{__html:datoProduct.description}}/>
-      {datoProduct.variation.length ?
-        <>
-          <button className={`snipcart-add-item ${styles.add} ${styles.addChoices}`}
-            data-item-id={datoProduct.id}
-            data-item-price={datoProduct.price}
-            data-item-description={datoProduct.description}
-            data-item-name={datoProduct.title}
-            data-item-url={`${domain}/products/${product}`}
-            data-item-weight={datoProduct.weight}
-            data-item-custom1-name="Select one"
-            data-item-custom1-options={handleVariantion()}
+    const photos = sanityProduct.image.map((photo: { asset: { _ref: string }; alt: string }) => ({
+      src: urlFor(photo.asset).width(500).url(),
+      width: 500,
+      height: 500,
+      alt: photo.alt ?? '',
+    }));
+
+    return (
+      <section className={styles.main}>
+        <h1>{sanityProduct.title}</h1>
+        <ProductImages photos={photos} />
+        <p className={styles.price}>{formattedPrice}</p>
+        <div className={styles.description}>
+          <PortableText value={sanityProduct.description} />
+        </div>
+        {sanityProduct.variation?.length ? (
+          <>
+            <button
+              className={`snipcart-add-item ${styles.add} ${styles.addChoices}`}
+              data-item-id={sanityProduct._id}
+              data-item-price={sanityProduct.price}
+              data-item-name={sanityProduct.title}
+              data-item-url={`${domain}/products/${slug}`}
+              data-item-weight={sanityProduct.weight}
+              data-item-custom1-name="Select one"
+              data-item-custom1-options={handleVariation()}
             >
+              Add to cart
+            </button>
+            <p className={styles.cartInstruction}>*You can select which one you want in the cart.</p>
+          </>
+        ) : (
+          <button
+            className={`snipcart-add-item ${styles.add}`}
+            data-item-id={sanityProduct._id}
+            data-item-price={sanityProduct.price}
+            data-item-name={sanityProduct.title}
+            data-item-url={`${domain}/products/${slug}`}
+            data-item-weight={sanityProduct.weight}
+          >
             Add to cart
-          </button >
-          <p className={`${styles.cartInstruction}`}>*You can select which one you want in the cart.</p>
-        </>
-      : 
-      <button className={`snipcart-add-item ${styles.add}`}
-        data-item-id={datoProduct.id}
-        data-item-price={datoProduct.price}
-        data-item-description={datoProduct.description}
-        data-item-name={datoProduct.title}
-        data-item-weight={datoProduct.weight}
-        data-item-url={`${domain}/products/${product}`}
-        >
-        Add to cart
-      </button>
-    }
-      
-    </section>
-  );
-} catch  {
- return (
-    <div>
-      <h2 id="errorH2">Taking a Short break!</h2>
-      <span id="errorSpan">Will be back April 1st!</span>
-    </div>
-  )
-}
+          </button>
+        )}
+      </section>
+    );
+  } catch (error) {
+    console.error('Error fetching page:', error);
+    return <ErrorFallback />;
+  }
 }

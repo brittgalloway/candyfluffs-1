@@ -1,55 +1,31 @@
-import {defineField, defineType} from 'sanity'
+import { defineField, defineType } from 'sanity';
 
-export const necahualPage = defineType({
-  name: 'necahual_page',
+export const necahual = defineType({
+  name: 'necahual',
   title: 'Necahual Page',
   type: 'document',
+  // Singleton — only one document of this type
+  __experimental_actions: ['update', 'publish'],
   fields: [
+    defineField({ name: 'pageTitle', title: 'Page Title', type: 'string', validation: (r) => r.required() }),
     defineField({
-      title: 'Page Title',
-      name: 'page_title',
-      type: 'string',
-      description:'This will likely, literally be "Necahual"'
-    }),
-    defineField({
-      title: 'Summary',
       name: 'summary',
-      type: 'text',
-      description:'This is a blurb about the comic.'
+      title: 'Summary',
+      type: 'array',
+      of: [{ type: 'block' }],
     }),
     defineField({
-      title: 'Patreon Disclaimer',
-      name: 'patreon_disclaim',
-      type: 'string',
-      description:'If applicable, meantion the discount for patreon members'
-    }),
-    defineField({
-      title: 'Image',
-      name: 'image',
+      name: 'necahualImage',
+      title: 'Necahual Image',
       type: 'image',
-      description:'A square image works best. WEBP and JPG prefered.',
+      options: { hotspot: true },
       fields: [
-        defineField({
-          name: 'caption',
-          type: 'string',
-        }),
-        defineField({
-          name: 'alt_text',
-          type: 'string',
-        })
-      ]
+        defineField({ name: 'alt', title: 'Alt text', type: 'string', validation: (r) => r.required() }),
+      ],
     }),
-    defineField({
-      name: 'updatedAt',
-      type: 'datetime',
-      initialValue: () => new Date().toISOString(),
-      validation: (rule) => rule.required(),
-    }),
-    defineField({
-      name: 'publishedAt',
-      type: 'datetime',
-      initialValue: () => new Date().toISOString(),
-      validation: (rule) => rule.required(),
-    }),
+    defineField({ name: 'patreonDisclaimer', title: 'Patreon Disclaimer', type: 'text' }),
   ],
-})
+  preview: {
+    select: { title: 'pageTitle', media: 'necahualImage' },
+  },
+});

@@ -1,34 +1,15 @@
-import {defineField, defineType} from 'sanity'
+import { defineField, defineType } from 'sanity';
 
-export const links = defineType({
-  name: 'links',
-  title: 'Link Page',
+export const linkPage = defineType({
+  name: 'linkPage',
+  title: 'Link',
   type: 'document',
   fields: [
-    defineField({
-      title: 'Website Name',
-      name: 'website_name',
-      type: 'string',
-    }),
-    defineField({
-      title: 'Website Link',
-      name: 'href',
-      type: 'url',
-      validation: Rule => Rule.uri({
-        scheme: ['http', 'https', 'mailto', 'tel']
-      })
-    }),
-    defineField({
-      name: 'updatedAt',
-      type: 'datetime',
-      initialValue: () => new Date().toISOString(),
-      validation: (rule) => rule.required(),
-    }),
-    defineField({
-      name: 'publishedAt',
-      type: 'datetime',
-      initialValue: () => new Date().toISOString(),
-      validation: (rule) => rule.required(),
-    }),
+    defineField({ name: 'label', title: 'Label', type: 'string', validation: (r) => r.required() }),
+    defineField({ name: 'url', title: 'URL', type: 'url', validation: (r) => r.required() }),
+    defineField({ name: 'order', title: 'Display Order', type: 'number' }),
   ],
-})
+  preview: {
+    select: { title: 'label', subtitle: 'url' },
+  },
+});

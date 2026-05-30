@@ -1,6 +1,6 @@
 {
   "name": "candyfluffs",
-  "version": "2.0.0",
+  "version": "2.5.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -14,23 +14,23 @@
   },
   "dependencies": {
     "@netlify/plugin-nextjs": "^5.7.2",
+    "@portabletext/react": "^3.0.18",
+    "@sanity/client": "^6.15.0",
     "@sanity/image-url": "^2.1.1",
-    "@sanity/vision": "^5.19.0",
     "embla-carousel-autoplay": "^8.3.0",
     "embla-carousel-react": "^8.3.0",
-    "next": "^16.0.7",
-    "next-sanity": "^12.1.1",
-    "playwright": "^1.60.0",
+    "next": "^16.2.6",
+    "next-sanity": "^13.0.7",
     "react": "^19.2.1",
     "react-dom": "^19.2.1",
     "react-responsive": "^10.0.0",
-    "sanity": "^5.14.1",
-    "sharp": "^0.33.5",
-    "styled-components": "^6.3.12"
+    "sanity": "^5.28.0",
+    "sharp": "^0.33.5"
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.9.1",
     "@playwright/test": "^1.44.0",
+    "@sanity/vision": "^5.28.0",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",

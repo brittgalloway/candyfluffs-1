@@ -1,20 +1,8 @@
-import { type SchemaTypeDefinition } from 'sanity';
+import { product } from './product';
 import { banner } from './banner';
 import { liveEvent } from './live-events';
-import { necahualPage } from './necahual';
 import { aboutMe } from './about-me';
-import { links } from './links';
-import { product } from './product';
-import { imageGallery } from './display-images';
+import { necahual } from './necahual';
+import { linkPage } from './links';
 
-export const schema: { types: SchemaTypeDefinition[] } = {
-  types: [
-    banner,
-    liveEvent,
-    necahualPage,
-    aboutMe,
-    links,
-    product,
-    imageGallery,
-  ],
-}
+export const schemaTypes = [product, banner, liveEvent, aboutMe, necahual, linkPage];

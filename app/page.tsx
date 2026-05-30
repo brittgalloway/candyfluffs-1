@@ -1,87 +1,61 @@
-import { performRequest, limit } from '@/lib/datocms';
-import { Product, SearchParams } from '@/lib/types';
+import { sanityClient, urlFor, limit } from '@/lib/sanity';
+import { Product, Banner, SearchParams } from '@/lib/types';
 import { EmblaOptionsType } from 'embla-carousel';
 import { ProductItem } from '@/components/productItem';
 import Slider from '@/components/slider';
 import Pagination from '@/components/pagination';
+import ErrorFallback from '@/components/errorFallback';
 
-export default async function Home({searchParams}: SearchParams) {
+export default async function Home({ searchParams }: SearchParams) {
   try {
-  const {page} = await searchParams;
-  const pageNumber = Number.parseInt( page ?? '1');
+    const { page } = await searchParams;
+    const pageNumber = Number.parseInt(page ?? '1');
+    const skip = pageNumber > 1 ? limit * (pageNumber - 1) : 0;
 
-  const skip = pageNumber > 1 ? limit * (pageNumber - 1) : 0;
+    const [products, banners, total] = await Promise.all([
+      sanityClient.fetch<Product[]>(`
+        *[_type == "product"] | order(_createdAt desc) [$skip...$end] {
+          _id, title, price, slug,
+          image[]{ asset, alt }
+        }
+      `, { skip, end: skip + limit }),
 
-  const PAGE_CONTENT_QUERY = `
-    query ProductsQuery {
-      allBanners {
-        banner {
-          id
-          alt
-          responsiveImage {
-            src
-            width
-            height
-          }
+      sanityClient.fetch<Banner[]>(`
+        *[_type == "banner"] | order(order asc) {
+          _id, image{ asset, alt }, link
         }
-        link {
-          value
-        }
-      }
-      _allProductsMeta(filter: {_status: {eq: published}}) {
-        count
-      }
-      allProducts(first:${limit}, skip:${skip}) {
-        id
-        title
-        price
-        slug
-        image {
-          alt
-          url
-        }
-      }
-    }
-  `;
+      `),
 
-  const { data: { allProducts, allBanners, _allProductsMeta } } = await performRequest({ query: PAGE_CONTENT_QUERY });
-  const productCount = _allProductsMeta.count;
-  const OPTIONS: EmblaOptionsType = { direction: 'rtl', loop: true }
-  const SLIDES = allBanners;
-  return (
-    <>      
-      <Slider 
-        slides={SLIDES} 
-        options={OPTIONS} 
-      />
-      <div className={`products`} id="products">
-        {allProducts.map((product : Product
-          ) => (
-          <ProductItem
-            key={product?.id}
-            id={product?.id}
-            title={product?.title}
-            slug={product?.slug}
-            url={product?.image[0].url}
-            alt={product?.image[0].alt}
-            price={product?.price}
-          />
-        )
-        )}
-      </div>
-      <Pagination
-        numberOfProducts={productCount}
-        currentPage={pageNumber}
-        maxItems={limit}
-      />
-    </>
-  )
-} catch{
-   return (
-    <div>
-      <h2 id="errorH2">Taking a Short break!</h2>
-      <span id="errorSpan">Will be back April 1st!</span>
-    </div>
-  )
-}
+      sanityClient.fetch<number>(`count(*[_type == "product"])`),
+    ]);
+
+    const OPTIONS: EmblaOptionsType = { direction: 'rtl', loop: true };
+
+    return (
+      <>
+        <Slider slides={banners} options={OPTIONS} />
+        <div className="products" id="products">
+          {products.map((product: Product) => (
+            <ProductItem
+              key={product._id}
+              id={product._id}
+              title={product.title}
+              slug={product.slug.current}
+              url={urlFor(product.image[0].asset).width(500).url()}
+              alt={product.image[0].alt}
+              price={product.price}
+            />
+          ))}
+        </div>
+        <Pagination
+          numberOfProducts={total}
+          currentPage={pageNumber}
+          maxItems={limit}
+        />
+      </>
+    );
+  } catch (error) {
+    console.error('Error fetching page:', error);
+    return <ErrorFallback />;
+  }
 }
