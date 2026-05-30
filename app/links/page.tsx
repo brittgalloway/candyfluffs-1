@@ -1,6 +1,6 @@
-import { performRequest } from '@/app/lib/datocms';
-import { Link } from '@/app/lib/types';
-import '@/app/style/links.scss';
+import { performRequest } from '@/lib/datocms';
+import { Link } from '@/lib/types';
+import '@/style/links.scss';
 
 export const metadata = {
   title: 'Candy Fluffs | Links',

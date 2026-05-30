@@ -1,3 +1,4 @@
+import { performRequest, limit } from '@/lib/datocms';
 import { Product } from '@/lib/types';
 import { ProductItem } from '@/components/productItem';
 import Dropdown from '@/components/dropdown';

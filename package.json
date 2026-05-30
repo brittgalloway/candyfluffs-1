@@ -5,10 +5,14 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "test": "playwright test",
+    "test:ui": "playwright test --ui",
+    "test:a11y": "playwright test tests/accessibility.test.ts",
+    "test:smoke": "playwright test tests/smoke.test.ts",
+    "test:headed": "playwright test --headed"
   },
   "dependencies": {
-    "@datocms/cda-client": "^0.2.2",
     "@netlify/plugin-nextjs": "^5.7.2",
     "@sanity/image-url": "^2.1.1",
     "@sanity/vision": "^5.19.0",
@@ -16,6 +20,7 @@
     "embla-carousel-react": "^8.3.0",
     "next": "^16.0.7",
     "next-sanity": "^12.1.1",
+    "playwright": "^1.60.0",
     "react": "^19.2.1",
     "react-dom": "^19.2.1",
     "react-responsive": "^10.0.0",
@@ -24,10 +29,13 @@
     "styled-components": "^6.3.12"
   },
   "devDependencies": {
+    "@axe-core/playwright": "^4.9.1",
+    "@playwright/test": "^1.44.0",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "sass": "^1.78.0",
-    "typescript": "^5"
+    "typescript": "^5",
+    "wait-on": "^7.2.0"
   }
 }

@@ -1,6 +1,7 @@
 import { type SanityDocument } from 'next-sanity'
 import { client } from 'b/sanityLib/client';
 import Image from 'next/image';
+import { performRequest } from '@/lib/datocms';
 import styles from './page.module.scss';
 
 export const metadata = {

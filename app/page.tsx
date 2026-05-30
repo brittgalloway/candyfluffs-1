@@ -1,3 +1,4 @@
+import { performRequest, limit } from '@/lib/datocms';
 import { Product, SearchParams } from '@/lib/types';
 import { EmblaOptionsType } from 'embla-carousel';
 import { ProductItem } from '@/components/productItem';

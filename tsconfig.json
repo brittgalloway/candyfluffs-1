@@ -54,7 +54,10 @@
       ],
       "b/sanityLib/*": [
         "./sanity/lib/*"
-      ]
+      ],
+      "p/*": [
+        "./public/*"
+      ],
     },
     "target": "ES2017"
   },

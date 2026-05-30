@@ -89,16 +89,8 @@ header {
       text-align: center;
       padding-block: 1rem;
     }
-    li > button {
-      background: none;
-      border: none;
-      padding: 0;
-      width: 100%;
-      cursor: pointer;
-    }
     li,
-    li > a,
-    li > button {
+    li > a {
       font-size: 1.5rem;
       color: #222;
       margin-block: 1rem;
@@ -154,8 +146,14 @@ header {
       .shopping-icon {
         justify-self: end;
       }
-      img {
+      .hamburger-btn {
         justify-self: start;
+        background: none;
+        border: none;
+        padding: 0;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
       }
       @media ( width >= 550px ) {
         display: none;
