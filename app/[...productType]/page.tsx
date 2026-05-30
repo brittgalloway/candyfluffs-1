@@ -10,7 +10,24 @@ type ParamTypes = {
   searchParams: Promise<{ page?: string }>;
 }
 
+type ProductMediaItem = {
+  _type: 'image' | 'file';
+  alt?: string;
+  asset: { _ref?: string; url?: string };
+};
+
 const productTypes = ['Book', 'Print', 'Scroll', 'Charm', 'Button', 'Sticker'];
+
+function getCardImageUrl(media: ProductMediaItem[]): string {
+  if (!media?.length) return '';
+  const first = media[0];
+  if (first._type === 'file') return first.asset.url ?? '';
+  return urlFor(first.asset).width(500).url();
+}
+
+function getCardImageAlt(media: ProductMediaItem[]): string {
+  return media?.[0]?.alt ?? '';
+}
 
 export default async function ProductsByType({ params, searchParams }: ParamTypes) {
   try {
@@ -35,17 +52,20 @@ export default async function ProductsByType({ params, searchParams }: ParamType
 
     const isTypePage = productTypes.includes(productType[0]);
 
-    // Build GROQ filters
     const typeFilter = productTypeParam ? `productType == "${productTypeParam}"` : '';
     const categoryFilter = category ? `fandoms == "${category}"` : '';
     const filters = [typeFilter, categoryFilter].filter(Boolean).join(' && ');
     const where = filters ? `&& ${filters}` : '';
 
     const [products, total, allFandomProducts] = await Promise.all([
-      sanityClient.fetch<Product[]>(`
+      sanityClient.fetch<(Product & { productImages: ProductMediaItem[] })[]>(`
         *[_type == "product" ${where}] | order(_createdAt desc) [$skip...$end] {
           _id, title, price, slug, fandoms,
-          image[]{ asset, alt }
+          productImages[0..0]{
+            _type,
+            alt,
+            asset->{ _ref, url }
+          }
         }
       `, { skip, end: skip + limit }),
 
@@ -60,7 +80,6 @@ export default async function ProductsByType({ params, searchParams }: ParamType
         : Promise.resolve([]),
     ]);
 
-    // Build deduplicated fandom list
     const fandomList: string[] = [];
     allFandomProducts.forEach((item) => {
       if (item.fandoms && !fandomList.includes(item.fandoms)) {
@@ -78,14 +97,14 @@ export default async function ProductsByType({ params, searchParams }: ParamType
           />
         )}
         <div className="products" id="products">
-          {products.map((product: Product) => (
+          {products.map((product) => (
             <ProductItem
               key={product._id}
               id={product._id}
               title={product.title}
               slug={product.slug.current}
-              url={urlFor(product.image[0].asset).width(500).url()}
-              alt={product.image[0].alt}
+              url={getCardImageUrl(product.productImages)}
+              alt={getCardImageAlt(product.productImages)}
               price={product.price}
             />
           ))}

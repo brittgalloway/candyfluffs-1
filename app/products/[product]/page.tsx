@@ -4,6 +4,20 @@ import { ProductImages } from '@/components/productImageDisplay';
 import ErrorFallback from '@/components/errorFallback';
 import styles from '@/style/product-page.module.scss';
 
+type SanityImageItem = {
+  _type: 'image';
+  asset: { _ref: string };
+  alt?: string;
+};
+
+type SanityFileItem = {
+  _type: 'file';
+  asset: { url: string };
+  alt?: string;
+};
+
+type ProductMediaItem = SanityImageItem | SanityFileItem;
+
 export default async function Product({ params }: { params: Promise<{ product: string }> }) {
   try {
     const { product: slug } = await params;
@@ -13,7 +27,14 @@ export default async function Product({ params }: { params: Promise<{ product: s
         _id, title, price, weight, size, fandoms, productType,
         description,
         slug,
-        image[]{ asset, alt },
+        productImages[]{
+          _type,
+          alt,
+          asset->{
+            _ref,
+            url
+          }
+        },
         variation[]{ title, price, size, weight, image{ asset } }
       }
     `, { slug });
@@ -41,12 +62,20 @@ export default async function Product({ params }: { params: Promise<{ product: s
       return `${options}|${sanityProduct.title}`;
     }
 
-    const photos = sanityProduct.image.map((photo: { asset: { _ref: string }; alt: string }) => ({
-      src: urlFor(photo.asset).width(500).url(),
-      width: 500,
-      height: 500,
-      alt: photo.alt ?? '',
-    }));
+    const photos = sanityProduct.productImages.map((item: ProductMediaItem) => {
+      if (item._type === 'file') {
+        return {
+          src: item.asset.url,
+          alt: item.alt ?? '',
+          isVideo: true,
+        };
+      }
+      return {
+        src: urlFor(item.asset).width(500).url(),
+        alt: item.alt ?? '',
+        isVideo: false,
+      };
+    });
 
     return (
       <section className={styles.main}>

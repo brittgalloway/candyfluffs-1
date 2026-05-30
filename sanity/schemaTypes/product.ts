@@ -26,12 +26,30 @@ export const product = defineType({
       of: [{ type: 'block' }],
     }),
     defineField({
-      name: 'image',
-      title: 'Images',
+      name: 'productImages',
+      title: 'Product Images',
+      description: 'Upload images (jpg, png, webp), GIFs, or WebM video files. Remember square formats are best!',
       type: 'array',
-      of: [{ type: 'image', options: { hotspot: true }, fields: [
-        defineField({ name: 'alt', title: 'Alt text', type: 'string' }),
-      ]}],
+      of: [
+        {
+          type: 'image',
+          title: 'Image',
+          options: { hotspot: true },
+          fields: [
+            defineField({ name: 'alt', title: 'Alt text', type: 'string' }),
+          ],
+        },
+        {
+          type: 'file',
+          title: 'GIF or WebM',
+          options: {
+            accept: 'image/gif,video/webm',
+          },
+          fields: [
+            defineField({ name: 'alt', title: 'Alt text', type: 'string' }),
+          ],
+        },
+      ],
       validation: (r) => r.required().min(1),
     }),
     defineField({
@@ -45,12 +63,12 @@ export const product = defineType({
           defineField({ name: 'price', title: 'Price', type: 'number' }),
           defineField({ name: 'size', title: 'Size', type: 'string' }),
           defineField({ name: 'weight', title: 'Weight', type: 'number' }),
-          defineField({ name: 'image', title: 'Image', type: 'image', options: { hotspot: true }, }),
+          defineField({ name: 'image', title: 'Image', type: 'image', options: { hotspot: true } }),
         ],
       }],
     }),
   ],
   preview: {
-    select: { title: 'title', media: 'image.0' },
+    select: { title: 'title', media: 'productImages.0' },
   },
 });
