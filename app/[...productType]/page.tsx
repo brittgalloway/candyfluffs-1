@@ -21,8 +21,8 @@ const productTypes = ['Book', 'Print', 'Scroll', 'Charm', 'Button', 'Sticker'];
 function getCardImageUrl(media: ProductMediaItem[]): string {
   if (!media?.length) return '';
   const first = media[0];
-  if (first._type === 'file') return first.asset.url ?? '';
-  return urlFor(first.asset).width(500).url();
+  if (first.asset?.url) return first.asset.url;
+  return urlFor(first.asset).width(500).url() ?? '';
 }
 
 function getCardImageAlt(media: ProductMediaItem[]): string {
@@ -53,7 +53,7 @@ export default async function ProductsByType({ params, searchParams }: ParamType
     const isTypePage = productTypes.includes(productType[0]);
 
     const typeFilter = productTypeParam ? `productType == "${productTypeParam}"` : '';
-    const categoryFilter = category ? `fandoms == "${category}"` : '';
+    const categoryFilter = category ? `fandoms->name == "${category}"` : '';
     const filters = [typeFilter, categoryFilter].filter(Boolean).join(' && ');
     const where = filters ? `&& ${filters}` : '';
 
@@ -72,9 +72,9 @@ export default async function ProductsByType({ params, searchParams }: ParamType
       sanityClient.fetch<number>(`count(*[_type == "product" ${where}])`),
 
       isTypePage
-        ? sanityClient.fetch<Array<{ fandoms: string }>>(`
+        ? sanityClient.fetch<Array<{ fandoms: { name: string } }>>(`
             *[_type == "product" && productType == $productTypeParam] {
-              fandoms
+              fandoms->{ name }
             }
           `, { productTypeParam })
         : Promise.resolve([]),
@@ -82,8 +82,9 @@ export default async function ProductsByType({ params, searchParams }: ParamType
 
     const fandomList: string[] = [];
     allFandomProducts.forEach((item) => {
-      if (item.fandoms && !fandomList.includes(item.fandoms)) {
-        fandomList.push(item.fandoms);
+      const name = item.fandoms?.name;
+      if (name && !fandomList.includes(name)) {
+        fandomList.push(name);
       }
     });
 

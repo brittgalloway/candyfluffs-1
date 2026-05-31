@@ -3,9 +3,11 @@ export type Product = {
   title: string;
   price: number;
   slug: { current: string };
-  image: Array<{
-    asset: { _ref: string };
-    alt: string;
+  fandoms?: string;
+  productImages: Array<{
+    _type: 'image' | 'file';
+    asset: { _ref?: string; url?: string };
+    alt?: string;
   }>;
 }
 

@@ -10,7 +10,12 @@ export const product = defineType({
     defineField({ name: 'price', title: 'Price', type: 'number', validation: (r) => r.required().min(0) }),
     defineField({ name: 'weight', title: 'Weight (grams)', type: 'number' }),
     defineField({ name: 'size', title: 'Size', type: 'string' }),
-    defineField({ name: 'fandoms', title: 'Fandom', type: 'string' }),
+    defineField({
+      name: 'fandoms',
+      title: 'Fandom',
+      type: 'reference',
+      to: [{ type: 'fandom' }],
+    }),
     defineField({
       name: 'productType',
       title: 'Product Type',
@@ -28,7 +33,7 @@ export const product = defineType({
     defineField({
       name: 'productImages',
       title: 'Product Images',
-      description: 'Upload images (jpg, png, webp), GIFs, or WebM video files. Remember square formats are best!',
+      description: 'Upload images (jpg, png, webp), GIFs, or WebM video files.Remember squares are best for the 1st image!',
       type: 'array',
       of: [
         {

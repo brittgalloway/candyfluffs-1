@@ -5,6 +5,7 @@ import { PortableText } from '@portabletext/react';
 import { FaInstagram, FaXTwitter, FaPatreon } from '@/components/icons';
 import { ProductItem } from '@/components/productItem';
 import Pagination from '@/components/pagination';
+import ErrorFallback from '@/components/errorFallback';
 import styles from './page.module.scss';
 
 export const metadata = {
@@ -19,6 +20,19 @@ const socialMedia = [
   { href: 'https://twitter.com/2Heroes1/', label: "Link to 2Heroes' X", Icon: FaXTwitter },
 ];
 
+type ProductMediaItem = {
+  _type: 'image' | 'file';
+  alt?: string;
+  asset: { _ref?: string; url?: string };
+};
+
+function getCardImageUrl(media: ProductMediaItem[]): string {
+  if (!media?.length) return '';
+  const first = media[0];
+  if (first.asset?.url) return first.asset.url;
+  return urlFor(first.asset).width(500).url() ?? '';
+}
+
 export default async function TwoHeroes({ searchParams }: SearchParams) {
   try {
     const { page } = await searchParams;
@@ -29,17 +43,23 @@ export default async function TwoHeroes({ searchParams }: SearchParams) {
       sanityClient.fetch(`
         *[_type == "necahual"][0] {
           pageTitle, summary, patreonDisclaimer,
-          necahualImage{ asset, alt }
+          necahualImage{ asset->{ _ref, url }, alt }
         }
       `),
-      sanityClient.fetch<Product[]>(`
-        *[_type == "product" && fandoms == "Necahual"] | order(_createdAt desc) [$skip...$end] {
+      sanityClient.fetch<(Product & { productImages: ProductMediaItem[] })[]>(`
+        *[_type == "product" && fandoms->name == "Necahual"] | order(_createdAt desc) [$skip...$end] {
           _id, title, price, slug,
-          image[]{ asset, alt }
+          productImages[0..0]{
+            _type, alt,
+            asset->{ _ref, url }
+          }
         }
       `, { skip, end: skip + limit }),
-      sanityClient.fetch<number>(`count(*[_type == "product" && fandoms == "Necahual"])`),
+      sanityClient.fetch<number>(`count(*[_type == "product" && fandoms->name == "Necahual"])`),
     ]);
+
+    const necahualImageUrl = necahual?.necahualImage?.asset?.url
+      ?? urlFor(necahual?.necahualImage?.asset).width(500).url();
 
     return (
       <>
@@ -48,7 +68,7 @@ export default async function TwoHeroes({ searchParams }: SearchParams) {
           <Image
             className={styles.span3mobile}
             alt={necahual?.necahualImage?.alt ?? ''}
-            src={urlFor(necahual.necahualImage.asset).width(500).url()}
+            src={necahualImageUrl}
             width={500}
             height={500}
           />
@@ -69,14 +89,14 @@ export default async function TwoHeroes({ searchParams }: SearchParams) {
         <section className={styles.merchSection}>
           <h1 className={styles.title} id="products">Merch</h1>
           <div className="products">
-            {products.map((product: Product) => (
+            {products.map((product) => (
               <ProductItem
                 key={product._id}
                 id={product._id}
                 title={product.title}
                 slug={product.slug.current}
-                url={urlFor(product.image[0].asset).width(500).url()}
-                alt={product.image[0].alt}
+                url={getCardImageUrl(product.productImages)}
+                alt={product.productImages?.[0]?.alt ?? ''}
                 price={product.price}
               />
             ))}
@@ -85,12 +105,8 @@ export default async function TwoHeroes({ searchParams }: SearchParams) {
         </section>
       </>
     );
-  } catch {
-    return (
-      <div>
-        <h2 id="errorH2">Taking a Short break!</h2>
-        <p id="errorMessage">Check back soon!</p>
-      </div>
-    );
+  } catch (error) {
+    console.error('Error fetching 2heroes page:', error);
+    return <ErrorFallback />;
   }
 }

@@ -63,17 +63,12 @@ export default async function Product({ params }: { params: Promise<{ product: s
     }
 
     const photos = sanityProduct.productImages.map((item: ProductMediaItem) => {
-      if (item._type === 'file') {
-        return {
-          src: item.asset.url,
-          alt: item.alt ?? '',
-          isVideo: true,
-        };
-      }
+      const isVideo = item._type === 'file';
+      const src = item.asset?.url ?? urlFor(item.asset).width(500).url() ?? '';
       return {
-        src: urlFor(item.asset).width(500).url(),
+        src,
         alt: item.alt ?? '',
-        isVideo: false,
+        isVideo,
       };
     });
 

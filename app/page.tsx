@@ -16,7 +16,7 @@ export default async function Home({ searchParams }: SearchParams) {
       sanityClient.fetch<Product[]>(`
         *[_type == "product"] | order(_createdAt desc) [$skip...$end] {
           _id, title, price, slug,
-          image[]{ asset, alt }
+          productImages[0..0]{ _type, alt, asset->{ _ref, url } }
         }
       `, { skip, end: skip + limit }),
 
@@ -41,8 +41,10 @@ export default async function Home({ searchParams }: SearchParams) {
               id={product._id}
               title={product.title}
               slug={product.slug.current}
-              url={urlFor(product.image[0].asset).width(500).url()}
-              alt={product.image[0].alt}
+              url={product.productImages?.[0]?.asset?.url
+                ? product.productImages[0].asset.url
+                : urlFor(product.productImages?.[0]?.asset).width(500).url() ?? ''}
+              alt={product.productImages?.[0]?.alt ?? ''}
               price={product.price}
             />
           ))}

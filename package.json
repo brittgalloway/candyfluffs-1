@@ -10,7 +10,8 @@
     "test:ui": "playwright test --ui",
     "test:a11y": "playwright test tests/accessibility.test.ts",
     "test:smoke": "playwright test tests/smoke.test.ts",
-    "test:headed": "playwright test --headed"
+    "test:headed": "playwright test --headed",
+    "migrate": "node migrate.mjs"
   },
   "dependencies": {
     "@netlify/plugin-nextjs": "^5.7.2",
