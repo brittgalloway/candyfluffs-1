@@ -1,63 +1,80 @@
 # Candy Fluffs
 
-Candy Fluffs is an eCommerce website for illustrator Candy Joy, designed with love in Figma and powered by modern web technologies. Originally built with Gatsby, the project was overhauled and migrated to Next.js and TypeScript, improving performance and maintainability. It integrates DatoCMS, Snipcart, Stripe, and Mailchimp to provide a seamless shopping experience.
+An eCommerce website for illustrator [Candy Joy](https://www.candyfluffs.com), designed in Figma and built with modern web technologies. The site lets fans browse and purchase prints, charms, books, stickers, and more — alongside content for Candy Joy's original webtoon series, [Necahual](https://www.webtoons.com/en/canvas/necahual/list?title_no=216820).
 
 ![CandyFluffs Home page](https://github.com/user-attachments/assets/1607adca-3209-4353-819b-d2e7a8125571)
 
+---
 
-## Project Evolution
+## Project History
 
-The original version was created in 2021 using Gatsby by a team of three:
-- **[Doug](https://github.com/daleinen7)**: Lead Developer
-- **[Stephanie](https://github.com/mlisdev)**: Front-end Developer
-- **[Brittney](https://www.linkedin.com/in/brittneygalloway/)**: Designer and Maintenance Developer
+The original site was built in 2021 with Gatsby by a team of three:
 
-Since then, Brittney became the sole maintainer and led the migration to Next.js and TypeScript for better scalability and developer experience.
+- [Doug](https://github.com/daleinen7) — Lead Developer
+- [Stephanie](https://github.com/mlisdev) — Front-end Developer
+- [Brittney](https://www.linkedin.com/in/brittneygalloway/) — Designer & Maintenance Developer
+
+Since then, Brittney has been the sole maintainer. The site has been overhauled and migrated to **Next.js and TypeScript**, with ongoing improvements to performance, accessibility, and code quality.
 
 ---
 
-## Key Updates & Features
+## What's New
 
-- Migrated from Gatsby to Next.js and TypeScript for improved performance and maintainability.
-- Refactored styling with CSS Grid for a more flexible and responsive layout.
-- Upgraded Snipcart from v2 to v3 for a better checkout experience.
-- Added pagination to enhance product browsing.
-- Implemented lazy loading and a loading spinner for better user experience and faster load times.
-
-## Technologies Used
-
-Candy Fluffs is powered by the following technologies and services:
-
-- Next.js
-- TypeScript
-- GraphQL
-- DatoCMS
-- Snipcart v3
-- Stripe
-- Mailchimp
-- [Figma](https://www.figma.com/file/IndaqA3RP8qZew4yHcXYQI/candyFluffs?node-id=26%3A9)
-- Netlify
-
-## Shopping Experience
-Candy Fluffs offers a smooth and user-friendly shopping experience:
-
-- Browse all products on the home page, with filtering options for different product types.
-- Hover over products on desktop to reveal details, or click for the full product page.
-- Explore Necahual, Candy Joy's original title, including links to its webtoon and social media.
-- Check out the Conventions/Expos page to find live events where Candy Joy will be present.
-- Seamless checkout process powered by Snipcart and Stripe, with cart management available on all pages.
-## Footer & Extras
-- Newsletter Signup – Stay updated on new releases and events.
-- About Page – Learn more about Candy Joy.
-- Contact Page – Reach out for inquiries or collaborations.
-## Future Enhancements
-- Implement Jest or Cypress for testing.
-- Transition to Stripe Checkout for improved payment processing.
-- Improve search and indexing for better discoverability.
-
+- **Migrated from Gatsby to Next.js 16** with TypeScript for improved performance and maintainability
+- **Accessibility audit and overhaul** — keyboard navigation, ARIA attributes, semantic HTML throughout
+- **Playwright test suite** with `@axe-core/playwright` for automated accessibility and E2E coverage
+- **FontAwesome removed** — replaced with a custom inline SVG icon system (`icons.tsx`) for zero dependency, `currentColor` theming, and full TypeScript support
+- **Popover API dropdown** for fandom filtering — no JavaScript state, native dismiss on Escape and click-outside
+- **Code quality sweep** — eliminated `any` types, GraphQL injection vulnerabilities, and DOM manipulation anti-patterns
+- **CI/CD pipeline** — GitHub Actions runs the full Playwright suite on every push; Netlify only deploys on green
+- **CMS migration in progress** — transitioning from DatoCMS to Sanity.io for a more flexible content editing experience
 
 ---
 
+## Tech Stack
+
+| Layer | Technology |
+|---|---|
+| Framework | [Next.js 16](https://nextjs.org/) |
+| Language | TypeScript |
+| Styling | SCSS Modules |
+| CMS | DatoCMS (Sanity.io migration in progress) |
+| Cart | [Snipcart v3](https://snipcart.com/) |
+| Payments | Stripe |
+| Email | Mailchimp |
+| Deployment | [Netlify](https://netlify.com/) |
+| Testing | [Playwright](https://playwright.dev/) + [@axe-core/playwright](https://github.com/dequelabs/axe-core-npm) |
+| Design | [Figma](https://www.figma.com/file/IndaqA3RP8qZew4yHcXYQI/candyFluffs?node-id=26%3A9) |
+
+---
+
+## Features
+
+**Shop**
+- Browse all products on the home page with pagination
+- Filter by product type (Prints, Charms, Books, etc.) and fandom category
+- Hover to preview product details on desktop, click for the full product page
+- Sold-out products are marked and non-purchasable automatically via the Snipcart API
+
+**Necahual**
+- Dedicated page for Candy Joy's original mesoamerican magical girl webtoon
+- Links to the Webtoons series, Patreon, Instagram, and X
+- Necahual merchandise displayed separately
+
+**Events**
+- Conventions/Expos page listing live events where Candy Joy will be present
+
+**Checkout**
+- Snipcart v3 cart available on all pages
+- Stripe payment processing
+- Product variations (size, style, etc.) supported
+
+**Footer & extras**
+- Newsletter signup via Mailchimp
+- Ko-fi support widget
+- About, Contact, and Links pages
+
+---
 ## Preview
 
 ![Product type gallery](https://github.com/user-attachments/assets/d1dbc4eb-803a-4829-851b-250b75fb0580)
@@ -66,26 +83,45 @@ Candy Fluffs offers a smooth and user-friendly shopping experience:
 ![Necahual Page](https://github.com/user-attachments/assets/0ab49f9b-1be6-47b9-a70e-2a6aabf17637)
 ![Page footer and pagination](https://github.com/user-attachments/assets/0b288079-b77b-476d-b3a3-bf6962fcc55e)
 
+---
+## Running Locally
 
+```bash
+npm install
+npm run dev
+```
 
+Add the following to `.env.local`:
+
+```
+NEXT_PUBLIC_SNIPCART_APIKEY=
+NEXT_PUBLIC_SITE_URL=
+API_TOKEN=                        # DatoCMS read token
+BASE64_ENCODED_SECRET_API_KEY=    # Snipcart secret (base64)
+```
 
 ---
 
+## Testing
+
+```bash
+# Install browsers (first time only)
+npx playwright install --with-deps chromium
+
+# Run all tests
+npm test
+
+# Open interactive UI
+npm run test:ui
+
+# Accessibility tests only
+npm run test:a11y
+```
+
+Tests cover smoke checks, navigation, product flows, pagination, and full axe accessibility scans at desktop and mobile viewports. Third-party iframes (Ko-fi, Mailchimp) are excluded from axe scans since their markup is outside our control.
+
+---
 
 ## License
 
-This project is licensed under the [The BSD Zero Clause License](./LICENSE).
-
-
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
-
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
+[BSD Zero Clause License](https://github.com/brittgalloway/candyfluffs-1/blob/main/LICENSE)
