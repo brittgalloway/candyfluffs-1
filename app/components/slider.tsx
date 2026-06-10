@@ -1,11 +1,12 @@
 'use client';
-import { FC } from 'react';
+import React, { FC } from 'react';
 import Image from 'next/image';
 import { EmblaOptionsType } from 'embla-carousel';
 import { DotButton, useDotButton } from './sliderDots';
 import useEmblaCarousel from 'embla-carousel-react';
 import Autoplay from 'embla-carousel-autoplay';
 import { Banner } from '@/lib/types';
+import { urlFor } from '@/lib/sanity';
 import '../style/slider.scss';
 
 type PropType = {
@@ -24,21 +25,17 @@ const Slider: FC<PropType> = (props) => {
       <section className="embla" dir="rtl" aria-label="Banner carousel">
         <div className="embla__viewport" ref={emblaRef}>
           <div className="embla__container">
-            {slides.map((slide) => {
-              const link = slide.link.value.document.children[0].children[0].url;
-              return (
-              <a href={link} className="embla__slide" key={slide.banner[0].id}>
+            {slides.map((slide) => (
+              <a href={slide.link ?? '/'} className="embla__slide" key={slide._id}>
                 <Image
                   className="embla__slide__image"
-                  src={slide.banner[0].responsiveImage.src}
-                  width={slide.banner[0].responsiveImage.width}
-                  height={slide.banner[0].responsiveImage.height}
-                  alt={slide.banner[0].alt}
+                  src={urlFor(slide.image.asset).width(1200).url()}
+                  width={1200}
+                  height={400}
+                  alt={slide.image.alt ?? ''}
                 />
-              
               </a>
-            )}
-            )}
+            ))}
           </div>
         </div>
 

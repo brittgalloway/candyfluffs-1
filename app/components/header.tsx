@@ -24,6 +24,8 @@ export function Header() {
           alt="Candy Fluffs logo with cotton candy next to the text."
           width={300}
           height={177}
+          loading="eager"
+          priority
         />
       </Link>
       {isMobile ? null : (
