@@ -6,8 +6,7 @@ import styles from './page.module.scss';
 
 export const metadata = {
   title: 'Candy Fluffs | About me',
-  description: "I'm just a girl who loves to draw manga! I am an illustrator who grew up on manga, and I'll forever be influenced by Sailor Moon.",
-  keywords: "necahual, magical girls, aztec, mayan, mahou shojo, mahou shoujo, mesoamerican, 2heroes, candy fluffs, candy joy, crystal galloway, manga, comics, webtoon, web comic, art, illustration, mangaka",
+  description: 'I\'m just a girl who loves to draw manga! I am an illustrator who grew up on manga, and I\'ll forever be influenced by Sailor Moon.',
   robots: { index: true, follow: true, nocache: true },
 };
 

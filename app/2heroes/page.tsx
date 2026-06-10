@@ -12,7 +12,7 @@ import styles from './page.module.scss';
 
 export const metadata = {
   title: 'Candy Fluffs | Necahual',
-  description: "Necahual is the mesoamerican magical girl series you've been waiting for.",
+  description: 'Necahual is the mesoamerican magical girl series you\'ve been waiting for. Explore prints, comics and more for this unique tale.',
   robots: { index: true, follow: true, nocache: true },
 };
 
