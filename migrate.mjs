@@ -4,6 +4,11 @@
  * Usage:
  *   node migrate.mjs
  *
+ * Required env vars (in .env.development):
+ *   API_TOKEN                     — DatoCMS read-only API token
+ *   NEXT_PUBLIC_SANITY_PROJECT_ID
+ *   NEXT_PUBLIC_SANITY_DATASET
+ *   SANITY_API_TOKEN              — Sanity token with write permissions
  */
 
 import { createClient } from '@sanity/client';
@@ -11,7 +16,7 @@ import * as dotenv from 'dotenv';
 
 dotenv.config({ path: '.env.development' });
 
-// ─── Clients ────────────────────────────────────────────────────────────────
+// ─── Clients ─────────────────────────────────────────────────────────────────
 
 const sanity = createClient({
   projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
@@ -35,24 +40,50 @@ async function datoRequest(query) {
   return json.data;
 }
 
-// ─── Image upload ────────────────────────────────────────────────────────────
+// ─── Image upload with deduplication ─────────────────────────────────────────
 
+// In-memory cache for this run
 const uploadCache = new Map();
+
+// Check if a Sanity asset with this filename already exists
+async function findExistingAsset(filename) {
+  const results = await sanity.fetch(
+    `*[_type == "sanity.imageAsset" && originalFilename == $filename][0]{ _id }`,
+    { filename }
+  );
+  return results?._id ?? null;
+}
 
 async function uploadImageToSanity(url, alt = '') {
   if (!url) return null;
-  if (uploadCache.has(url)) return uploadCache.get(url);
+  if (uploadCache.has(url)) {
+    console.log(`  ↩ cached: ${url}`);
+    return uploadCache.get(url);
+  }
 
-  console.log(`  ↑ uploading: ${url}`);
+  const filename = url.split('/').pop().split('?')[0] || 'image.jpg';
+
+  // Check if already uploaded to Sanity
+  const existingId = await findExistingAsset(filename);
+  if (existingId) {
+    console.log(`  ✓ exists: ${filename}`);
+    const result = {
+      _type: 'image',
+      asset: { _type: 'reference', _ref: existingId },
+      alt,
+    };
+    uploadCache.set(url, result);
+    return result;
+  }
+
+  console.log(`  ↑ uploading: ${filename}`);
   const res = await fetch(url);
   if (!res.ok) {
-    console.warn(`  ✗ failed to fetch image: ${url}`);
+    console.warn(`  ✗ failed to fetch: ${url}`);
     return null;
   }
 
   const buffer = Buffer.from(await res.arrayBuffer());
-  const filename = url.split('/').pop().split('?')[0] || 'image.jpg';
-
   const asset = await sanity.assets.upload('image', buffer, {
     filename,
     contentType: res.headers.get('content-type') ?? 'image/jpeg',
@@ -68,7 +99,7 @@ async function uploadImageToSanity(url, alt = '') {
   return result;
 }
 
-// ─── DAST → Portable Text conversion ────────────────────────────────────────
+// ─── DAST → Portable Text ─────────────────────────────────────────────────────
 
 function dastToPortableText(dastValue) {
   if (!dastValue?.document?.children) return [];
@@ -107,12 +138,42 @@ function dastToPortableText(dastValue) {
     .filter(Boolean);
 }
 
-// ─── Migrate products ────────────────────────────────────────────────────────
+// ─── Migrate fandoms (must run before products) ───────────────────────────────
+
+async function migrateFandoms(products) {
+  console.log('\n── Fandoms ──────────────────────────────────────────');
+
+  // Collect unique fandom names from all products
+  const uniqueFandoms = [...new Set(
+    products
+      .map((p) => p.fandoms)
+      .filter(Boolean)
+  )];
+
+  console.log(`  found ${uniqueFandoms.length} unique fandoms`);
+
+  // Map of fandom name → Sanity _id for use in product migration
+  const fandomRefMap = new Map();
+
+  for (const name of uniqueFandoms) {
+    const id = `imported-fandom-${name.toLowerCase().replaceAll(' ', '-')}`;
+    await sanity.createOrReplace({
+      _type: 'fandom',
+      _id: id,
+      name,
+    });
+    fandomRefMap.set(name, id);
+    console.log(`  ✓ ${name}`);
+  }
+
+  return fandomRefMap;
+}
+
+// ─── Migrate products ─────────────────────────────────────────────────────────
 
 async function migrateProducts() {
   console.log('\n── Products ─────────────────────────────────────────');
 
-  // Fetch all products — DatoCMS has a max of 100 per request so paginate
   let allProducts = [];
   let skip = 0;
   const pageSize = 100;
@@ -138,17 +199,20 @@ async function migrateProducts() {
 
   console.log(`  found ${allProducts.length} products`);
 
+  // Create fandom documents first and get the reference map
+  const fandomRefMap = await migrateFandoms(allProducts);
+
+  console.log('\n── Importing products ───────────────────────────────');
+
   for (const product of allProducts) {
     console.log(`\n  → ${product.title}`);
 
-    // Upload all images
     const productImages = [];
     for (const img of product.image ?? []) {
       const uploaded = await uploadImageToSanity(img.url, img.alt);
       if (uploaded) productImages.push(uploaded);
     }
 
-    // Upload variation images
     const variations = [];
     for (const v of product.variation ?? []) {
       const varImage = v.image?.url
@@ -165,8 +229,6 @@ async function migrateProducts() {
       });
     }
 
-    // Convert description markdown to portable text blocks
-    // DatoCMS returns markdown — convert to simple paragraph blocks
     const descriptionBlocks = product.description
       ? product.description.split('\n\n').filter(Boolean).map((para) => ({
           _type: 'block',
@@ -177,6 +239,12 @@ async function migrateProducts() {
         }))
       : [];
 
+    // Build fandom reference if we have one
+    const fandomId = product.fandoms ? fandomRefMap.get(product.fandoms) : null;
+    const fandomField = fandomId
+      ? { fandoms: { _type: 'reference', _ref: fandomId } }
+      : {};
+
     const doc = {
       _type: 'product',
       _id: `imported-product-${product.id}`,
@@ -185,11 +253,11 @@ async function migrateProducts() {
       price: product.price,
       weight: product.weight ?? 0,
       size: product.size ?? '',
-      fandoms: product.fandoms ?? '',
       productType: product.productType ?? '',
       description: descriptionBlocks,
       productImages,
       variation: variations,
+      ...fandomField,
     };
 
     await sanity.createOrReplace(doc);
@@ -220,15 +288,13 @@ async function migrateBanners() {
     const uploaded = await uploadImageToSanity(imgUrl, imgAlt);
     if (!uploaded) continue;
 
-    const doc = {
+    await sanity.createOrReplace({
       _type: 'banner',
       _id: `imported-banner-${banner.id}`,
       image: uploaded,
       link,
       order: i,
-    };
-
-    await sanity.createOrReplace(doc);
+    });
     console.log(`  ✓ banner ${i + 1}`);
   }
 }
@@ -246,7 +312,7 @@ async function migrateEvents() {
   `);
 
   for (const event of data.allLiveEvents) {
-    const doc = {
+    await sanity.createOrReplace({
       _type: 'liveEvent',
       _id: `imported-event-${event.id}`,
       eventName: event.eventName,
@@ -254,8 +320,7 @@ async function migrateEvents() {
       endDate: event.endDate,
       website: event.website ?? '',
       address: event.address ?? '',
-    };
-    await sanity.createOrReplace(doc);
+    });
     console.log(`  ✓ ${event.eventName}`);
   }
 }
@@ -274,19 +339,14 @@ async function migrateAboutMe() {
   `);
 
   const { aboutMe } = data;
-  const bioImage = await uploadImageToSanity(
-    aboutMe.bioImage?.url,
-    aboutMe.bioImage?.alt ?? ''
-  );
+  const bioImage = await uploadImageToSanity(aboutMe.bioImage?.url, aboutMe.bioImage?.alt ?? '');
 
-  const doc = {
+  await sanity.createOrReplace({
     _type: 'aboutMe',
     _id: 'singleton-aboutme',
     bio: dastToPortableText(aboutMe.bio?.value),
     ...(bioImage ? { bioImage } : {}),
-  };
-
-  await sanity.createOrReplace(doc);
+  });
   console.log('  ✓ about me');
 }
 
@@ -306,21 +366,16 @@ async function migrateNecahual() {
   `);
 
   const { necahual } = data;
-  const necahualImage = await uploadImageToSanity(
-    necahual.necahualImage?.url,
-    necahual.necahualImage?.alt ?? ''
-  );
+  const necahualImage = await uploadImageToSanity(necahual.necahualImage?.url, necahual.necahualImage?.alt ?? '');
 
-  const doc = {
+  await sanity.createOrReplace({
     _type: 'necahual',
     _id: 'singleton-necahual',
     pageTitle: necahual.pageTitle,
     patreonDisclaimer: necahual.patreonDisclaimer ?? '',
     summary: dastToPortableText(necahual.summary?.value),
     ...(necahualImage ? { necahualImage } : {}),
-  };
-
-  await sanity.createOrReplace(doc);
+  });
   console.log('  ✓ necahual');
 }
 
@@ -337,14 +392,13 @@ async function migrateLinks() {
   `);
 
   for (const [i, link] of data.allLinkPages.entries()) {
-    const doc = {
+    await sanity.createOrReplace({
       _type: 'linkPage',
       _id: `imported-link-${link.id}`,
       label: link.label,
       url: link.url,
       order: i,
-    };
-    await sanity.createOrReplace(doc);
+    });
     console.log(`  ✓ ${link.label}`);
   }
 }
@@ -367,7 +421,7 @@ async function main() {
   }
 
   try {
-    await migrateProducts();
+    await migrateProducts(); // also runs migrateFandoms internally
     await migrateBanners();
     await migrateEvents();
     await migrateAboutMe();

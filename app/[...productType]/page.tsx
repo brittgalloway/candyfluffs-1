@@ -3,6 +3,8 @@ import { Product } from '@/lib/types';
 import { ProductItem } from '@/components/productItem';
 import Dropdown from '@/components/dropdown';
 import Pagination from '@/components/pagination';
+export const dynamic = 'force-dynamic';
+
 import ErrorFallback from '@/components/errorFallback';
 
 type ParamTypes = {

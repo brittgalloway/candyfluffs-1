@@ -4,8 +4,6 @@ export const aboutMe = defineType({
   name: 'aboutMe',
   title: 'About Me',
   type: 'document',
-  // Singleton — only one document of this type
-  __experimental_actions: ['update', 'publish'],
   fields: [
     defineField({
       name: 'bio',

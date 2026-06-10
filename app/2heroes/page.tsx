@@ -5,6 +5,8 @@ import { PortableText } from '@portabletext/react';
 import { FaInstagram, FaXTwitter, FaPatreon } from '@/components/icons';
 import { ProductItem } from '@/components/productItem';
 import Pagination from '@/components/pagination';
+export const dynamic = 'force-dynamic';
+
 import ErrorFallback from '@/components/errorFallback';
 import styles from './page.module.scss';
 

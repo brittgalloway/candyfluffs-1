@@ -4,19 +4,11 @@ import { ProductImages } from '@/components/productImageDisplay';
 import ErrorFallback from '@/components/errorFallback';
 import styles from '@/style/product-page.module.scss';
 
-type SanityImageItem = {
-  _type: 'image';
-  asset: { _ref: string };
+type ProductMediaItem = {
+  _type: 'image' | 'file';
+  asset: { _ref?: string; url?: string };
   alt?: string;
 };
-
-type SanityFileItem = {
-  _type: 'file';
-  asset: { url: string };
-  alt?: string;
-};
-
-type ProductMediaItem = SanityImageItem | SanityFileItem;
 
 export default async function Product({ params }: { params: Promise<{ product: string }> }) {
   try {

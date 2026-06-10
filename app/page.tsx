@@ -4,6 +4,8 @@ import { EmblaOptionsType } from 'embla-carousel';
 import { ProductItem } from '@/components/productItem';
 import Slider from '@/components/slider';
 import Pagination from '@/components/pagination';
+export const dynamic = 'force-dynamic';
+
 import ErrorFallback from '@/components/errorFallback';
 
 export default async function Home({ searchParams }: SearchParams) {

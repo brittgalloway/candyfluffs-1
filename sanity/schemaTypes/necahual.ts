@@ -4,8 +4,6 @@ export const necahual = defineType({
   name: 'necahual',
   title: 'Necahual Page',
   type: 'document',
-  // Singleton — only one document of this type
-  __experimental_actions: ['update', 'publish'],
   fields: [
     defineField({ name: 'pageTitle', title: 'Page Title', type: 'string', validation: (r) => r.required() }),
     defineField({
