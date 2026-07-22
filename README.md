@@ -120,8 +120,4 @@ npm run test:a11y
 
 Tests cover smoke checks, navigation, product flows, pagination, and full axe accessibility scans at desktop and mobile viewports. Third-party iframes (Ko-fi, Mailchimp) are excluded from axe scans since their markup is outside our control.
 
----
 
-## License
-
-[BSD Zero Clause License](https://github.com/brittgalloway/candyfluffs-1/blob/main/LICENSE)
