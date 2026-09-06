@@ -1,35 +1,28 @@
-import { performRequest } from '@/lib/datocms';
+import { sanityClient } from '@/lib/sanity';
 import { Link } from '@/lib/types';
 import '@/style/links.scss';
 
 export const metadata = {
   title: 'Candy Fluffs | Links',
-  description: "Find the links to my shop, social media, and comics.",
-  keywords: "necahual, magical girls, aztec, mayan, mahou shojo, mahou shoujo, mesoamerican, 2heroes, candy fluffs, candy joy, crystal galloway, manga, comics, webtoon, web comic, art, illustration, mangaka",
+  description: 'Find the links to my shop, social media, and comics.',
   robots: { index: true, follow: true, nocache: true },
 };
 
-const PAGE_CONTENT_QUERY = `
-  query MyLinks {
-    allLinkPages {
-      id
-      label
-      url
-    }
-  }
-`;
-
 export default async function Links() {
   try {
-    const { data: { allLinkPages } } = await performRequest({ query: PAGE_CONTENT_QUERY });
+    const links = await sanityClient.fetch<Link[]>(`
+      *[_type == "linkPage"] | order(order asc) {
+        _id, label, url
+      }
+    `);
 
     return (
       <section>
         <h1>My Links!</h1>
         <nav aria-label='Links to CandyFluffs.com and various social media.'>
           <ul id="links">
-            {allLinkPages.map((link: Link) => (
-              <li key={link.id}>
+            {links.map((link) => (
+              <li key={link._id}>
                 <a href={link.url}>{link.label}</a>
               </li>
             ))}
@@ -43,15 +36,12 @@ export default async function Links() {
         <h1>My Links!</h1>
         <nav aria-label='Links to CandyFluffs.com and various social media.'>
           <ul id="links">
-            <li>Ichigo Tarot (coming soon)</li>
             <li><a href="/">Candy Fluffs Shop</a></li>
             <li><a href="https://candy-fluffs.tumblr.com/">Tumblr</a></li>
             <li><a href="https://instagram.com/candy_fluffs">Instagram</a></li>
-            <li><a href="https://twitter.com/candyfluffs">X (formerly Twitter)</a></li>
+            <li><a href="https://bsky.app/profile/candyfluffs.bsky.social">Bluesky</a></li>
             <li><a href="https://www.webtoons.com/en/canvas/necahual/list?title_no=216820">Necahual</a></li>
             <li><a href="https://www.patreon.com/2heroes">Necahual Patreon</a></li>
-            <li><a href="https://www.instagram.com/2.heroes/">2Heroes Instagram</a></li>
-            <li><a href="https://x.com/2Heroes1/">2Heroes X (formerly Twitter)</a></li>
           </ul>
         </nav>
       </section>

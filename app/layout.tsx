@@ -4,6 +4,7 @@ import { Header } from './components/header';
 import { Footer } from './components/footer';
 import { lato } from './fonts';
 import './style/globals.scss';
+import ScrollToTop from './components/scrollToTop';
 
 export const metadata: Metadata = {
   title: 'Candy Fluffs',
@@ -39,6 +40,7 @@ export default function RootLayout({
         }}/>
       </head>
       <body className={lato.className}>
+        <ScrollToTop />
         <Header />
         <main>{children}</main>
         <Footer />

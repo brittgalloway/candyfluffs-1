@@ -1,61 +1,41 @@
-import { performRequest } from '@/lib/datocms';
-import styles from "./page.module.scss";
+import { sanityClient } from '@/lib/sanity';
+import { LiveEvent } from '@/lib/types';
+import ErrorFallback from '@/components/errorFallback';
+import styles from './page.module.scss';
 
-const PAGE_CONTENT_QUERY = `
-  query liveEvent {
-    allLiveEvents {
-      id
-      eventName
-      startDate
-      endDate
-      website
-      address
-    }
-  }
-`;
+export const metadata = {
+  title: 'Candy Fluffs | Events',
+  robots: { index: true, follow: true, nocache: true },
+};
 
 export default async function Events() {
   try {
-  const { data: { allLiveEvents } } = await performRequest({ query: PAGE_CONTENT_QUERY });
+    const events = await sanityClient.fetch<LiveEvent[]>(`
+      *[_type == "liveEvent"] | order(startDate asc) {
+        _id, eventName, startDate, endDate, website, address
+      }
+    `);
 
-  const formatDateTime = (dateString: string) => {
-    const date = new Date(dateString);
+    const formatDateTime = (dateString: string) => {
+      const date = new Date(dateString);
+      return `${date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })} at ${date.toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })}`;
+    };
 
-    const formattedDate = date.toLocaleDateString('en-US', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
-    });
-
-    const formattedTime = date.toLocaleTimeString('en-US', {
-      hour: 'numeric',
-      minute: 'numeric',
-      hour12: true,
-    });
-
-    return `${formattedDate} at ${formattedTime}`;
-  };
-
-  return (
-    <section className={styles.main} >
-      <h1 className={styles.h1}>Planned Events</h1>
-      {allLiveEvents.map((liveEvent: {id: string, eventName: string, startDate: string, endDate: string, website: string, address: string}) => (
-        <div key={liveEvent?.id} className={styles.events}>
-          <h2>{liveEvent?.eventName}</h2>
-          <p>{formatDateTime(liveEvent?.startDate)} - {formatDateTime(liveEvent?.endDate)}</p>
-          <p>{liveEvent?.address}</p>
-          <p>Get tickets Here: <a href={liveEvent?.website}>{liveEvent?.website}</a></p>
-        </div>
-      ))}
-    </section>
-  )
-} catch(error) {
-  console.error("Error fetching live events:", error);
- return (
-    <div>
-      <h2 id="errorH2">Taking a Short break!</h2>
-      <span id="errorSpan">Will be back April 1st!</span>
-    </div>
-  )
-}
+    return (
+      <section className={styles.main}>
+        <h1 className={styles.h1}>Planned Events</h1>
+        {events.map((event) => (
+          <div key={event._id} className={styles.events}>
+            <h2>{event.eventName}</h2>
+            <p>{formatDateTime(event.startDate)} - {formatDateTime(event.endDate)}</p>
+            <p>{event.address}</p>
+            <p>Get tickets here: <a href={event.website}>{event.website}</a></p>
+          </div>
+        ))}
+      </section>
+    );
+  } catch (error) {
+    console.error('Error fetching page:', error);
+    return <ErrorFallback />;
+  }
 }

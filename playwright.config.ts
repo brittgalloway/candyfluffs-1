@@ -12,10 +12,15 @@ export default defineConfig({
     ['list'],
   ],
 
+  timeout: 60_000,
+  expect: { timeout: 10_000 },
+
   use: {
     baseURL: process.env.BASE_URL ?? 'http://localhost:3000',
     trace: 'on-first-retry',
     screenshot: 'only-on-failure',
+    actionTimeout: 15_000,
+    navigationTimeout: 30_000,
   },
 
   projects: [

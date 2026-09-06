@@ -1,5 +1,6 @@
 /** @type {import('next').NextConfig} */
 const path = require('path')
+
 const nextConfig = {
   reactStrictMode: true,
   sassOptions: {
@@ -9,7 +10,7 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'www.datocms-assets.com',
+        hostname: 'cdn.sanity.io',
       },
     ],
   },
