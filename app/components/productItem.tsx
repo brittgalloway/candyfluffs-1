@@ -31,7 +31,7 @@ export async function ProductItem({id, title, slug, url, alt, price}: ProductDat
   return(
     <>
     { isSoldOut ?  (
-      <div id={id} className="product-item">
+      <article id={id} className="product-item">
         <div id="soldOut">
           <p>Sold Out</p>
         </div>
@@ -44,10 +44,11 @@ export async function ProductItem({id, title, slug, url, alt, price}: ProductDat
         />
         <p className="product-title">{title}</p>
         <p className="product-price">{formatedPrice}</p>
-      </div>
+      </article>
       ) : (
         <Link href={`/products/${slug}`} id={id} className="product-item">
           <div className="overlay" />
+          <article>
           <Image 
             src={url}
             alt={alt}
@@ -56,6 +57,7 @@ export async function ProductItem({id, title, slug, url, alt, price}: ProductDat
           />
           <p className="product-title">{title}</p>
           <p className="product-price">{formatedPrice}</p>
+          </article>
         </Link>
       )}
     </>

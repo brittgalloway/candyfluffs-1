@@ -1,3 +1,4 @@
+import { type Metadata } from 'next'
 import { performRequest, limit } from '@/lib/datocms';
 import { Product } from '@/lib/types';
 import { ProductItem } from '@/components/productItem';
@@ -10,6 +11,20 @@ type ParamTypes = {
 }
 
 const productTypes = ['Book', 'Print', 'Scroll', 'Charm', 'Button', 'Sticker'];
+
+export async function generateMetadata(
+  { params }: { params: Promise<{ productType: string }> }
+) : Promise<Metadata> {
+  const { productType } = await params;
+  const indexFandoms = ['LADS', 'Danmei', 'Necahual'];
+  if (!indexFandoms.includes(productType[1])) {
+    return{};
+  } else {
+    return {
+      robots: { index: true, follow: true, nocache: true },
+    }
+  };
+}
 
 export default async function ProductsByType({ params, searchParams }: ParamTypes) {
   try {

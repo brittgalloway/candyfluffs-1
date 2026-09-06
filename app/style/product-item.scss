@@ -37,7 +37,8 @@
     text-decoration: none;
     color: #222;
     font-weight: 700;
-    box-shadow: 0 0 10px 2px var(--faded-highlight);
+    outline: 3px solid var(--highlight);
+    border-radius: var(--radius);
     .overlay {
       display: block;
       grid-column: 1/2;
