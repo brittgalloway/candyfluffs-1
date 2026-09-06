@@ -16,7 +16,7 @@ export default async function Home({ searchParams }: SearchParams) {
 
     const [products, banners, total] = await Promise.all([
       sanityClient.fetch<Product[]>(`
-        *[_type == "product"] | order(_createdAt desc) [$skip...$end] {
+        *[_type == "product"] | order(orderRank asc) [$skip...$end] {
           _id, title, price, slug,
           productImages[0..0]{ _type, alt, asset->{ _ref, url } }
         }

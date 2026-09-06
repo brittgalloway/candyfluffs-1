@@ -1,4 +1,6 @@
 import { defineField, defineType } from 'sanity';
+import { orderRankField } from '@sanity/orderable-document-list';
+
 
 export const product = defineType({
   name: 'product',
@@ -10,6 +12,7 @@ export const product = defineType({
     defineField({ name: 'price', title: 'Price', type: 'number', validation: (r) => r.required().min(0) }),
     defineField({ name: 'weight', title: 'Weight (grams)', type: 'number' }),
     defineField({ name: 'size', title: 'Size', type: 'string' }),
+    orderRankField({ type: 'product' }),
     defineField({
       name: 'fandoms',
       title: 'Fandom',
