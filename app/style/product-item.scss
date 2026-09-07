@@ -29,6 +29,10 @@
     align-content: center;
     text-align: center;
     z-index: 2;
+    p {
+      visibility: visible;
+      opacity: 1;
+    }
   }
 
   img {
