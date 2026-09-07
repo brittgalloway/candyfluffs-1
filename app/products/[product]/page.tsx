@@ -1,4 +1,5 @@
 import { cache } from 'react'
+import { type Metadata } from 'next'
 import { performRequest } from '@/lib/datocms';
 import { ProductImages } from '@/components/productImageDisplay';
 import styles from '@/style/product-page.module.scss';
