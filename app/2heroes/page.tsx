@@ -9,7 +9,6 @@ import styles from './page.module.scss';
 export const metadata = {
   title: 'Candy Fluffs | Necahual',
   description: "Necahual is the mesoamerican magical girl series you've been waiting for. As seen on Webtoons, buy official prints, charms, and stickers.",
-  keywords: "necahual, magical girls, aztec, mayan, mahou shojo, mahou shoujo, mesoamerican, 2heroes, candy fluffs, candy joy, crystal galloway, sergio silva, manga, comics, webtoon, web comic, art, illustration",
   robots: { index: true, follow: true, nocache: true },
 };
 

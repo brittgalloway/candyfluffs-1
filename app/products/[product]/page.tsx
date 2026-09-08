@@ -1,11 +1,10 @@
+import { cache } from 'react'
+import { type Metadata } from 'next'
 import { performRequest } from '@/lib/datocms';
 import { ProductImages } from '@/components/productImageDisplay';
 import styles from '@/style/product-page.module.scss';
 
-export default async function Product({ params }: { params: Promise<{ product: string }> }) {
-  try {
-  const { product } = await params;
-  const PAGE_CONTENT_QUERY = `
+ const PAGE_CONTENT_QUERY = `
     query productQuery($slug: String!) {
       product(filter: {slug: {eq: $slug}}) {
         id
@@ -33,8 +32,36 @@ export default async function Product({ params }: { params: Promise<{ product: s
       }
     }
   `;
-  const { data } = await performRequest({ query: PAGE_CONTENT_QUERY, variables: { slug: product } });
-  const datoProduct = data.product;
+const getProduct = cache(async (product: string) => {
+  const _product = await performRequest({ query: PAGE_CONTENT_QUERY, variables: { slug: product } });
+  return _product.data.product;
+});
+
+export async function generateMetadata(
+  { params }: { params: Promise<{ product: string }> }
+) : Promise<Metadata> {
+  const { product } = await params;
+  const thisProduct = await getProduct(product);
+  const indexFandoms = ['LADS', 'Danmei', 'Necahual'];
+  const title = thisProduct.title;
+  const fandom = thisProduct.fandoms;
+  if (!indexFandoms.includes(fandom)) {
+    return{};
+  } else {
+    return {
+      title: `Candy Fluffs | ${title} | ${fandom}`,
+      description: `${title} from ${fandom} by Candyfluffs.`,
+      robots: { index: true, follow: true, nocache: true },
+    }
+  };
+}
+
+export default async function Product({ params }: { params: Promise<{ product: string }> }) {
+  try {
+  const { product } = await params;
+
+  const datoProduct = await getProduct(product);
+  // const datoProduct = data.product;
   const domain = process.env.NODE_ENV === 'production'
     ? (process.env.NEXT_PUBLIC_SITE_URL ?? '')
     : 'http://localhost:3000';
@@ -106,8 +133,8 @@ export default async function Product({ params }: { params: Promise<{ product: s
 } catch  {
  return (
     <div>
-      <h2 id="errorH2">Taking a Short break!</h2>
-      <span id="errorSpan">Will be back April 1st!</span>
+      <h2 id="errorH2">Oops!</h2>
+      <span id="errorSpan">There'es a problem behind the scenes. If refreshing doesn't work, please use the contact form or find me on Instagram.</span>
     </div>
   )
 }
