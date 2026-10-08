@@ -4,7 +4,7 @@ import { NextRequest, NextResponse } from 'next/server';
 
 // Flip to false once a deploy preview runs clean (no CSP errors in the console).
 // Report-Only doesn't block anything, and Observatory doesn't score it.
-const REPORT_ONLY = true;
+const REPORT_ONLY = false;
 
 export function proxy(request: NextRequest) {
   const nonce = Buffer.from(crypto.randomUUID()).toString('base64');
