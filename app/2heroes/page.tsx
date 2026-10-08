@@ -50,8 +50,51 @@ export default async function TwoHeroes({ searchParams }: SearchParams) {
       { href: 'https://twitter.com/2Heroes1/', label: "Link to 2Heroes' X", Icon: FaXTwitter },
     ];
 
+    const domain = process.env.NODE_ENV === 'production'
+      ? (process.env.NEXT_PUBLIC_SITE_URL ?? '')
+      : 'http://localhost:3000';
+    const pageUrl = `${domain}/2heroes${pageNumber > 1 ? `?page=${pageNumber}` : ''}`;
+    const summary = necahual?.summary?.value?.document?.children[0]?.children[0]?.value;
+
+    const jsonLd = {
+      '@context': 'https://schema.org',
+      '@type': 'CollectionPage',
+      '@id': `${pageUrl}#page`,
+      url: pageUrl,
+      name: metadata.title,
+      description: metadata.description,
+      about: {
+        '@type': 'ComicSeries',
+        '@id': `${domain}/2heroes#necahual`,
+        name: 'Necahual',
+        ...(summary && { description: summary }),
+        ...(necahual?.necahualImage?.url && { image: necahual.necahualImage.url }),
+        url: 'https://www.webtoons.com/en/canvas/necahual/list?title_no=216820',
+        author: {
+          '@type': 'Organization',
+          name: '2Heroes',
+          sameAs: socialMedia.map((link) => link.href),
+        },
+      },
+      mainEntity: {
+        '@type': 'ItemList',
+        numberOfItems: productCount,
+        itemListElement: allProducts.map((product: Product, i: number) => ({
+          '@type': 'ListItem',
+          position: skip + i + 1,
+          url: `${domain}/products/${product.slug}`,
+          name: product.title,
+          ...(product.image?.[0]?.url && { image: product.image[0].url }),
+        })),
+      },
+    };
+
     return (
       <>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, '\\u003c') }}
+        />
         <section className={styles.grid}>
           <h1 className={`${styles.span3mobile} ${styles.title}`}>{necahual?.pageTitle}</h1>
           <Image
